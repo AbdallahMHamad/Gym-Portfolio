@@ -1,68 +1,137 @@
+/* ================================
+   Google Fonts
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ================================
+   CSS Reset + Box Sizing
+================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* ================================
+   Design Tokens (Variables)
+================================ */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Colors */
+  --color-bg: #0a0a0a;
+  /* Deep dark background */
+  --color-surface: #1a1a1a;
+  /* Cards / Sections */
+  --color-primary: #00E5CC;
+  /* Teal accent */
+  --color-text: #ffffff;
+  --color-text-dim: #a0a0a0;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Fonts */
+  --font-heading: 'Oswald', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-  font-synthesis: none;
+  /* Typography */
+  --line-height-base: 1.6;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* UI */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --transition-base: 0.25s ease;
+
+  color-scheme: dark;
+}
+
+/* ================================
+   Base Styles
+================================ */
+body {
+  font-family: var(--font-body);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-regular);
+
+  background-color: var(--color-bg);
+  color: var(--color-text);
+
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ================================
+   Typography
+================================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+p {
+  color: var(--color-text-dim);
+}
+
+/* ================================
+   Links
+================================ */
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-base);
 }
+
 a:hover {
-  color: #535bf2;
+  opacity: 0.8;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* ================================
+   Buttons
+================================ */
 button {
-  border-radius: 8px;
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+
+  background-color: var(--color-surface);
+  color: var(--color-text);
+
   border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: border-color var(--transition-base),
+    background-color var(--transition-base);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  border-color: var(--color-primary);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ================================
+   Surfaces / Cards (optional utility)
+================================ */
+.surface {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
 }
