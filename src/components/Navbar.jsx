@@ -6,9 +6,13 @@ function Navbar() {
       <div className="navbar-container">
 
         {/* Logo */}
-        <div className="logo">
-          <span>🏋️</span> COACH MARCUS
-        </div>
+<div className="logo">
+  <img 
+    src="/images_resources/salman.png"
+    alt="Coach Salman Logo"
+  />
+  <span>Coach Salman</span>
+</div>
 
         {/* Links */}
         <ul className="nav-links">

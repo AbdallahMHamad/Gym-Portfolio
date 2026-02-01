@@ -10,37 +10,72 @@
 .navbar-container {
     max-width: 1200px;
     margin: auto;
-    padding: 16px 24px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .logo {
-    color: white;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+
+    color: var(--text-main);
 }
+
+.logo img {
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(245, 196, 0, 0.6));
+    border-radius: 70px;
+
+}
+
+.logo span {
+    color: var(--text-main);
+}
+
+.logo span {
+    color: var(--text-main);
+}
+
+
+
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 24px;
+    gap: 40px;
+    padding: 0px 20px;
+
 }
 
 .nav-links a {
-    color: #aaa;
+    color: var(--text-muted);
     text-decoration: none;
+    font-weight: 500;
 }
 
 .nav-links a:hover {
-    color: white;
+    color: var(--yellow-main);
 }
 
+
 .cta-btn {
-    background: #2dd4bf;
-    padding: 8px 16px;
-    border-radius: 999px;
+    background: var(--yellow-main);
     color: black;
-    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: 700;
     text-decoration: none;
+}
+
+.cta-btn:hover {
+    background: var(--yellow-glow);
 }
