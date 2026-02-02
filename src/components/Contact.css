@@ -1,0 +1,116 @@
+/* =========================================
+   Contact / Socials Section Styles
+   ========================================= */
+
+.contact-section {
+    padding: 100px 20px;
+    background: #111;
+    /* Matches your 'gray' theme */
+}
+
+.contact-desc {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* Grid Layout */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    /* 2 columns on desktop */
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* The Card Link */
+.social-card {
+    display: flex;
+    align-items: center;
+    background: #000;
+    /* Darker than section bg */
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effects */
+.social-card:hover {
+    border-color: var(--yellow-main);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(245, 196, 0, 0.15);
+}
+
+/* Icon Box (Left) */
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+/* Make icon yellow on hover */
+.social-card:hover .icon-box {
+    background: var(--yellow-main);
+    color: black;
+}
+
+/* Text Info */
+.link-info {
+    flex: 1;
+}
+
+.link-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 700;
+}
+
+.link-info span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.social-card:hover .link-info span {
+    color: white;
+}
+
+/* Arrow (Right) */
+.arrow-icon {
+    color: #333;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-card:hover .arrow-icon {
+    color: var(--yellow-main);
+    transform: translateX(5px);
+    /* Slide arrow to right */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .social-grid {
+        grid-template-columns: 1fr;
+        /* 1 column on mobile */
+    }
+
+    .social-card {
+        padding: 15px;
+    }
+}

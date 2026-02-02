@@ -1,0 +1,106 @@
+/* =========================================
+   Sponsors Section Styles
+   ========================================= */
+
+.sponsers-section {
+    padding: 100px 20px;
+    background-color: var(--bg-main);
+    /* Ensure it blends with the page */
+}
+
+/* Grid Layout */
+.sponsers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card Container */
+.sponsor-card {
+    background: #111;
+    /* Slightly lighter than main black bg */
+    border: 1px solid #222;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect: Yellow Glow + Lift */
+.sponsor-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--yellow-main);
+    box-shadow: 0 10px 40px rgba(245, 196, 0, 0.1);
+}
+
+/* Logo Wrapper */
+.sponsor-logo-wrapper {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+
+    /* Optional: Add a subtle background behind logo */
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.sponsor-logo-wrapper img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+
+    /* Grayscale Effect: Logos look silver/grey initially */
+    filter: grayscale(100%) opacity(0.7);
+    transition: all 0.4s ease;
+}
+
+/* On Hover: Bring back color and full opacity */
+.sponsor-card:hover .sponsor-logo-wrapper img {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.1);
+}
+
+/* Text Content */
+.sponsor-content h3 {
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Small yellow divider line */
+.sponsor-content .divider {
+    width: 40px;
+    height: 3px;
+    background-color: var(--yellow-main);
+    margin: 15px auto;
+    transition: width 0.3s ease;
+}
+
+.sponsor-card:hover .divider {
+    width: 80px;
+    /* Expands on hover */
+}
+
+.sponsor-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .sponsers-grid {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+        padding: 0 10px;
+    }
+}

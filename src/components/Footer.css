@@ -1,0 +1,63 @@
+.footer {
+    background: #000;
+    /* Solid black */
+    padding: 30px 20px;
+    border-top: 1px solid #1a1a1a;
+    /* Very subtle divider */
+    width: 100%;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.rights-text {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.rights-text strong {
+    color: var(--yellow-main);
+    /* Highlights 'Coach Salman' in yellow */
+    font-weight: 600;
+}
+
+.made-by {
+    color: #555;
+    /* Slightly darker text for the credit */
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.made-by a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.made-by a:hover {
+    color: var(--yellow-main);
+}
+
+.heart {
+    font-size: 0.9rem;
+}
+
+/* Responsive: Center text on mobile */
+@media (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}

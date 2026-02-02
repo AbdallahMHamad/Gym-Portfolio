@@ -99,7 +99,7 @@ body {
 }
 
 .hero-title .highlight {
-  color: var(--yellow-main);
+  color: var(--white-main);
   /* Your yellow theme color */
 }
 
@@ -333,6 +333,7 @@ body {
   font-weight: 700;
   font-size: 0.9rem;
 }
+
 
 
 
