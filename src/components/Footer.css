@@ -1,63 +1,118 @@
 .footer {
     background: #000;
-    /* Solid black */
-    padding: 30px 20px;
+    padding: 50px 0;
+    /* Vertical padding */
     border-top: 1px solid #1a1a1a;
-    /* Very subtle divider */
     width: 100%;
+    /* CRITICAL: Ensures internal padding doesn't push the width past 100% */
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .footer-container {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    /* Keeps everything centered if the content is small */
+    display: flex;
+    justify-content: center;
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     flex-wrap: wrap;
-    gap: 15px;
+    /* Allows wrapping on smaller screens */
+    gap: 20px;
 }
 
 .rights-text {
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    color: #888;
+    font-size: 0.95rem;
     margin: 0;
+    letter-spacing: 0.5px;
 }
 
 .rights-text strong {
     color: var(--yellow-main);
-    /* Highlights 'Coach Salman' in yellow */
-    font-weight: 600;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .made-by {
-    color: #555;
-    /* Slightly darker text for the credit */
+    background: rgba(255, 255, 255, 0.03);
+    /* Subtle box to make it stand out */
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid #1a1a1a;
+    color: #666;
     font-size: 0.85rem;
     margin: 0;
+    transition: 0.3s ease;
+}
+
+.made-by:hover {
+    border-color: #333;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .made-by a {
-    color: var(--text-muted);
+    color: #eee;
     text-decoration: none;
-    transition: 0.3s;
-    font-weight: 500;
-}
-
-.made-by a:hover {
-    color: var(--yellow-main);
+    font-weight: 600;
+    margin-left: 4px;
 }
 
 .heart {
-    font-size: 0.9rem;
+    color: #ff4d4d;
+    /* Actual red for the fire/heart area */
+    margin: 0 2px;
 }
 
-/* Responsive: Center text on mobile */
-@media (max-width: 600px) {
+/* =========================================
+   THE FIX: Universal Media Queries
+   ========================================= */
+
+/* Tablets and below (Standardize at 800px) */
+@media screen and (max-width: 800px) {
     .footer-content {
         flex-direction: column;
+        /* Force vertical stacking */
         text-align: center;
+        gap: 25px;
+    }
+
+    .rights-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Small Phones (The 320px - 420px "Danger Zone") */
+@media screen and (max-width: 420px) {
+    .footer {
+        padding: 40px 10px;
+        /* Side padding for tiny screens */
+    }
+
+    .footer-container {
+        width: 100%;
+        /* Use full width but rely on footer padding */
+    }
+
+    .rights-text {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        max-width: 280px;
+        /* Forces wrap so it doesn't hit borders */
+        margin: 0 auto;
+    }
+
+    .made-by {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        width: fit-content;
+        margin: 0 auto;
     }
 }

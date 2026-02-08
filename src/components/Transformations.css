@@ -1,0 +1,321 @@
+/* =========================================
+   Transformations Section - Scoped Styles
+   ========================================= */
+
+.transformations-section {
+    padding: 100px 20px;
+    background-color: #000;
+    /* Distinct from pure black */
+    color: #ffffff;
+}
+
+.trans-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.trans-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.trans-subtitle {
+    color: var(--yellow-main);
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.trans-header h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin: 0;
+}
+
+.trans-highlight {
+    color: var(--yellow-main);
+}
+
+/* Grid Layout */
+.transformations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* Card Design */
+.trans-card {
+    background: #161616;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #252525;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.trans-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--yellow-main);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Image Side-by-Side */
+.trans-images-box {
+    display: flex;
+    height: 320px;
+    /* Taller images for a more dramatic effect */
+    background: #000;
+    position: relative;
+}
+
+.trans-img-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle separator line between before/after */
+.trans-img-wrapper:first-child {
+    border-right: 1px solid rgba(245, 196, 0, 0.3);
+}
+
+.trans-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.trans-card:hover .trans-img-wrapper img {
+    transform: scale(1.05);
+}
+
+/* Labels */
+.trans-label {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    font-weight: 800;
+    text-transform: uppercase;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.label-after {
+    color: var(--yellow-main);
+}
+
+/* Info Section */
+.trans-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.trans-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.trans-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* Badge */
+.trans-duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--yellow-main);
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   Responsiveness
+   ========================================= */
+
+@media (max-width: 968px) {
+    .transformations-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .transformations-section {
+        padding: 60px 15px;
+    }
+
+    .transformations-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .trans-images-box {
+        height: 280px;
+        /* Slightly shorter on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .trans-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .trans-info h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* =========================================
+   Enhanced Responsiveness
+   ========================================= */
+
+/* Desktop & Large Tablets */
+=========================================*/ @media (max-width: 1024px) {
+    .transformations-grid {
+        grid-template-columns: 1fr;
+        /* Single column as you requested */
+        gap: 30px;
+        width: 100%;
+    }
+
+    .trans-images-box {
+        /* Use aspect-ratio instead of fixed height to prevent over-stretching */
+        height: auto;
+        aspect-ratio: 4 / 3;
+        max-height: 500px;
+    }
+}
+
+/* Mobile & Small Tablets (The 768px break) */
+@media (max-width: 768px) {
+    .transformations-section {
+        padding: 60px 0;
+        /* Vertical padding only */
+    }
+
+    .trans-container {
+        width: 90%;
+        /* Creates the safety margin on left/right */
+        margin: 0 auto;
+    }
+
+    .trans-img-wrapper img {
+        /* Ensure the image doesn't 'zoom' too deep, preserving clarity */
+        object-fit: cover;
+        object-position: center top;
+        /* Keeps faces/shoulders visible */
+        width: 100%;
+        height: 100%;
+    }
+
+    .transformations-grid {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+        max-width: 100%;
+        width: 95%;
+    }
+
+    .trans-images-box {
+        height: 450px;
+        /* Adjust height for better mobile aspect ratio */
+    }
+
+    .trans-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        /* Critical for border containment */
+    }
+}
+
+/* Fix for phones between 320px and 416px (Your target range) */
+@media (max-width: 480px) {
+    .trans-header {
+        margin-bottom: 35px;
+        padding: 0 10px;
+    }
+
+    .transformations-grid {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+        max-width: 100%;
+        width: 90%;
+    }
+
+
+    .trans-header h2 {
+        /* Ensures "Transformations" doesn't clip on the right */
+        font-size: clamp(1.5rem, 8vw, 2rem);
+        line-height: 1.2;
+        word-wrap: break-word;
+    }
+
+    .trans-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    .trans-info {
+        padding: 20px 15px;
+    }
+
+    .trans-info h3 {
+        font-size: 1.25rem;
+    }
+
+    .trans-info p {
+        font-size: 0.9rem;
+        width: 100%;
+        /* Prevents text from pushing width */
+    }
+
+    .trans-duration {
+        padding: 6px 16px;
+        font-size: 0.75rem;
+    }
+
+    .trans-images-box {
+        height: 310px;
+        /* Prevent tall cards on tiny phones */
+    }
+}
+
+/* Ultra-small screens safety */
+@media (max-width: 330px) {
+    .trans-container {
+        width: 92%;
+        /* Slightly more room for tiny screens */
+    }
+
+
+    .transformations-grid {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+        max-width: 90%;
+        width: 80%;
+    }
+
+    .trans-images-box {
+        height: 250px;
+        /* Prevent tall cards on tiny phones */
+    }
+}

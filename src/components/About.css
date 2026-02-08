@@ -1,0 +1,299 @@
+.subtitle {
+    color: var(--yellow-main);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 15px;
+}
+
+
+.description {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    max-width: 95%;
+}
+
+/* Buttons */
+.cta-group {
+    display: flex;
+    justify-content: flex-start;
+    /* Default for desktop */
+    gap: 15px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--yellow-main);
+    color: black;
+    padding: 14px 35px;
+    font-weight: 700;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--yellow-glow);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid #333;
+    padding: 14px 35px;
+    font-weight: 700;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    border-color: var(--yellow-main);
+    color: var(--yellow-main);
+}
+
+@media (max-width: 768px) {
+    .cta-group {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 480px) {
+        .cta-group {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            /* Hard limit prevents overflow */
+        }
+
+        .coach-name-tag .name {
+            font-size: 0.75rem;
+            /* Scale down name tag */
+            letter-spacing: 1px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+            max-width: 150px;
+            /* Keeps them from looking too stretched */
+        }
+    }
+}
+
+.stat-box p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 5px 0 0 0;
+}
+
+/* =========================================
+   About Image System (Mobile-Optimized)
+   ========================================= */
+
+.glow-effect {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: var(--yellow-main);
+    opacity: 0.15;
+    filter: blur(120px);
+    z-index: 1;
+    border-radius: 50%;
+}
+
+
+/* =========================================
+   About Section Layout
+   ========================================= */
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* CHANGE THIS LINE */
+    padding-top: 10px;
+    /* Was 40px - Increased to clear the Navbar */
+    padding-bottom: 60px;
+
+    overflow: hidden;
+    position: relative;
+    background: var(--bg-main);
+    /* Ensure background is dark */
+}
+
+.coach-name-tag {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    padding-top: -20px;
+}
+
+.coach-name-tag .line {
+    width: 40px;
+    height: 2px;
+    background: var(--yellow-main);
+}
+
+
+.coach-name-tag .name {
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+
+    /* CHANGE THIS LINE */
+    color: white;
+    /* Force white color to ensure visibility */
+}
+
+.about-container {
+    max-width: 1200px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* Text Content Area */
+.about-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 5;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.stats-grid {
+    display: flex;
+    gap: 40px;
+    border-top: 1px solid #222;
+    padding-top: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    /* Prevents stats from squishing */
+}
+
+.stat-box {
+    min-width: 100px;
+}
+
+.stat-box h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.about-image {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    cursor: pointer;
+    /* This height ensures the image area doesn't collapse */
+    min-height: 600px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hero-image-original {
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    /* Rounded corners to match the professional look */
+    border-radius: 20px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    will-change: opacity, transform;
+    /* Adds the soft shadow seen in your reference */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.hero-image-original.hidden {
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+}
+
+.hero-image-original.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+}
+
+.image-tap-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--yellow-main);
+    color: black;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   Smartphone Accuracy Fixes
+   ========================================= */
+@media (max-width: 768px) {
+    .about-section {
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+
+
+
+    .coach-name-tag {
+        justify-content: center;
+    }
+
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-content {
+        order: 1;
+        width: 100%;
+        margin-bottom: 40px;
+        /* Forces space before images start */
+    }
+
+    .about-image {
+        order: 2;
+        width: 100%;
+        /* Adjusted height for mobile screens to prevent overlap */
+        min-height: 450px;
+    }
+
+    .stats-grid {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+}

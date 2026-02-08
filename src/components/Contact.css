@@ -103,14 +103,71 @@
     /* Slide arrow to right */
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 0;
+        /* Changed to 0 horizontal to let container handle margins */
+    }
+
+    .contact-container {
+        width: 90%;
+        /* Safety buffer on the sides */
+        margin: 0 auto;
+    }
+
+    .contact-desc {
+        font-size: 1rem;
+        width: 90%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
     .social-grid {
         grid-template-columns: 1fr;
-        /* 1 column on mobile */
+        /* Force vertical stack */
+        width: 100%;
+        padding: 0 10px;
     }
 
     .social-card {
         padding: 15px;
+    }
+
+    .icon-box {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+        margin-right: 15px;
+        /* Tighter spacing for small screens */
+    }
+
+    .link-info h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Specific Fix for Tiny Screens (373px and below) */
+@media (max-width: 661px) {
+    .link-info span {
+        font-size: 0.8rem;
+        display: block;
+        /* Prevents long emails/handles from breaking the card */
+        word-break: break-all;
+    }
+
+    
+
+    .social-grid {
+        grid-template-columns: 1fr;
+        /* Force vertical stack */
+        width: 90%;
+        padding: 0 10px;
+    }
+
+}
+@media(max-width: 326px){
+
+.arrow-icon {
+        display: none;
     }
 }

@@ -1,106 +1,416 @@
 /* =========================================
-   Sponsors Section Styles
+   Sponsors Section Base
    ========================================= */
 
 .sponsers-section {
-    padding: 100px 20px;
+    padding: 80px 0;
     background-color: var(--bg-main);
-    /* Ensure it blends with the page */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Centers the internal container */
+    overflow-x: hidden;
 }
 
-/* Grid Layout */
-.sponsers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+.section-container {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers header and grid */
 }
 
-/* Card Container */
+/* Header Text Fixes */
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.section-header .section-title {
+    /* Prevents title from breaking borders */
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: white;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 15px 0;
+}
+
+.section-description {
+    color: var(--text-muted);
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* =========================================
+   Flexible Grid System
+   ========================================= */
+
+.sponsers-grid {
+    display: grid;
+    /* Desktop: 3 columns */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+}
+
 .sponsor-card {
     background: #111;
-    /* Slightly lighter than main black bg */
     border: 1px solid #222;
     border-radius: 15px;
-    padding: 30px;
+    padding: 40px 25px;
     text-align: center;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
-/* Hover Effect: Yellow Glow + Lift */
 .sponsor-card:hover {
     transform: translateY(-10px);
     border-color: var(--yellow-main);
-    box-shadow: 0 10px 40px rgba(245, 196, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(245, 196, 0, 0.1);
 }
 
-/* Logo Wrapper */
+/* Logo & Content */
 .sponsor-logo-wrapper {
-    height: 100px;
+    height: 80px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
-
-    /* Optional: Add a subtle background behind logo */
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
-    padding: 10px;
 }
 
 .sponsor-logo-wrapper img {
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 160px;
+    max-height: 100%;
     object-fit: contain;
-
-    /* Grayscale Effect: Logos look silver/grey initially */
     filter: grayscale(100%) opacity(0.7);
-    transition: all 0.4s ease;
+    transition: 0.4s ease;
 }
 
-/* On Hover: Bring back color and full opacity */
 .sponsor-card:hover .sponsor-logo-wrapper img {
     filter: grayscale(0%) opacity(1);
-    transform: scale(1.1);
 }
 
-/* Text Content */
 .sponsor-content h3 {
-    font-size: 1.5rem;
     color: white;
+    font-size: 1.4rem;
     margin: 0;
-    font-weight: 700;
 }
 
-/* Small yellow divider line */
-.sponsor-content .divider {
+.divider {
     width: 40px;
     height: 3px;
-    background-color: var(--yellow-main);
+    background: var(--yellow-main);
     margin: 15px auto;
-    transition: width 0.3s ease;
 }
 
-.sponsor-card:hover .divider {
-    width: 80px;
-    /* Expands on hover */
+/* =========================================
+   Responsive Breakpoints
+   ========================================= */
+
+/* =========================================
+   Responsive Breakpoints (Fixed)
+   ========================================= */
+
+/* Mid Screens: 2 on top, 1 centered on bottom */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .sponsers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sponsor-card:nth-child(3) {
+        grid-column: span 2;
+        max-width: 500px;
+        justify-self: center;
+    }
 }
 
-.sponsor-content p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
+/* Tablets & Mobile (768px and below) */
+@media (max-width: 768px) {
+    .sponsers-section {
+        padding: 50px 0;
+    }
+
+    .section-container {
+        /* Reduce width to 85% to create a large safety 'buffer' on the sides */
+        width: 85%;
+        max-width: 100vw;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .sponsers-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        /* Fill the 85% container */
+        gap: 20px;
+    }
+
+    .sponsor-card {
+        /* Force card to never exceed its parent */
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 15px;
+        box-sizing: border-box;
+        /* Crucial: ensures padding doesn't add to width */
+    }
+
+    .section-description {
+        width: 100%;
+        /* Let it fill the section-container */
+        padding: 0 5px;
+        font-size: 0.95rem;
+        word-wrap: break-word;
+        /* Insurance against long words */
+        text-wrap: balance;
+        /* Prevents awkward single words on new lines */
+    }
+
+    .section-header .section-title {
+        /* Using a smaller minimum for clamp to fit narrow screens */
+        font-size: clamp(1.2rem, 4vw, 1.9rem);
+        width: 100%;
+        word-break: break-word;
+    }
+
+}
+
+
+
+@media(max-width: 528px) {
+
+    .section-header .section-title {
+        /* Using a smaller minimum for clamp to fit narrow screens */
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        width: 100%;
+        word-break: break-word;
+    }
+
+    .sponsers-grid {
+        /* Reducing the width slightly to ensure it's away from the 'dead zone' */
+        width: 80%;
+        padding: 0;
+    }
+
+    .section-container {
+        width: 80%;
+        /* Slightly wider for phones, but still with margins */
+    }
+
+
+}
+
+/* Small Phones (480px and below) */
+@media (max-width: 480px) {
+    .section-header .section-title {
+        /* Using a smaller minimum for clamp to fit narrow screens */
+        font-size: clamp(1.3rem, 8vw, 1.6rem);
+        width: 100%;
+        word-break: break-word;
+    }
+
+    .sponsers-grid {
+        /* Reducing the width slightly to ensure it's away from the 'dead zone' */
+        width: 80%;
+        padding: 0;
+    }
+
+    .section-container {
+        width: 80%;
+        /* Slightly wider for phones, but still with margins */
+    }
+}
+
+@media (max-width: 420px) {
+    .section-header .section-title {
+        /* Shinks text so it doesn't push the border out */
+        font-size: 1.4rem;
+        line-height: 1.2;
+    }
+
+    .section-container {
+        width: 80%;
+        /* Provides exactly 5% space on each side */
+    }
+
+    .sponsor-card {
+        /* Prevent internal horizontal scrolling */
+        max-width: 100%;
+    }
+}
+
+
+/* Tiny Phones (320px and below) - Fixes your image_c70ed4.png issue */
+@media (max-width: 320px) {
+    .section-header .section-title {
+        font-size: 1.2rem;
+    }
+
+    .sponsor-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .sponsers-grid {
+        /* Reducing the width slightly to ensure it's away from the 'dead zone' */
+        width: 70%;
+        padding: 0;
+    }
+
+    .sponsor-card {
+        padding: 20px 10px;
+        /* Extra tight padding for tiny screens */
+    }
+}
+
+/*Promo code Section*/
+
+/* Promo Banner Styles */
+.promo-banner {
+    background: rgba(245, 196, 0, 0.05);
+    /* Very light yellow tint */
+    border: 2px dashed var(--yellow-main);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 600px;
+    /* Keeps it centered and neat */
+    text-align: center;
+    animation: pulse-border 2s infinite;
+}
+
+.promo-label {
+    display: block;
+    color: var(--yellow-main);
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.promo-content p {
+    color: white;
+    font-size: 1.2rem;
     margin: 0;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .sponsers-grid {
-        grid-template-columns: 1fr;
-        /* Stack vertically */
-        padding: 0 10px;
+.promo-code {
+    background: var(--yellow-main);
+    color: black;
+    padding: 2px 10px;
+    font-family: monospace;
+    font-weight: 900;
+    border-radius: 4px;
+    margin: 0 5px;
+    font-size: 1.3rem;
+}
+
+  /* parent to child hover relationship*/
+  /*
+.promo-banner:hover~.sponsers-grid .sponsor-card {
+    border-color: var(--yellow-main);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(245, 196, 0, 0.15);
+}
+
+.promo-banner:hover~.sponsers-grid .sponsor-card .sponsor-logo-wrapper img {
+    filter: grayscale(0%) opacity(1);
+}
+
+.promo-banner:hover {
+    background: rgba(245, 196, 0, 0.1);
+    cursor: pointer;
+}
+
+ */
+
+
+
+
+
+/* Animation to draw attention */
+@keyframes pulse-border {
+    0% {
+        border-color: rgba(245, 196, 0, 0.4);
+    }
+
+    50% {
+        border-color: rgba(245, 196, 0, 1);
+    }
+
+    100% {
+        border-color: rgba(245, 196, 0, 0.4);
+    }
+}
+
+/* Mobile adjustments for the banner */
+
+@media (max-width: 720px) {
+    .promo-banner {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .promo-content p {
+        font-size: 1rem;
+    }
+
+    .promo-code {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 5700px) {
+    .promo-banner {
+        width: 93%;
+        padding: 15px;
+    }
+
+    .promo-content p {
+        font-size: 1rem;
+    }
+
+    .promo-code {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-banner {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .promo-content p {
+        font-size: 1rem;
+    }
+
+    .promo-code {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .promo-banner {
+        width: 82%;
+        padding: 15px;
+    }
+
+    .promo-content p {
+        font-size: 1rem;
+    }
+
+    .promo-code {
+        font-size: 1.1rem;
     }
 }

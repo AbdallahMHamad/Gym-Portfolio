@@ -1,72 +1,78 @@
 import React from "react";
+import "./Transformations.css";
 
 const transformationsData = [
   {
     id: 1,
-    name: "Ahmed S.",
-    duration: "12 Weeks",
-    description: "Lost 15kg & Built Muscle",
-    beforeImg: "/images_resources/before1.jpg", // Placeholder path
-    afterImg: "/images_resources/after1.jpg",   // Placeholder path
+    name: "Ashraf S.",
+    duration: "1 Month",
+    description: "Lost 8kg fat and diet plan",
+    beforeImg: "/images_resources/Transformations/ashb.jpg",
+    afterImg: "/images_resources/Transformations/asha.jpg",
   },
   {
     id: 2,
     name: "Sarah K.",
-    duration: "6 Months",
-    description: "Competition Prep Ready",
-    beforeImg: "/images_resources/before2.jpg",
-    afterImg: "/images_resources/after2.jpg",
+    duration: "1 Month",
+    description: "Muscle growth & definition",
+    beforeImg: "/images_resources/Transformations/10b.jpg",
+    afterImg: "/images_resources/Transformations/10a.jpg",
   },
   {
     id: 3,
     name: "Mike D.",
-    duration: "16 Weeks",
-    description: "Total Body Recomposition",
-    beforeImg: "/images_resources/before3.jpg",
-    afterImg: "/images_resources/after3.jpg",
+    duration: "11 Months",
+    description: "Incredible fat loss journey",
+    beforeImg: "/images_resources/Transformations/4b.jpg",
+    afterImg: "/images_resources/Transformations/4a.jpg",
   },
   {
     id: 4,
     name: "Omar Y.",
-    duration: "8 Weeks",
-    description: "Fat Loss Focus",
-    beforeImg: "/images_resources/before4.jpg",
-    afterImg: "/images_resources/after4.jpg",
+    duration: "6 Months",
+    description: "Clean bulk & muscle gain",
+    beforeImg: "/images_resources/Transformations/2b.jpg",
+    afterImg: "/images_resources/Transformations/2a.jpg",
   },
 ];
 
 const Transformations = () => {
   return (
-    <section id="transformations" className="section gray transformations-section">
-      <div className="section-container">
+    <section id="transformations" className="transformations-section">
+      <div className="trans-container">
         
-        <div className="section-header">
-          <span className="subtitle">REAL RESULTS</span>
-          <h2>Client <span className="highlight">Transformations</span></h2>
+        <div className="trans-header">
+          <span className="trans-subtitle">REAL RESULTS</span>
+          <h2>Client <span className="trans-highlight">Transformations</span></h2>
         </div>
 
         <div className="transformations-grid">
           {transformationsData.map((item) => (
             <div key={item.id} className="trans-card">
-              {/* Images Container */}
-              <div className="trans-images">
-                <div className="img-wrapper">
-                  <span className="img-label">Before</span>
-                  {/* Using placeholder images if you don't have files yet */}
-                  <img src={item.beforeImg} alt={`${item.name} Before`} onError={(e) => e.target.src='https://via.placeholder.com/150/333/fff?text=Before'} />
+              <div className="trans-images-box">
+                <div className="trans-img-wrapper">
+                  <span className="trans-label label-before">Before</span>
+                  <img 
+                    src={item.beforeImg} 
+                    alt={`${item.name} Before`} 
+                    onError={(e) => e.target.src='https://via.placeholder.com/400x500/111/fff?text=Before'} 
+                  />
                 </div>
-                <div className="img-wrapper">
-                  <span className="img-label">After</span>
-                  <img src={item.afterImg} alt={`${item.name} After`} onError={(e) => e.target.src='https://via.placeholder.com/150/f5c400/000?text=After'} />
+                <div className="trans-img-wrapper">
+                  <span className="trans-label label-after">After</span>
+                  <img 
+                    src={item.afterImg} 
+                    alt={`${item.name} After`} 
+                    onError={(e) => e.target.src='https://via.placeholder.com/400x500/f5c400/000?text=After'} 
+                  />
                 </div>
               </div>
 
-              {/* Card Info */}
               <div className="trans-info">
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
-                <div className="duration-badge">
-                  <i className="fa-regular fa-clock"></i> {item.duration}
+                <div className="trans-duration">
+                   {item.duration}
                 </div>
               </div>
             </div>

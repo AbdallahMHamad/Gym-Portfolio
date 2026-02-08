@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
-
+import "./About.css";
 const CountUp = ({ end, duration = 1000 }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef(null);
@@ -48,26 +47,45 @@ const CountUp = ({ end, duration = 1000 }) => {
 
 
 function About() {
-    return (
-   <section id="about" className="section dark about-section">
-          <div className="about-container">
-            
-            <div className="about-content">
-              <span className="subtitle"> ONLINE COACHING</span>
-              
-              <h1 className="hero-title">
-                <span className="highlight">Stop Wishing, Start <span style={{color:"var(--yellow-main)"}}>Doing</span></span>
-              </h1>
-              
-              <p className="description">
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem autem minus, saepe alias repellendus accusantium vero. Labore, maiores? Dolore culpa amet molestiae doloribus repellendus est beatae soluta quis aut ad?              </p>
+  // Array of original .jfif images
+  const originalImages = [
+    "/images_resources/salman/1.jfif",
+    "/images_resources/salman/2.jfif",
+    "/images_resources/salman/3.jfif",
+    "/images_resources/salman/4.jfif"
+  ];
 
-              <div className="cta-group">
-                <a href="#plans" className="btn-primary">View Programs</a>
-                <a href="#transformations" className="btn-secondary">See Results</a>
-              </div>
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-              <div className="stats-grid">
+  const nextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % originalImages.length);
+  };
+
+  return (
+    
+    <section id="about" className="section dark about-section">
+      <div className="about-container">
+        <div className="about-content">
+          {/* Identity Line */}
+      <div className="coach-name-tag">
+        <span className="line"></span>
+        <span className="name">Mohammad Salman</span>
+      </div>
+          <span className="subtitle">ONLINE COACHING</span>
+          <h1 className="hero-title">
+            Stop Wishing, <br />
+            Start <span style={{ color: "var(--yellow-main)" }}>Doing</span>
+          </h1>
+          <p className="description">
+            Transform your physique with expert guidance. Whether you're looking to lose fat or build elite muscle, I provide the roadmap to your best self.
+          </p>
+
+          <div className="cta-group">
+            <a href="#plans" className="btn-primary">View Programs</a>
+            <a href="#transformations" className="btn-secondary">See Results</a>
+          </div>
+
+          <div className="stats-grid">
             <div className="stat-box">
               <h3>
                 {/* Duration is in milliseconds (2000 = 2 seconds) */}
@@ -92,16 +110,20 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem autem minus, sa
           </div>
         </div>
 
-            <div className="about-image">
-              <img 
-                src="/images_resources/salman.png" 
-                alt="Coach Salman" 
-              />
-              <div className="glow-effect"></div>
-            </div>
-
-          </div>
-        </section>
-    );
+        <div className="about-image" onClick={nextImage}>
+          {originalImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Coach Salman ${index}`}
+              className={`hero-image-original ${index === currentIndex ? "active" : "hidden"}`}
+            />
+          ))}
+          <div className="image-tap-hint">Tap to swap</div>
+        </div>
+      </div>
+    </section>
+  );
 }
+
 export default About;
