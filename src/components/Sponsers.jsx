@@ -1,5 +1,6 @@
 import React from "react";
 import "./Sponsers.css";
+
 const sponsorsData = [
     {
         id: 1,

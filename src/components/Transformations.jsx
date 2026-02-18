@@ -7,8 +7,8 @@ const transformationsData = [
     name: "Ashraf S.",
     duration: "1 Month",
     description: "Lost 8kg fat and diet plan",
-    beforeImg: "/images_resources/Transformations/ashb.jpg",
-    afterImg: "/images_resources/Transformations/asha.jpg",
+    beforeImg: "/images_resources/Transformations/12b.jpg",
+    afterImg: "/images_resources/Transformations/12a.jpg",
   },
   {
     id: 2,
@@ -33,6 +33,22 @@ const transformationsData = [
     description: "Clean bulk & muscle gain",
     beforeImg: "/images_resources/Transformations/2b.jpg",
     afterImg: "/images_resources/Transformations/2a.jpg",
+  },
+  {
+    id: 5,
+    name: "Omar Y.",
+    duration: "6 Months",
+    description: "Clean bulk & muscle gain",
+    beforeImg: "/images_resources/Transformations/11b.jpg",
+    afterImg: "/images_resources/Transformations/11a.jpg",
+  },
+  {
+    id: 6,
+    name: "Omar Y.",
+    duration: "6 Months",
+    description: "Clean bulk & muscle gain",
+    beforeImg: "/images_resources/Transformations/ashb.jpg",
+    afterImg: "/images_resources/Transformations/asha.jpg",
   },
 ];
 

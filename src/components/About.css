@@ -9,6 +9,7 @@
 }
 
 
+
 .description {
     color: var(--text-muted);
     font-size: 1.1rem;
@@ -81,14 +82,25 @@
             letter-spacing: 1px;
         }
 
+        .coach-name-tag .line {
+            width: 8px;
+            height: 1px;
+            margin: 0 -5px;
+        }
+
         .btn-primary,
         .btn-secondary {
-            width: 100%;
-            max-width: 150px;
-            /* Keeps them from looking too stretched */
+            max-width: 180px;
+            margin: 5px;
         }
     }
 }
+
+
+
+
+
+
 
 .stat-box p {
     color: var(--text-muted);
@@ -102,18 +114,21 @@
 
 .glow-effect {
     position: absolute;
-    top: 40%;
+    top: 20%;
+    /* رفع التأثير قليلاً للموبايل */
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
+    transform: translateX(-50%);
+    /* تقليل الحجم في الموبايل لكي لا يغطي الشاشة بالكامل */
+    width: 250px;
+    height: 250px;
     background: var(--yellow-main);
-    opacity: 0.15;
-    filter: blur(120px);
+    opacity: 0.1;
+    /* تقليل الشفافية ليكون مريح للعين */
+    filter: blur(80px);
     z-index: 1;
-    border-radius: 50%;
+    pointer-events: none;
+    /* لكي لا يمنع النقر على الصور */
 }
-
 
 /* =========================================
    About Section Layout
@@ -123,15 +138,12 @@
     align-items: center;
     justify-content: center;
 
-    /* CHANGE THIS LINE */
-    padding-top: 10px;
-    /* Was 40px - Increased to clear the Navbar */
-    padding-bottom: 60px;
 
-    overflow: hidden;
+    padding-top: 80px;
+    padding-bottom: 120px;
+    !important overflow: hidden;
     position: relative;
     background: var(--bg-main);
-    /* Ensure background is dark */
 }
 
 .coach-name-tag {
@@ -296,4 +308,372 @@
     .hero-title {
         font-size: 2.2rem;
     }
+}
+
+
+/* Container for the image and hint */
+.about-image {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    /* Limits size on desktop */
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* The Fixed-Size Box */
+.image-wrapper {
+    position: relative;
+    top: 60px;
+    width: 100%;
+    /* 4:5 is the standard professional fitness/portrait ratio */
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.hero-image-original {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* This ensures every image fills the 4:5 box without stretching */
+    object-fit: cover;
+    object-position: center top;
+    /* Keeps the face/upper body in view */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.image-tap-hint {
+    position: absolute;
+    bottom: 15px;
+    /* Anchored to bottom of image box */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--yellow-main);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    /* Clicks go through to the image */
+    white-space: nowrap;
+}
+
+/* Mobile Tweaks to prevent height collapse */
+@media (max-width: 768px) {
+    .about-image {
+        min-height: auto;
+        /* Aspect ratio handles height now */
+        margin: 0 auto;
+    }
+
+    .image-wrapper {
+        width: 90vw;
+        /* Responsive width on mobile */
+        max-width: 380px;
+    }
+}
+
+
+.uk-certification-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(245, 196, 0, 0.07);
+    border: 1px solid rgba(245, 196, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 50px;
+    margin-bottom: 25px;
+    white-space: nowrap;
+    /* يمنع البوكس من تجاوز حدود الأب */
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.uk-certification-badge .flag-icon {
+    background: var(--yellow-main);
+    color: #000;
+    font-weight: 900;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    font-size: clamp(0.5rem, 2vw, 0.7rem);
+}
+
+.uk-certification-badge .cert-text {
+    color: var(--yellow-main);
+    font-weight: 700;
+    text-transform: uppercase;
+    /* تصغير الخط لضمان بقائه داخل الصندوق */
+    font-size: clamp(0.45rem, 2.5vw, 0.75rem);
+}
+
+@media (max-width: 767px) {
+
+    /* 1. ضبط القسم الرئيسي ليكون مرناً مع الهيدر */
+    .about-section {
+        padding-top: clamp(80px, 15vh, 120px) !important;
+        padding-bottom: 40px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 2. النصوص: استخدام clamp لجعل الخط يصغر في الهواتف الصغيرة جداً */
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+        line-height: 1.1;
+        text-align: center;
+        width: 90%;
+        margin: 0 auto 15px auto;
+    }
+
+    /* 3. حل مشكلة البادج (الشهادة): منعه من الخروج عن الحواف */
+    .uk-certification-badge {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        max-width: 95%;
+        /* ضمان بقائه داخل الشاشة */
+        margin: 0 auto 20px auto !important;
+        padding: 4px 10px;
+        transform: scale(0.95);
+    }
+
+    .cert-text {
+        font-size: clamp(0.6rem, 2.5vw, 0.8rem) !important;
+        white-space: normal;
+        /* السماح للنص بالنزول لسطر جديد إذا ضاقت الشاشة */
+        text-align: center;
+    }
+
+    /* 4. العدادات (Stats): ترتيب ذكي */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(5px, 2vw, 15px);
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 15px 5px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-box h3 {
+        font-size: clamp(1.2rem, 5vw, 1.8rem) !important;
+    }
+
+    /* 5. الصورة: رفعها للأعلى وإلغاء الفراغ الميت */
+    .about-image {
+        margin-top: -20px !important;
+        /* سحب الصورة للأعلى */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .image-wrapper {
+        width: 90vw !important;
+        /* مرونة كاملة مع عرض الهاتف */
+        max-width: 350px;
+        aspect-ratio: 4 / 5;
+        top: 0 !important;
+        margin-bottom: 0;
+    }
+
+    /* 6. الأزرار: التأكد من أنها لا تتداخل */
+    .cta-group {
+        display: flex;
+        flex-direction: row;
+        /* إبقاء الأزرار بجانب بعضها إن أمكن */
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 15px;
+        font-size: 0.85rem;
+        flex: 1;
+        /* جعل الأزرار بنفس الحجم */
+        max-width: 150px;
+        text-align: center;
+    }
+}
+
+.stats-grid {
+    display: grid;
+    /* إجبار العناصر على البقاء في 3 أعمدة دائماً */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    border-top: 1px solid #222;
+    padding-top: 25px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.highlighted-stat h3 {
+    color: var(--yellow-main);
+    font-style: italic;
+}
+
+/* --- تنظيف بعض الأخطاء في الكود الأصلي --- */
+.about-section {
+    position: relative;
+    padding: 60px 0;
+    background: var(--bg-main);
+    overflow: hidden;
+    /* ضروري جداً لمنع السكرول الجانبي */
+}
+
+.coach-name-tag {
+    margin-top: 0;
+    /* تم تصحيح الـ padding-top السالب الذي كان خطأ */
+}
+
+/* --- تحسين الموبايل --- */
+@media (max-width: 768px) {
+
+    /* 1. رفع حاوية الصورة للأعلى لتقليل الفراغ تحت العدادات */
+    .about-image {
+        margin-top: -30px;
+        /* يسحب الصورة للأعلى باتجاه العدادات */
+        order: 2;
+        width: 100%;
+        min-height: auto;
+    }
+
+    /* 2. تقليل الفراغ الداخلي للسكشن لتوفير مساحة للسكشن القادم */
+    .about-section {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        /* تقليل الفراغ السفلي */
+    }
+
+    /* 3. التأكد من أن الـ wrapper لا يضيف مسافة علوية كبيرة */
+    .image-wrapper {
+        top: 20px;
+        /* تقليل الـ top الذي كان 60px سابقاً */
+        margin-bottom: 0;
+    }
+
+    /* 4. تصغير المسافة تحت العدادات مباشرة */
+    .about-content {
+        margin-bottom: 20px;
+        /* بدلاً من 40px */
+    }
+
+    /* 5. جعل العدادات متراصة أكثر لتوفير مساحة عمودية */
+    .stats-grid {
+        padding-top: 15px;
+        margin-top: 10px;
+        gap: 5px;
+    }
+
+    .glow-effect {
+        top: 45%;
+        /* تعديل طفيف ليتناسب مع رفع الصورة */
+        opacity: 0.12;
+        /* تعزيز التوهج قليلاً خلف الصورة المرفوعة */
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+
+    /* زيادة المساحة العلوية لمنع التداخل مع الـ Navbar */
+    .about-section {
+        padding-top: 140px !important;
+        padding-bottom: 80px;
+    }
+
+
+    .coach-name-tag {
+        margin-top: 0;
+        margin-bottom: 20px;
+        z-index: 10;
+        position: relative;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .about-container {
+        flex-direction: column;
+        /* تحويل الترتيب لعمودي في التابلت لزيادة الحجم */
+        text-align: center;
+        gap: 50px;
+    }
+
+    .about-content {
+        max-width: 100%;
+        width: 100%;
+        order: 1;
+    }
+
+    .about-image {
+        width: 100%;
+        max-width: 500px;
+        /* تكبير الصورة بشكل ملحوظ */
+        margin: 0 auto;
+        order: 2;
+    }
+
+    .image-wrapper {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        top: 0;
+    }
+
+    .stats-grid {
+        justify-content: center;
+        gap: 40px;
+        margin-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .coach-name-tag {
+        justify-content: center;
+    }
+
+    .cta-group {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1023px) and (max-width: 1366px) {
+    .about-container {
+        gap: 60px;
+    }
+
+    .about-image {
+        flex: 1.2;
+        /* زيادة حصة الصورة من المساحة */
+        max-width: 500px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
 }

@@ -11,11 +11,21 @@ function Navbar() {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
+
+const WHATSAPP_NUMBER = "966581145883"; 
+
+const trainingMsg = encodeURIComponent("مرحباً كوتش سلمان، أود الاستفسار عن برامج التدريب المتاحة.");
+const collabMsg = encodeURIComponent("مرحباً كوتش سلمان، أنا مهتم بعمل تعاون (Collaboration) أو رعاية.");
+
+// الروابط النهائية
+const trainingLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${trainingMsg}`;
+const collabLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${collabMsg}`;
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo">
-          <img src="/images_resources/Logos/salman.png" alt="Coach Salman Logo" />
+         <a href="#about"> <img src="/images_resources/Logos/salman.png" alt="Coach Salman Logo" /></a>
+        <a/>
           <span>Coach Salman</span>
         </div>
 
@@ -28,24 +38,28 @@ function Navbar() {
 
         {/* Navigation Links */}
         <ul className={`nav-links ${isOpen ? "open" : ""}`}>
-          <li><a href="#about" onClick={() => setIsOpen(false)}>About</a></li>
+          {/* <li><a href="#about" onClick={() => setIsOpen(false)}>About</a></li> */}
           <li><a href="#transformations" onClick={() => setIsOpen(false)}>Transformations</a></li>
           <li><a href="#sponsers" onClick={() => setIsOpen(false)}>Sponsors</a></li>
           <li><a href="#contact" onClick={() => setIsOpen(false)}>Contact</a></li>
           
-          {/* MOBILE ONLY BUTTON: Inside the UL list */}
           <span className="mobile-only-item">
-            <a href="#contact" className="cta-btn mobile-only-btn" onClick={() => setIsOpen(false)}>
-              Start Training
-            </a>
-          </span>
+<a href={trainingLink} target="_blank" rel="noreferrer" className="cta-btn mobile-only-btn">
+  Start Training
+</a>
+<a href={collabLink} target="_blank" rel="noreferrer" className="cta-btn mobile-only-btn collab-btn">
+  For Collaborations
+</a>          </span>
         </ul>
 
-        {/* DESKTOP ONLY BUTTON: Outside the UL list */}
-        <a href="#contact" className="cta-btn desktop-only-btn">
-          Start Training
-        </a>
-      </div>
+<a href={trainingLink} target="_blank" rel="noreferrer" className="cta-btn desktop-only-btn">
+  Start Training
+</a>
+
+{/* زر التعاون */}
+<a href={collabLink} target="_blank" rel="noreferrer" className="cta-btn desktop-only-btn collab-btn">
+  For Collaborations
+</a>      </div>
     </nav>
   );
 }

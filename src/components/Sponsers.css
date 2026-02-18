@@ -315,8 +315,8 @@
     font-size: 1.3rem;
 }
 
-  /* parent to child hover relationship*/
-  /*
+/* parent to child hover relationship*/
+/*
 .promo-banner:hover~.sponsers-grid .sponsor-card {
     border-color: var(--yellow-main);
     transform: translateY(-5px);

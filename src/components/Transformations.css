@@ -2,11 +2,30 @@
    Transformations Section - Scoped Styles
    ========================================= */
 
+/* =========================================
+   Transformations Section - Scoped Styles
+   ========================================= */
+
 .transformations-section {
-    padding: 100px 20px;
-    background-color: #000;
-    /* Distinct from pure black */
     color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+
+@media (max-width: 768px) {
+    .transformations-section {
+        padding: 60px 0;
+        width: 100%;
+        overflow: hidden;
+        /* مهم جداً لمنع الـ Scroll العرضي */
+    }
+
+    .trans-container {
+        width: 90%;
+        /* هذا يحافظ على مسافة أمان داخلية دون كسر الخلفية */
+        margin: 0 auto;
+    }
 }
 
 .trans-container {

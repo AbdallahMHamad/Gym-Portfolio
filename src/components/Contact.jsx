@@ -1,5 +1,6 @@
 import React from "react";
 import './Contact.css'
+
 const socialLinks = [
   {
     id: 1,
@@ -47,7 +48,7 @@ const socialLinks = [
 
 function Contact() {
   return (
-    <section id="contact" className="section gray contact-section">
+    <section id="contact" className="section dark contact-section">
       <div className="section-container">
         
         <div className="section-header">

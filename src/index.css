@@ -14,7 +14,9 @@ html {
 }
 
 body {
+  background-color: #0b0b0b;
   margin: 0;
+  padding: 0;
   font-family: 'Arial', sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
@@ -22,45 +24,40 @@ body {
   user-select: none;
 }
 
+/* إصلاح الحاوية الأساسية لتناسب الموبايل */
+#root {
+  width: 100%;
+  max-width: 100vw;
+  /* ضمان عدم تجاوز عرض الشاشة */
+  margin: 0;
+  padding: 0;
+  /* حذف الـ 2rem التي كانت تسبب الفراغات */
+  overflow-x: hidden;
+  /* قتل أي سكرول عرضي فوراً */
+}
+
+/* ضبط حسابات العرض لجميع العناصر */
+* {
+  box-sizing: border-box;
+}
+
+
+section,
 .section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+  width: 100%;
+  padding: 80px 20px;
+  position: relative;
+  background-color: transparent !important;
+  /* نجعل السكشن شفافاً ليظهر سواد الـ body */
+
+  /* توهج موحد: يبدأ دائماً في آخر 150 بكسل من السكشن */
+  background-image: linear-gradient(to bottom,
+      transparent calc(100% - 150px),
+      rgba(245, 196, 0, 0.08) 100%);
+
+  border-bottom: 1px solid rgba(245, 196, 0, 0.05);
+  box-sizing: border-box;
 }
-
-.dark {
-  background: #000;
-}
-
-.gray {
-  background: #111;
-}
-
-
-.section-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-header h2 {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 10px 0;
-}
-
-.section-header .highlight {
-  color: var(--yellow-main);
-}
-
-
-
 
 .duration-badge {
   display: inline-block;
@@ -70,4 +67,3 @@ body {
   border-radius: 20px;
   font-weight: 700;
 }
-

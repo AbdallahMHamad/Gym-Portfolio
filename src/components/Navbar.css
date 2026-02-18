@@ -3,16 +3,21 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(10px);
+    /* تقليل الشفافية لزيادة الفخامة */
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     box-sizing: border-box;
+    /* إضافة خط سفلي نحيف جداً وأنيق */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navbar-container {
-    max-width: 1200px;
+    max-width: 1300px;
+    /* توسيع الحاوية قليلاً للمساحة التنفسية */
     margin: auto;
-    padding: 10px 20px;
+    padding: 12px 30px;
+    /* زيادة الـ Padding لراحة العين */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,25 +25,31 @@
     box-sizing: border-box;
 }
 
+/* الشعار والكتابة */
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
-
-    font-size: 20px;
-    font-weight: 800;
+    gap: 10px;
+    font-size: 1.1rem;
+    /* تصغير طفيف للكتابة لتبدو أنحف */
+    font-weight: 700;
     letter-spacing: 0.5px;
-
-    color: var(--text-main);
+    color: #ffffff;
+    cursor: pointer;
 }
 
 .logo img {
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    /* حجم معتدل أكثر */
+    width: 60px;
     object-fit: contain;
-    filter: drop-shadow(0 0 6px rgba(245, 196, 0, 0.6));
-    border-radius: 70px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
 
+.logo:hover img {
+    transform: scale(1.05);
+    /* حركة تفاعلية بسيطة */
 }
 
 .logo span {
@@ -51,18 +62,68 @@
 
 
 
+.cta-btn.collab-btn {
+    background: transparent;
+    color: var(--yellow-main);
+    border: 2px solid var(--yellow-main);
+    transition: all 0.3s ease;
+}
+
+.cta-btn.collab-btn:hover {
+    background: var(--yellow-main);
+    color: black;
+    box-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
+}
+
+/* تنسيق الموبايل (للتأكد من المسافات) */
+@media (max-width: 968px) {
+    .mobile-only-item {
+        flex-direction: column;
+        /* جعل الزرين فوق بعض في الموبايل */
+        gap: 15px;
+        align-items: center;
+    }
+
+    .cta-btn.mobile-only-btn {
+        width: 85%;
+    }
+
+    .cta-btn.mobile-only-btn {
+        background: var(--yellow-main);
+        color: black;
+        text-decoration: none;
+        font-weight: 700;
+        width: 80%;
+        /* Consistent width */
+        text-align: center;
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+
+    .cta-btn.mobile-only-btn.collab-btn {
+        background: transparent;
+        color: var(--yellow-main);
+        border: 2px solid var(--yellow-main);
+    }
+}
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 25px;
+    /* مسافة متوازنة */
     align-items: center;
 }
 
 .nav-links a {
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
+    /* لون مطفأ ليعطي الأولوية للأزرار */
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
 .nav-links a:hover {
@@ -70,19 +131,46 @@
 }
 
 
+
 .cta-btn {
-    background: var(--yellow-main);
-    color: black;
-    padding: 10px 20px;
-    border-radius: 999px;
+    padding: 10px 22px;
+    border-radius: 50px;
     font-weight: 700;
     text-decoration: none;
+    font-size: 0.85rem;
+    /* حجم أصغر لتبدو أنيقة وليست ضخمة */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
 }
 
-.cta-btn:hover {
-    background: var(--yellow-glow);
+/* زر التدريب الأساسي (Solid) */
+.desktop-only-btn:not(.collab-btn) {
+    background: var(--yellow-main);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(245, 196, 0, 0.2);
 }
 
+.desktop-only-btn:not(.collab-btn):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 196, 0, 0.4);
+    background: #ffcc00;
+    /* تفتيح بسيط عند الـ hover */
+}
+
+/* زر التعاون الفرعي (Outline) */
+.cta-btn.collab-btn {
+    background: transparent;
+    color: var(--yellow-main);
+    border: 1.5px solid rgba(245, 196, 0, 0.5);
+    /* إطار شفاف قليلاً */
+    margin-left: 10px;
+}
+
+.cta-btn.collab-btn:hover {
+    border-color: var(--yellow-main);
+    background: rgba(245, 196, 0, 0.05);
+    color: #fff;
+}
 
 .menu-toggle {
     display: none;
@@ -101,30 +189,36 @@
 
 
 .desktop-only-btn {
-    display: inline-block; /* Show on desktop */
+    display: inline-block;
+    /* Show on desktop */
 }
 
 .mobile-only-item {
-    display: none; /* Hide the menu-list version on desktop */
+    display: none;
+    /* Hide the menu-list version on desktop */
 }
+
 /* Tablet & Mobile Styles */
 @media (max-width: 968px) {
+    .navbar-container {
+        padding: 10px 20px;
+    }
+
     .menu-toggle {
         display: flex;
         z-index: 1002;
     }
 
-    /* FIX: Hide the desktop button so it doesn't show twice */
     .desktop-only-btn {
-        display: none ;
+        display: none !important;
     }
 
-    /* FIX: Show the button inside the mobile menu */
     .mobile-only-item {
         display: flex;
-        justify-content: center;
-        width: 100%;
-        margin-top: 25px;
+        flex-direction: column;
+        gap: 15px;
+        width: 80%;
+        margin-top: 30px;
     }
 
     .nav-links {
@@ -133,42 +227,39 @@
         right: -100%;
         width: 100%;
         height: 100vh;
-        background: #000;
+        background: #000000;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        /* Perfect centering for all items */
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .nav-links.open {
         right: 0;
     }
 
-    .nav-links li {
-        width: 100%;
-        text-align: center;
-        padding: 15px 0;
-    }
-
     .nav-links li a {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        /* خط كبير وواضح في القائمة */
+        font-weight: 700;
     }
 
-    .cta-btn {
-        
-        width: 80%;
-        /* Big tap target for smartphones */
+    /* أزرار الموبايل */
+    .cta-btn.mobile-only-btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 1.1rem;
         text-align: center;
-        padding: 15px;
-        font-size: 1.2rem;
-
     }
-    .cta-btn.mobile-only-btn{
+
+    .cta-btn.mobile-only-btn:not(.collab-btn) {
         background: var(--yellow-main);
-    color: black;
-    text-decoration: none;
-    font-weight: 700;
+        color: #000;
+    }
+
+    .cta-btn.mobile-only-btn.collab-btn {
+        background: transparent;
+        border: 2px solid var(--yellow-main);
+        color: var(--yellow-main);
     }
 }
 
@@ -180,5 +271,136 @@
 
     .navbar-container {
         padding: 10px 15px;
+    }
+}
+
+@media (max-width: 1180px) {
+
+    /* 1. تفعيل زر القائمة (Menu Toggle) وإخفاء الأزرار العلوية */
+    .menu-toggle {
+        display: flex !important;
+        z-index: 1005;
+        /* ضمان بقاء الزر فوق القائمة المفتوحة */
+    }
+
+    .desktop-only-btn {
+        display: none !important;
+    }
+
+    .navbar-container {
+        padding: 10px 20px !important;
+        justify-content: space-between;
+    }
+
+    /* 2. تصميم القائمة المنسدلة (بدون تغطية سوداء كاملة) */
+    .nav-links {
+        position: fixed;
+        top: -100vh;
+        /* تبدأ القائمة من خارج الشاشة في الأعلى */
+        left: 0;
+        width: 100%;
+        height: auto;
+        min-height: 50vh;
+        /* تأخذ نصف الشاشة تقريباً وليس كلها */
+        padding: 100px 20px 40px;
+        /* مسافة علوية لعدم تداخل المحتوى مع الهيدر */
+        background: rgba(10, 10, 10, 0.85);
+        /* خلفية داكنة ولكن شفافة */
+        backdrop-filter: blur(25px);
+        /* تمويه قوي للخلفية (تأثير الزجاج) */
+        -webkit-backdrop-filter: blur(25px);
+        /* لدعم متصفحات سفاري */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 25px;
+        /* مسافة متناسقة بين الروابط */
+        transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* حركة انزلاق ناعمة */
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        /* خط سفلي ذهبي خفيف */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 3. حالة فتح القائمة (تنزلق للأسفل) */
+    .nav-links.open {
+        top: 0;
+    }
+
+    /* 4. تنسيق الروابط داخل القائمة */
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        font-size: 1.4rem;
+        /* حجم مناسب للموبايل، ليس عملاقاً */
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        letter-spacing: 2px;
+        display: block;
+        padding: 10px;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a:active {
+        color: var(--yellow-main);
+    }
+
+    /* 5. تنسيق الأزرار داخل القائمة المفتوحة */
+    .mobile-only-item {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        max-width: 300px;
+        /* عدم جعل الأزرار عريضة جداً */
+        margin-top: 20px;
+    }
+
+    .cta-btn.mobile-only-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 1.1rem;
+        text-align: center;
+        border-radius: 50px;
+    }
+
+    /* 6. تحريك أيقونة الهامبرغر لتصبح (X) عند الفتح */
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+        background-color: var(--yellow-main);
+        /* يتغير لونها للذهبي */
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+        /* يختفي الخط الأوسط */
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+        background-color: var(--yellow-main);
+    }
+}
+
+/* تعديلات خاصة للهواتف الصغيرة جداً */
+@media (max-width: 480px) {
+    .logo span {
+        display: none;
+        /* إخفاء الاسم بجانب اللوجو لتوفير مساحة */
+    }
+
+    .logo img {
+        height: 45px;
+        width: 45px;
+    }
+
+    .nav-links li a {
+        font-size: 1.2rem;
+        /* تصغير الروابط قليلاً */
     }
 }

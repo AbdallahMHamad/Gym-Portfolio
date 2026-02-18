@@ -52,7 +52,11 @@ function About() {
     "/images_resources/salman/1.jfif",
     "/images_resources/salman/2.jfif",
     "/images_resources/salman/3.jfif",
-    "/images_resources/salman/4.jfif"
+    "/images_resources/salman/backss.jpg",
+    "/images_resources/salman/back2.jpg",
+    "/images_resources/salman/packs.jpg",
+    "/images_resources/salman/pose.jpg",
+    "/images_resources/salman/side.jpg"
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,65 +65,64 @@ function About() {
     setCurrentIndex((prev) => (prev + 1) % originalImages.length);
   };
 
-  return (
-    
+return (
     <section id="about" className="section dark about-section">
       <div className="about-container">
         <div className="about-content">
-          {/* Identity Line */}
-      <div className="coach-name-tag">
-        <span className="line"></span>
-        <span className="name">Mohammad Salman</span>
-      </div>
+          <div className="coach-name-tag">
+            <span className="line"></span>
+            <span className="name">Mohammad Salman</span>
+          </div>
+          
           <span className="subtitle">ONLINE COACHING</span>
+          
           <h1 className="hero-title">
             Stop Wishing, <br />
             Start <span style={{ color: "var(--yellow-main)" }}>Doing</span>
           </h1>
-          <p className="description">
+
+<div className="uk-certification-badge">
+    <span className="flag-icon">GB</span>
+    <span className="cert-text">Certified Nutritionist — Liverpool College</span>
+</div>          <p className="description">
             Transform your physique with expert guidance. Whether you're looking to lose fat or build elite muscle, I provide the roadmap to your best self.
           </p>
 
           <div className="cta-group">
-            <a href="#plans" className="btn-primary">View Programs</a>
-            <a href="#transformations" className="btn-secondary">See Results</a>
+            <a href="#transformations" className="btn-primary">See Results</a>
           </div>
 
           <div className="stats-grid">
             <div className="stat-box">
-              <h3>
-                {/* Duration is in milliseconds (2000 = 2 seconds) */}
-                <CountUp end={100} duration={1000} />+
-              </h3>
+              <h3><CountUp end={100} duration={1000} />+</h3>
               <p>Clients Transformed</p>
             </div>
             
             <div className="stat-box">
-              <h3>
-                <CountUp end={7} duration={500} />+
-              </h3>
+              <h3><CountUp end={7} duration={500} />+</h3>
               <p>Years Experience</p>
             </div>
-            
-            <div className="stat-box">
-              <h3>
-                <CountUp end={8} duration={500} />+
-              </h3>
-              <p>Certifications</p>
+
+            <div className="stat-box highlighted-stat">
+              <h3 className="uk-text">UK</h3>
+              <p>Certified Coach</p>
             </div>
           </div>
         </div>
 
+        {/* ... (الجزء الخاص بالصور يبقى كما هو) */}
         <div className="about-image" onClick={nextImage}>
-          {originalImages.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Coach Salman ${index}`}
-              className={`hero-image-original ${index === currentIndex ? "active" : "hidden"}`}
-            />
-          ))}
-          <div className="image-tap-hint">Tap to swap</div>
+          <div className="image-wrapper">
+            {originalImages.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Coach Salman ${index}`}
+                className={`hero-image-original ${index === currentIndex ? "active" : "hidden"}`}
+              />
+            ))}
+            <div className="image-tap-hint">Tap to swap</div>
+          </div>
         </div>
       </div>
     </section>
