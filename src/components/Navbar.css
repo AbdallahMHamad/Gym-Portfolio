@@ -116,60 +116,104 @@
 }
 
 .nav-links a {
-    color: rgba(255, 255, 255, 0.7);
-    /* لون مطفأ ليعطي الأولوية للأزرار */
-    text-decoration: none;
-    font-weight: 500;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
     font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.6);
     transition: 0.3s;
+
+    text-decoration: none !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: var(--yellow-main);
+    color: var(--yellow-main) !important;
+    /* استخدام اللون الأصفر الخاص بالثيم */
 }
 
+/* زر تبديل اللغة الديسكتوب */
+.lang-toggle-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    border-radius: 4px;
+}
 
-
+/* التصميم الموحد والجديد للأزرار */
 .cta-btn {
-    padding: 10px 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 26px;
+    /* زيادة الطول قليلاً للفخامة */
     border-radius: 50px;
+    /* زوايا دائرية بالكامل (Pill Shape) لتبدو عصرية */
     font-weight: 700;
     text-decoration: none;
     font-size: 0.85rem;
-    /* حجم أصغر لتبدو أنيقة وليست ضخمة */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* حركة مطاطية خفيفة */
     white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
 }
 
-/* زر التدريب الأساسي (Solid) */
-.desktop-only-btn:not(.collab-btn) {
-    background: var(--yellow-main);
+
+.desktop-only-btn:not(.collab-btn),
+.cta-btn.mobile-only-btn:not(.collab-btn) {
+    background: linear-gradient(135deg, #f5c400 0%, #ffcc00 100%);
     color: #000;
-    box-shadow: 0 4px 15px rgba(245, 196, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(245, 196, 0, 0.15);
 }
 
 .desktop-only-btn:not(.collab-btn):hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245, 196, 0, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(245, 196, 0, 0.4);
     background: #ffcc00;
-    /* تفتيح بسيط عند الـ hover */
 }
 
-/* زر التعاون الفرعي (Outline) */
 .cta-btn.collab-btn {
-    background: transparent;
-    color: var(--yellow-main);
-    border: 1.5px solid rgba(245, 196, 0, 0.5);
-    /* إطار شفاف قليلاً */
-    margin-left: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    /* خلفية خافتة جداً */
+    color: #ffffff;
+    border: 1px solid rgba(245, 196, 0, 0.4);
+    /* إطار ذهبي شفاف */
+    backdrop-filter: blur(5px);
 }
 
 .cta-btn.collab-btn:hover {
     border-color: var(--yellow-main);
-    background: rgba(245, 196, 0, 0.05);
-    color: #fff;
+    background: rgba(245, 196, 0, 0.1);
+    color: var(--yellow-main);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(245, 196, 0, 0.1);
+}
+
+/* تأثير اللمعان الذي يمر فوق الزر (إضافة جمالية) */
+.cta-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(30deg);
+    transition: all 0.6s ease;
+}
+
+.cta-btn:hover::after {
+    left: 120%;
 }
 
 .menu-toggle {
@@ -213,13 +257,6 @@
         display: none !important;
     }
 
-    .mobile-only-item {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 80%;
-        margin-top: 30px;
-    }
 
     .nav-links {
         position: fixed;
@@ -261,9 +298,20 @@
         border: 2px solid var(--yellow-main);
         color: var(--yellow-main);
     }
+
+    .mobile-only-item {
+        gap: 12px;
+        padding: 0 20px;
+    }
+
+    .cta-btn.mobile-only-btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 0.95rem;
+        border-radius: 12px;
+    }
 }
 
-/* Small phone tweaks */
 @media (max-width: 520px) {
     .logo span {
         font-size: 16px;
@@ -276,15 +324,9 @@
 
 @media (max-width: 1180px) {
 
-    /* 1. تفعيل زر القائمة (Menu Toggle) وإخفاء الأزرار العلوية */
     .menu-toggle {
         display: flex !important;
         z-index: 1005;
-        /* ضمان بقاء الزر فوق القائمة المفتوحة */
-    }
-
-    .desktop-only-btn {
-        display: none !important;
     }
 
     .navbar-container {
@@ -292,11 +334,9 @@
         justify-content: space-between;
     }
 
-    /* 2. تصميم القائمة المنسدلة (بدون تغطية سوداء كاملة) */
     .nav-links {
         position: fixed;
         top: -100vh;
-        /* تبدأ القائمة من خارج الشاشة في الأعلى */
         left: 0;
         width: 100%;
         height: auto;
@@ -336,13 +376,14 @@
     }
 
     .nav-links li a {
-        font-size: 1.4rem;
-        /* حجم مناسب للموبايل، ليس عملاقاً */
+        font-family: 'Cairo', sans-serif !important;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
-        letter-spacing: 2px;
-        display: block;
-        padding: 10px;
+        /* وزن متوسط للحفاظ على الأناقة */
+        font-size: 0.95rem;
+        /* الخط العربي يحتاج حجم أكبر قليلاً ليظهر بوضوح */
+        letter-spacing: 0 !important;
+        /* إلغاء تباعد الحروف الإنجليزية */
+        transition: 0.3s ease;
     }
 
     .nav-links li a:hover,
@@ -350,23 +391,46 @@
         color: var(--yellow-main);
     }
 
-    /* 5. تنسيق الأزرار داخل القائمة المفتوحة */
     .mobile-only-item {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
         width: 100%;
-        max-width: 300px;
-        /* عدم جعل الأزرار عريضة جداً */
-        margin-top: 20px;
+        max-width: 280px;
+        margin-top: 25px;
     }
 
     .cta-btn.mobile-only-btn {
         width: 100%;
-        padding: 14px;
-        font-size: 1.1rem;
-        text-align: center;
-        border-radius: 50px;
+        padding: 14px 20px;
+        font-size: 1rem;
+        border-radius: 8px;
+        letter-spacing: 1px;
+    }
+
+    /* Primary mobile button */
+    .cta-btn.mobile-only-btn:not(.collab-btn) {
+        background: var(--yellow-main);
+        color: #000;
+        box-shadow: 0 4px 20px rgba(245, 196, 0, 0.3);
+    }
+
+    .cta-btn.mobile-only-btn:not(.collab-btn):active {
+        background: #ffcc00;
+        transform: scale(0.97);
+    }
+
+    /* Secondary mobile button */
+    .cta-btn.mobile-only-btn.collab-btn {
+        background: transparent;
+        color: var(--yellow-main);
+        border: 1.5px solid rgba(245, 196, 0, 0.6);
+        margin-left: 0;
+    }
+
+    .cta-btn.mobile-only-btn.collab-btn:active {
+        background: rgba(245, 196, 0, 0.08);
+        border-color: var(--yellow-main);
     }
 
     /* 6. تحريك أيقونة الهامبرغر لتصبح (X) عند الفتح */
@@ -403,4 +467,118 @@
         font-size: 1.2rem;
         /* تصغير الروابط قليلاً */
     }
+}
+
+
+
+/* أضف هذه التنسيقات لملف الـ CSS الحالي */
+
+.nav-actions-desktop {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* زر تبديل اللغة - ديستكوب */
+.lang-toggle-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-toggle-btn:hover {
+    background: rgba(245, 196, 0, 0.1);
+    border-color: var(--yellow-main);
+    color: var(--yellow-main);
+}
+
+/* زر تبديل اللغة - موبايل */
+.lang-switcher-mobile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 25px;
+    border-radius: 30px;
+}
+
+.lang-switcher-mobile button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.lang-switcher-mobile button.active {
+    color: var(--yellow-main);
+    text-shadow: 0 0 10px rgba(245, 196, 0, 0.5);
+}
+
+.lang-switcher-mobile .divider {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+/* تعديل الـ Media Query ليتناسب مع العناصر الجديدة */
+@media (max-width: 1180px) {
+    .nav-actions-desktop {
+        display: none;
+        /* نخفي أفعال الديسكتوب في الموبايل */
+    }
+
+    .lang-switcher-mobile {
+        display: flex;
+        /* نظهر التبديل داخل القائمة */
+    }
+
+    .nav-links li a {
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+}
+
+/* دعم اتجاه اللغة RTL */
+html[dir="rtl"] .nav-links {
+    right: auto;
+    left: -100%;
+}
+
+html[dir="rtl"] .nav-links.open {
+    left: 0;
+    right: auto;
+}
+
+html[dir="rtl"] .icon-box {
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+.lang-switch {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.lang-switch:hover {
+    border-color: var(--yellow-main);
+    color: var(--yellow-main);
+    background: rgba(245, 196, 0, 0.05);
+    /* توهج خفيف جداً عند التمرير */
+}
+
+.cta-btn,
+.lang-toggle-btn,
+.nav-links a,
+.nav-links li a {
+    font-family: 'Cairo', sans-serif !important;
 }

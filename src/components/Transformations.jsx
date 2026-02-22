@@ -1,65 +1,68 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./Transformations.css";
 
-const transformationsData = [
-  {
-    id: 1,
-    name: "Ashraf S.",
-    duration: "1 Month",
-    description: "Lost 8kg fat and diet plan",
-    beforeImg: "/images_resources/Transformations/12b.jpg",
-    afterImg: "/images_resources/Transformations/12a.jpg",
-  },
-  {
-    id: 2,
-    name: "Sarah K.",
-    duration: "1 Month",
-    description: "Muscle growth & definition",
-    beforeImg: "/images_resources/Transformations/10b.jpg",
-    afterImg: "/images_resources/Transformations/10a.jpg",
-  },
-  {
-    id: 3,
-    name: "Mike D.",
-    duration: "11 Months",
-    description: "Incredible fat loss journey",
-    beforeImg: "/images_resources/Transformations/4b.jpg",
-    afterImg: "/images_resources/Transformations/4a.jpg",
-  },
-  {
-    id: 4,
-    name: "Omar Y.",
-    duration: "6 Months",
-    description: "Clean bulk & muscle gain",
-    beforeImg: "/images_resources/Transformations/2b.jpg",
-    afterImg: "/images_resources/Transformations/2a.jpg",
-  },
-  {
-    id: 5,
-    name: "Omar Y.",
-    duration: "6 Months",
-    description: "Clean bulk & muscle gain",
-    beforeImg: "/images_resources/Transformations/11b.jpg",
-    afterImg: "/images_resources/Transformations/11a.jpg",
-  },
-  {
-    id: 6,
-    name: "Omar Y.",
-    duration: "6 Months",
-    description: "Clean bulk & muscle gain",
-    beforeImg: "/images_resources/Transformations/ashb.jpg",
-    afterImg: "/images_resources/Transformations/asha.jpg",
-  },
-];
-
 const Transformations = () => {
+  const { t } = useTranslation();
+
+  const transformationsData = [
+    {
+      id: 1,
+      name: "Ashraf S.",
+      duration: `1 ${t('month')}`,
+      description: t('desc_fat_loss'),
+      beforeImg: "/images_resources/Transformations/12b.jpg",
+      afterImg: "/images_resources/Transformations/12a.jpg",
+    },
+    {
+      id: 2,
+      name: "Sarah K.",
+      duration: `1 ${t('month')}`,
+      description: t('desc_muscle_growth'),
+      beforeImg: "/images_resources/Transformations/10b.jpg",
+      afterImg: "/images_resources/Transformations/10a.jpg",
+    },
+    {
+      id: 3,
+      name: "Mike D.",
+      duration: `11 ${t('months')}`,
+      description: t('desc_fat_loss_journey'),
+      beforeImg: "/images_resources/Transformations/4b.jpg",
+      afterImg: "/images_resources/Transformations/4a.jpg",
+    },
+    {
+      id: 4,
+      name: "Omar Y.",
+      duration: `6 ${t('months')}`,
+      description: t('desc_clean_bulk'),
+      beforeImg: "/images_resources/Transformations/2b.jpg",
+      afterImg: "/images_resources/Transformations/2a.jpg",
+    },
+    {
+      id: 5,
+      name: "Omar Y.", // يمكنك تغيير الاسم هنا إذا كان متدرباً آخر
+      duration: `6 ${t('months')}`,
+      description: t('desc_clean_bulk'),
+      beforeImg: "/images_resources/Transformations/11b.jpg",
+      afterImg: "/images_resources/Transformations/11a.jpg",
+    },
+    {
+      id: 6,
+      name: "Omar Y.",
+      duration: `6 ${t('months')}`,
+      description: t('desc_clean_bulk'),
+      beforeImg: "/images_resources/Transformations/ashb.jpg",
+      afterImg: "/images_resources/Transformations/asha.jpg",
+    },
+  ];
+
   return (
     <section id="transformations" className="transformations-section">
       <div className="trans-container">
         
         <div className="trans-header">
-          <span className="trans-subtitle">REAL RESULTS</span>
-          <h2>Client <span className="trans-highlight">Transformations</span></h2>
+          <span className="subtitle">{t('trans_subtitle')}</span>
+          <h2>{t('trans_title')} <span className="trans-highlight">{t('trans_highlight')}</span></h2>
         </div>
 
         <div className="transformations-grid">
@@ -67,18 +70,20 @@ const Transformations = () => {
             <div key={item.id} className="trans-card">
               <div className="trans-images-box">
                 <div className="trans-img-wrapper">
-                  <span className="trans-label label-before">Before</span>
+                  <span className="trans-label label-before">{t('trans_before')}</span>
                   <img 
                     src={item.beforeImg} 
-                    alt={`${item.name} Before`} 
+                    alt={`Coach Salman - ${t('trans_before')} - ${item.name}`} 
+                    loading="lazy" 
                     onError={(e) => e.target.src='https://via.placeholder.com/400x500/111/fff?text=Before'} 
                   />
                 </div>
                 <div className="trans-img-wrapper">
-                  <span className="trans-label label-after">After</span>
+                  <span className="trans-label label-after">{t('trans_after')}</span>
                   <img 
                     src={item.afterImg} 
-                    alt={`${item.name} After`} 
+                    alt={`Coach Salman - ${t('trans_after')} - ${item.name}`} 
+                    loading="lazy" 
                     onError={(e) => e.target.src='https://via.placeholder.com/400x500/f5c400/000?text=After'} 
                   />
                 </div>

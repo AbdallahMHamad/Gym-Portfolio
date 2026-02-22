@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next"; 
 import "./About.css";
+
 const CountUp = ({ end, duration = 1000 }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef(null);
@@ -47,6 +49,8 @@ const CountUp = ({ end, duration = 1000 }) => {
 
 
 function About() {
+  const { t } = useTranslation(); // 👈 تفعيل دالة الترجمة
+
   // Array of original .jfif images
   const originalImages = [
     "/images_resources/salman/1.jfif",
@@ -71,57 +75,54 @@ return (
         <div className="about-content">
           <div className="coach-name-tag">
             <span className="line"></span>
-            <span className="name">Mohammad Salman</span>
+            <span className="name">{t('about_name')}</span>
           </div>
           
-          <span className="subtitle">ONLINE COACHING</span>
+          <span className="subtitle">{t('about_subtitle')}</span>
           
           <h1 className="hero-title">
-            Stop Wishing, <br />
-            Start <span style={{ color: "var(--yellow-main)" }}>Doing</span>
+            {t('about_title_stop')} <br />
+            {t('about_title_start')} <span style={{ color: "var(--yellow-main)" }}>{t('about_title_doing')}</span>
           </h1>
 
-<div className="uk-certification-badge">
-    <span className="flag-icon">GB</span>
-    <span className="cert-text">Certified Nutritionist — Liverpool College</span>
-</div>          <p className="description">
-            Transform your physique with expert guidance. Whether you're looking to lose fat or build elite muscle, I provide the roadmap to your best self.
+          <div className="uk-certification-badge">
+              <span className="flag-icon">GB</span>
+              <span className="cert-text">{t('about_cert')}</span>
+          </div>          
+          
+          <p className="description">
+            {t('about_desc')}
           </p>
 
-          <div className="cta-group">
-            <a href="#transformations" className="btn-primary">See Results</a>
-          </div>
-
           <div className="stats-grid">
-            <div className="stat-box">
+            <div className="stat-box highlighted-stat">
               <h3><CountUp end={100} duration={1000} />+</h3>
-              <p>Clients Transformed</p>
+              <p>{t('about_stat_clients')}</p>
             </div>
             
-            <div className="stat-box">
+            <div className="stat-box highlighted-stat">
               <h3><CountUp end={7} duration={500} />+</h3>
-              <p>Years Experience</p>
+              <p>{t('about_stat_years')}</p>
             </div>
 
             <div className="stat-box highlighted-stat">
               <h3 className="uk-text">UK</h3>
-              <p>Certified Coach</p>
+              <p>{t('about_stat_uk')}</p>
             </div>
           </div>
         </div>
 
-        {/* ... (الجزء الخاص بالصور يبقى كما هو) */}
         <div className="about-image" onClick={nextImage}>
           <div className="image-wrapper">
             {originalImages.map((img, index) => (
               <img
                 key={index}
                 src={img}
-                alt={`Coach Salman ${index}`}
+                alt={`كوتش محمد سلمان مدرب لياقة بدنية أونلاين - صورة رقم ${index + 1}`} 
                 className={`hero-image-original ${index === currentIndex ? "active" : "hidden"}`}
-              />
+              />            
             ))}
-            <div className="image-tap-hint">Tap to swap</div>
+            <div className="image-tap-hint">{t('about_tap_hint')}</div>
           </div>
         </div>
       </div>

@@ -42,21 +42,35 @@ body {
 }
 
 
+/* استبدل كود السكشن القديم في index.css بهذا */
 section,
 .section {
   width: 100%;
-  padding: 80px 20px;
+  padding: 100px 0;
   position: relative;
-  background-color: transparent !important;
-  /* نجعل السكشن شفافاً ليظهر سواد الـ body */
+  background: transparent !important;
+  overflow: visible !important;
+  /* مهم جداً لكي يظهر الضوء بين السكاشن */
+}
 
-  /* توهج موحد: يبدأ دائماً في آخر 150 بكسل من السكشن */
-  background-image: linear-gradient(to bottom,
-      transparent calc(100% - 150px),
-      rgba(245, 196, 0, 0.08) 100%);
-
-  border-bottom: 1px solid rgba(245, 196, 0, 0.05);
-  box-sizing: border-box;
+/* هذا هو الفاصل الضوئي الجديد */
+section::after,
+.section::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  /* يبرز خارج السكشن قليلاً ليغطي الفاصل */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 120px;
+  background: radial-gradient(ellipse at center,
+      rgba(245, 196, 0, 0.15) 0%,
+      rgba(245, 196, 0, 0.05) 50%,
+      transparent 80%);
+  filter: blur(40px);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .duration-badge {
@@ -65,5 +79,27 @@ section,
   color: black;
   padding: 6px 14px;
   border-radius: 20px;
+  font-weight: 700;
+}
+
+[dir='rtl'] {
+  font-family: 'Cairo', sans-serif !important;
+}
+
+[dir='rtl'] h1,
+[dir='rtl'] h2,
+[dir='rtl'] h3,
+[dir='rtl'] .hero-title,
+[dir='rtl'] .section-title {
+  font-family: 'Cairo', sans-serif !important;
+  font-weight: 900;
+  /* لجعل العناوين ضخمة واحترافية */
+  letter-spacing: 0;
+  /* ضروري جداً للعربي */
+}
+
+[dir='rtl'] .subtitle {
+  font-family: 'Cairo', sans-serif !important;
+  letter-spacing: 0;
   font-weight: 700;
 }

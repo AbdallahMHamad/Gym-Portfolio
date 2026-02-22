@@ -1,6 +1,6 @@
 .subtitle {
     color: var(--yellow-main);
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -114,20 +114,16 @@
 
 .glow-effect {
     position: absolute;
-    top: 20%;
-    /* رفع التأثير قليلاً للموبايل */
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    /* تقليل الحجم في الموبايل لكي لا يغطي الشاشة بالكامل */
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     background: var(--yellow-main);
-    opacity: 0.1;
-    /* تقليل الشفافية ليكون مريح للعين */
-    filter: blur(80px);
-    z-index: 1;
-    pointer-events: none;
-    /* لكي لا يمنع النقر على الصور */
+    opacity: 0.05;
+    /* تقليل الشفافية جداً */
+    filter: blur(120px);
+    z-index: 0;
 }
 
 /* =========================================
@@ -137,13 +133,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-
-    padding-top: 80px;
-    padding-bottom: 120px;
-    !important overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: 100px;
     position: relative;
-    background: var(--bg-main);
+    background: transparent !important;
+    /* تأكد أنه شفاف */
+    overflow: visible !important;
+    /* لظهار الضوء السفلي */
 }
 
 .coach-name-tag {
@@ -212,6 +208,8 @@
 .stat-box h3 {
     font-size: 2rem;
     margin: 0;
+    color: var(--yellow-main);
+
 }
 
 .about-image {
@@ -676,4 +674,19 @@
         font-size: 3rem;
     }
 
+}
+
+/* عند تحويل الاتجاه لليمين، اعكس الهوامش */
+[dir='rtl'] .uk-certification-badge .flag-icon {
+    margin-right: 0;
+    margin-left: 8px;
+    /* بدلاً من اليمين */
+}
+
+/* لمنع خروج البادج عن الشاشة في الموبايل */
+.uk-certification-badge {
+    display: inline-flex;
+    flex-direction: row;
+    /* يضمن بقاء العلم بجانب النص دائماً */
+    max-width: 95%;
 }

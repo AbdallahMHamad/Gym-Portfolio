@@ -8,8 +8,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    /* Centers the internal container */
-    overflow-x: hidden;
+    overflow: visible !important;
 }
 
 .section-container {
@@ -19,10 +18,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Centers header and grid */
 }
 
-/* Header Text Fixes */
+/* Header */
 .section-header {
     text-align: center;
     margin-bottom: 50px;
@@ -30,7 +28,6 @@
 }
 
 .section-header .section-title {
-    /* Prevents title from breaking borders */
     font-size: clamp(2rem, 6vw, 3.5rem);
     color: white;
     font-weight: 800;
@@ -47,17 +44,19 @@
 }
 
 /* =========================================
-   Flexible Grid System
+   Grid
    ========================================= */
 
 .sponsers-grid {
     display: grid;
-    /* Desktop: 3 columns */
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     width: 100%;
-    justify-content: center;
 }
+
+/* =========================================
+   Sponsor Card
+   ========================================= */
 
 .sponsor-card {
     background: #111;
@@ -69,16 +68,72 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
 }
 
-.sponsor-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--yellow-main);
-    box-shadow: 0 15px 35px rgba(245, 196, 0, 0.1);
+/* Desktop: hover glow */
+@media (hover: hover) {
+    .sponsor-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--yellow-main);
+        box-shadow: 0 0 30px rgba(245, 196, 0, 0.2);
+    }
+
+    .sponsor-card:hover .sponsor-logo-wrapper img {
+        filter: grayscale(0%) opacity(1);
+    }
+
+    .promo-banner:hover ~ .sponsers-grid .sponsor-card {
+        border-color: var(--yellow-main);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(245, 196, 0, 0.15);
+    }
+
+    .promo-banner:hover ~ .sponsers-grid .sponsor-card .sponsor-logo-wrapper img {
+        filter: grayscale(0%) opacity(1);
+    }
+
+    .promo-banner:hover {
+        background: rgba(245, 196, 0, 0.1);
+        transform: scale(1.02);
+    }
 }
 
-/* Logo & Content */
+/* Touch devices: tap glow via React .tapped class */
+@media (hover: none) {
+
+    /* Logos always fully visible on touch */
+    .sponsor-logo-wrapper img {
+        filter: grayscale(0%) opacity(1) !important;
+    }
+
+    /* Brief press feedback */
+    .sponsor-card:active {
+        transform: translateY(-4px);
+        border-color: var(--yellow-main);
+        box-shadow: 0 0 20px rgba(245, 196, 0, 0.2);
+    }
+
+    /* Persistent glow after tap — toggled by React state */
+    .sponsor-card.tapped {
+        transform: translateY(-8px);
+        border-color: var(--yellow-main);
+        background: #161616;
+        box-shadow:
+            0 0 20px rgba(245, 196, 0, 0.3),
+            0 0 50px rgba(245, 196, 0, 0.15);
+    }
+
+    .sponsor-card.tapped .sponsor-logo-wrapper img {
+        filter: grayscale(0%) opacity(1) !important;
+    }
+}
+
+/* =========================================
+   Logo & Content
+   ========================================= */
+
 .sponsor-logo-wrapper {
     height: 80px;
     width: 100%;
@@ -93,11 +148,7 @@
     max-height: 100%;
     object-fit: contain;
     filter: grayscale(100%) opacity(0.7);
-    transition: 0.4s ease;
-}
-
-.sponsor-card:hover .sponsor-logo-wrapper img {
-    filter: grayscale(0%) opacity(1);
+    transition: filter 0.4s ease;
 }
 
 .sponsor-content h3 {
@@ -114,178 +165,22 @@
 }
 
 /* =========================================
-   Responsive Breakpoints
+   Promo Banner
    ========================================= */
 
-/* =========================================
-   Responsive Breakpoints (Fixed)
-   ========================================= */
-
-/* Mid Screens: 2 on top, 1 centered on bottom */
-@media (max-width: 1024px) and (min-width: 769px) {
-    .sponsers-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .sponsor-card:nth-child(3) {
-        grid-column: span 2;
-        max-width: 500px;
-        justify-self: center;
-    }
-}
-
-/* Tablets & Mobile (768px and below) */
-@media (max-width: 768px) {
-    .sponsers-section {
-        padding: 50px 0;
-    }
-
-    .section-container {
-        /* Reduce width to 85% to create a large safety 'buffer' on the sides */
-        width: 85%;
-        max-width: 100vw;
-        padding: 0;
-        margin: 0 auto;
-    }
-
-    .sponsers-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-        /* Fill the 85% container */
-        gap: 20px;
-    }
-
-    .sponsor-card {
-        /* Force card to never exceed its parent */
-        width: 100%;
-        max-width: 100%;
-        padding: 25px 15px;
-        box-sizing: border-box;
-        /* Crucial: ensures padding doesn't add to width */
-    }
-
-    .section-description {
-        width: 100%;
-        /* Let it fill the section-container */
-        padding: 0 5px;
-        font-size: 0.95rem;
-        word-wrap: break-word;
-        /* Insurance against long words */
-        text-wrap: balance;
-        /* Prevents awkward single words on new lines */
-    }
-
-    .section-header .section-title {
-        /* Using a smaller minimum for clamp to fit narrow screens */
-        font-size: clamp(1.2rem, 4vw, 1.9rem);
-        width: 100%;
-        word-break: break-word;
-    }
-
-}
-
-
-
-@media(max-width: 528px) {
-
-    .section-header .section-title {
-        /* Using a smaller minimum for clamp to fit narrow screens */
-        font-size: clamp(1.2rem, 4vw, 1.8rem);
-        width: 100%;
-        word-break: break-word;
-    }
-
-    .sponsers-grid {
-        /* Reducing the width slightly to ensure it's away from the 'dead zone' */
-        width: 80%;
-        padding: 0;
-    }
-
-    .section-container {
-        width: 80%;
-        /* Slightly wider for phones, but still with margins */
-    }
-
-
-}
-
-/* Small Phones (480px and below) */
-@media (max-width: 480px) {
-    .section-header .section-title {
-        /* Using a smaller minimum for clamp to fit narrow screens */
-        font-size: clamp(1.3rem, 8vw, 1.6rem);
-        width: 100%;
-        word-break: break-word;
-    }
-
-    .sponsers-grid {
-        /* Reducing the width slightly to ensure it's away from the 'dead zone' */
-        width: 80%;
-        padding: 0;
-    }
-
-    .section-container {
-        width: 80%;
-        /* Slightly wider for phones, but still with margins */
-    }
-}
-
-@media (max-width: 420px) {
-    .section-header .section-title {
-        /* Shinks text so it doesn't push the border out */
-        font-size: 1.4rem;
-        line-height: 1.2;
-    }
-
-    .section-container {
-        width: 80%;
-        /* Provides exactly 5% space on each side */
-    }
-
-    .sponsor-card {
-        /* Prevent internal horizontal scrolling */
-        max-width: 100%;
-    }
-}
-
-
-/* Tiny Phones (320px and below) - Fixes your image_c70ed4.png issue */
-@media (max-width: 320px) {
-    .section-header .section-title {
-        font-size: 1.2rem;
-    }
-
-    .sponsor-content h3 {
-        font-size: 1.1rem;
-    }
-
-    .sponsers-grid {
-        /* Reducing the width slightly to ensure it's away from the 'dead zone' */
-        width: 70%;
-        padding: 0;
-    }
-
-    .sponsor-card {
-        padding: 20px 10px;
-        /* Extra tight padding for tiny screens */
-    }
-}
-
-/*Promo code Section*/
-
-/* Promo Banner Styles */
 .promo-banner {
     background: rgba(245, 196, 0, 0.05);
-    /* Very light yellow tint */
     border: 2px dashed var(--yellow-main);
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 40px;
     width: 100%;
     max-width: 600px;
-    /* Keeps it centered and neat */
     text-align: center;
+    transition: all 0.3s ease;
     animation: pulse-border 2s infinite;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .promo-label {
@@ -296,12 +191,6 @@
     font-size: 0.8rem;
     letter-spacing: 2px;
     margin-bottom: 8px;
-}
-
-.promo-content p {
-    color: white;
-    font-size: 1.2rem;
-    margin: 0;
 }
 
 .promo-code {
@@ -315,48 +204,56 @@
     font-size: 1.3rem;
 }
 
-/* parent to child hover relationship*/
-/*
-.promo-banner:hover~.sponsers-grid .sponsor-card {
-    border-color: var(--yellow-main);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(245, 196, 0, 0.15);
+.promo-content p {
+    color: white;
+    font-size: 1.2rem;
+    margin: 0;
 }
 
-.promo-banner:hover~.sponsers-grid .sponsor-card .sponsor-logo-wrapper img {
-    filter: grayscale(0%) opacity(1);
-}
-
-.promo-banner:hover {
-    background: rgba(245, 196, 0, 0.1);
-    cursor: pointer;
-}
-
- */
-
-
-
-
-
-/* Animation to draw attention */
 @keyframes pulse-border {
-    0% {
-        border-color: rgba(245, 196, 0, 0.4);
+    0%   { border-color: rgba(245, 196, 0, 0.3); }
+    50%  { border-color: rgba(245, 196, 0, 1);   }
+    100% { border-color: rgba(245, 196, 0, 0.3); }
+}
+
+/* =========================================
+   Responsive Breakpoints
+   ========================================= */
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .sponsers-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    50% {
-        border-color: rgba(245, 196, 0, 1);
-    }
-
-    100% {
-        border-color: rgba(245, 196, 0, 0.4);
+    .sponsor-card:nth-child(3) {
+        grid-column: span 2;
+        max-width: 500px;
+        justify-self: center;
     }
 }
 
-/* Mobile adjustments for the banner */
+@media (max-width: 768px) {
+    .sponsers-section {
+        padding: 50px 0;
+    }
 
-@media (max-width: 720px) {
+    .section-container {
+        width: 92%;
+    }
+
+    .sponsers-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .sponsor-card {
+        padding: 25px 15px;
+        border-color: rgba(245, 196, 0, 0.1);
+    }
+
     .promo-banner {
+        max-width: 100%;
+        margin-bottom: 30px;
         width: 95%;
         padding: 15px;
     }
@@ -370,29 +267,46 @@
     }
 }
 
-@media (max-width: 5700px) {
-    .promo-banner {
-        width: 93%;
-        padding: 15px;
+@media (max-width: 528px) {
+    .section-header .section-title {
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        width: 100%;
+        word-break: break-word;
     }
 
-    .promo-content p {
-        font-size: 1rem;
+    .section-container {
+        width: 80%;
     }
 
-    .promo-code {
-        font-size: 1.1rem;
+    .sponsers-grid {
+        width: 80%;
+        padding: 0;
     }
 }
 
 @media (max-width: 480px) {
+    .section-header .section-title {
+        font-size: clamp(1.3rem, 8vw, 1.8rem);
+        word-break: break-word;
+    }
+
+    .section-container {
+        width: 80%;
+    }
+
+    .sponsers-grid {
+        width: 80%;
+        padding: 0;
+    }
+
+    .sponsor-card {
+        padding: 30px 20px;
+        width: 100%;
+    }
+
     .promo-banner {
         width: 90%;
-        padding: 15px;
-    }
-
-    .promo-content p {
-        font-size: 1rem;
+        box-sizing: border-box;
     }
 
     .promo-code {
@@ -400,17 +314,37 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
+    .section-header .section-title {
+        font-size: 1.4rem;
+        line-height: 1.2;
+    }
+
+    .section-container {
+        width: 80%;
+    }
+
+    .sponsor-card {
+        max-width: 100%;
+    }
+
     .promo-banner {
         width: 82%;
-        padding: 15px;
-    }
-
-    .promo-content p {
-        font-size: 1rem;
-    }
-
-    .promo-code {
-        font-size: 1.1rem;
     }
 }
+
+@media (max-width: 330px) {
+    .section-container {
+        width: 95%;
+    }
+
+    .sponsers-grid {
+        width: 100%;
+    }
+
+    .sponsor-card {
+        padding: 20px 10px;
+    }
+}
+
+

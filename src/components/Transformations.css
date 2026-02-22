@@ -9,9 +9,16 @@
 .transformations-section {
     color: #ffffff;
     position: relative;
-    overflow: hidden;
+    /* احذف background و overflow: hidden من هنا */
+    background: transparent !important;
+    overflow: visible !important;
 }
 
+.trans-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
 @media (max-width: 768px) {
     .transformations-section {
@@ -39,14 +46,14 @@
     margin-bottom: 60px;
 }
 
-.trans-subtitle {
+/* .subtitle {
     color: var(--yellow-main);
     letter-spacing: 3px;
     font-size: 0.9rem;
     font-weight: 700;
     display: block;
     margin-bottom: 10px;
-}
+} */
 
 .trans-header h2 {
     font-size: clamp(2rem, 5vw, 3.5rem);
@@ -338,3 +345,4 @@
         /* Prevent tall cards on tiny phones */
     }
 }
+
