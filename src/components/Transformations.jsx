@@ -6,56 +6,55 @@ const Transformations = () => {
   const { t } = useTranslation();
 
 const transformationsData = [
-  {
-    id: 1,
-    name: "Ashraf S.",
-    duration: `1 ${t('month')}`,
-    description: t('desc_fat_loss'),
-    beforeImg: "/images_resources/Transformations/12b.jpg",
-    afterImg: "/images_resources/Transformations/12a.jpg",
-  },
-  {
-    id: 2,
-    name: "Sarah K.",
-    duration: `1 ${t('month')}`,
-    description: t('desc_muscle_growth'),
-    beforeImg: "/images_resources/Transformations/10b.jpg",
-    afterImg: "/images_resources/Transformations/10a.jpg",
-  },
-  {
-    id: 3,
-    name: "Mike D.",
-    duration: `11 ${t('months')}`,
-    description: t('desc_fat_loss_journey'),
-    beforeImg: "/images_resources/Transformations/4b.jpg",
-    afterImg: "/images_resources/Transformations/4a.jpg",
-  },
-  {
-    id: 4,
-    name: "Omar Y.",
-    duration: `6 ${t('months')}`,
-    description: t('desc_clean_bulk'),
-    beforeImg: "/images_resources/Transformations/2b.jpg",
-    afterImg: "/images_resources/Transformations/2a.jpg",
-  },
-  {
-    id: 5,
-    name: "Omar Y.",
-    duration: `6 ${t('months')}`,
-    description: t('desc_clean_bulk'),
-    beforeImg: "/images_resources/Transformations/11b.jpg",
-    afterImg: "/images_resources/Transformations/11a.jpg",
-  },
-  {
-    id: 6,
-    name: "Omar Y.",
-    duration: `6 ${t('months')}`,
-    description: t('desc_clean_bulk'),
-    beforeImg: "/images_resources/Transformations/ashb.jpg",
-    afterImg: "/images_resources/Transformations/asha.jpg",
-  },
-];
-  return (
+    {
+      id: 1,
+      name: "Ashraf S.",
+      duration: `1 ${t('month')}`,
+      description: t('desc_fat_loss'),
+      beforeImg: "/images_resources/Transformations/12b.jpg",
+      afterImg: "/images_resources/Transformations/12a.jpg",
+    },
+    {
+      id: 2,
+      name: "Sarah K.",
+      duration: `1 ${t('month')}`,
+      description: t('desc_muscle_growth'),
+      beforeImg: "/images_resources/Transformations/10b.jpg",
+      afterImg: "/images_resources/Transformations/10a.jpg",
+    },
+    {
+      id: 3,
+      name: "Mike D.",
+      duration: `11 ${t('months')}`,
+      description: t('desc_fat_loss_journey'),
+      beforeImg: "/images_resources/Transformations/4b.jpg",
+      afterImg: "/images_resources/Transformations/4a.jpg",
+    },
+    {
+      id: 4,
+      name: "Omar Y.",
+      duration: `6 ${t('months')}`,
+      description: t('desc_clean_bulk'),
+      beforeImg: "/images_resources/Transformations/2b.jpg",
+      afterImg: "/images_resources/Transformations/2a.jpg",
+    },
+    {
+      id: 5,
+      name: "Omar Y.", // يمكنك تغيير الاسم لاحقاً
+      duration: `6 ${t('months')}`,
+      description: t('desc_clean_bulk'),
+      beforeImg: "/images_resources/Transformations/11b.jpg",
+      afterImg: "/images_resources/Transformations/11a.jpg",
+    },
+    {
+      id: 6,
+      name: "Omar Y.",
+      duration: `6 ${t('months')}`,
+      description: t('desc_clean_bulk'),
+      beforeImg: "/images_resources/Transformations/ashb.jpg",
+      afterImg: "/images_resources/Transformations/asha.jpg",
+    },
+  ];  return (
     <section id="transformations" className="transformations-section">
       <div className="trans-container">
         
