@@ -12,19 +12,19 @@ function Sponsers() {
             id: 1,
             name: "Myprotein ME",
             description: t('desc_myprotein'),
-            logo: "/images_resources/Logos/Myproteinme.jpg",
+            logo: "./public/images_resources/Logos/Myproteinme.jpg",
         },
         {
             id: 2,
             name: "Squatwolf",
             description: t('desc_squatwolf'),
-            logo: "/images_resources/Logos/Squatwolf.jpg",
+            logo: "./public/images_resources/Logos/Squatwolf.jpg",
         },
         {
             id: 3,
             name: "Ghithaa - غذاء",
             description: t('desc_ghithaa'),
-            logo: "/images_resources/Logos/ghithaa_sa.jpg",
+            logo: "./public/images_resources/Logos/ghithaa_sa.jpg",
         }
     ];
 
