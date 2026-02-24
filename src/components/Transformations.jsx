@@ -11,8 +11,8 @@ const transformationsData = [
       name: "Ashraf S.",
       duration: `1 ${t('month')}`,
       description: t('desc_fat_loss'),
-      beforeImg: "/images_resources/Transformations/12b.jpg",
-      afterImg: "/images_resources/Transformations/12a.jpg",
+      beforeImg: "/images_resources/transformations/12b.jpg",
+      afterImg: "/images_resources/transformations/12a.jpg",
     },
     {
       id: 2,
