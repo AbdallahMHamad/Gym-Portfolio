@@ -1,3 +1,76 @@
+/* =========================================
+   BREAKPOINT SYSTEM — لا تداخل إطلاقاً
+   
+   mobile:  < 768px      → عمودي + display:contents trick
+   tablet:  768–1024px   → عمودي عادي (about-content block)
+   desktop: > 1024px     → أفقي row-reverse
+   ========================================= */
+
+/* =========================================
+   Base / Shared Styles
+   ========================================= */
+.about-section {
+    position: relative;
+    background: var(--bg-main);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-container {
+    max-width: 1200px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.about-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 5;
+}
+
+.about-image {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================
+   Coach Name Tag
+   ========================================= */
+.coach-name-tag {
+    margin-top: 0;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.coach-name-tag .line {
+    width: 40px;
+    height: 2px;
+    background: var(--yellow-main);
+}
+
+.coach-name-tag .name {
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    color: white;
+}
+
+/* =========================================
+   Subtitle
+   ========================================= */
 .subtitle {
     color: var(--yellow-main);
     font-size: 20px;
@@ -8,8 +81,58 @@
     margin-bottom: 15px;
 }
 
+/* =========================================
+   Hero Title
+   ========================================= */
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
 
+/* =========================================
+   UK Certification Badge
+   ========================================= */
+.uk-certification-badge {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgba(245, 196, 0, 0.07);
+    border: 1px solid rgba(245, 196, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 50px;
+    margin-bottom: 25px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
 
+.uk-certification-badge .flag-icon {
+    background: var(--yellow-main);
+    color: #000;
+    font-weight: 900;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    font-size: clamp(0.5rem, 2vw, 0.7rem);
+}
+
+.uk-certification-badge .cert-text {
+    color: var(--yellow-main);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(0.45rem, 2.5vw, 0.75rem);
+}
+
+[dir="rtl"] .uk-certification-badge .flag-icon {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* =========================================
+   Description
+   ========================================= */
 .description {
     color: var(--text-muted);
     font-size: 1.1rem;
@@ -18,11 +141,98 @@
     max-width: 95%;
 }
 
-/* Buttons */
+/* =========================================
+   Stats Grid
+   ========================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    border-top: 1px solid #222;
+    padding-top: 25px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.stat-box {
+    min-width: 80px;
+}
+
+.stat-box h3 {
+    font-size: 2rem;
+    margin: 0;
+    color: var(--yellow-main);
+    font-style: italic;
+}
+
+.stat-box p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 5px 0 0 0;
+}
+
+/* =========================================
+   Image Wrapper
+   ========================================= */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.hero-image-original {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    will-change: opacity, transform;
+}
+
+.hero-image-original.hidden {
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+}
+
+.hero-image-original.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+}
+
+/* =========================================
+   Image Tap Hint
+   ========================================= */
+.image-tap-hint {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--yellow-main);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* =========================================
+   Buttons
+   ========================================= */
 .cta-group {
     display: flex;
     justify-content: flex-start;
-    /* Default for desktop */
     gap: 15px;
     margin-bottom: 40px;
     width: 100%;
@@ -59,533 +269,9 @@
     color: var(--yellow-main);
 }
 
-@media (max-width: 768px) {
-    .cta-group {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    @media (max-width: 480px) {
-        .cta-group {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-size: 2.2rem;
-            /* Hard limit prevents overflow */
-        }
-
-        .coach-name-tag .name {
-            font-size: 0.75rem;
-            /* Scale down name tag */
-            letter-spacing: 1px;
-        }
-
-        .coach-name-tag .line {
-            width: 8px;
-            height: 1px;
-            margin: 0 -5px;
-        }
-
-        .btn-primary,
-        .btn-secondary {
-            max-width: 180px;
-            margin: 5px;
-        }
-    }
-}
-
-
-
-
-
-
-
-.stat-box p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin: 5px 0 0 0;
-}
-
 /* =========================================
-   About Image System (Mobile-Optimized)
+   Animations
    ========================================= */
-
-.glow-effect {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 400px;
-    height: 400px;
-    background: var(--yellow-main);
-    opacity: 0.05;
-    /* تقليل الشفافية جداً */
-    filter: blur(120px);
-    z-index: 0;
-}
-
-/* =========================================
-   About Section Layout
-   ========================================= */
-.about-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    position: relative;
-    background: transparent !important;
-    /* تأكد أنه شفاف */
-    overflow: visible !important;
-    /* لظهار الضوء السفلي */
-}
-
-.coach-name-tag {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
-    padding-top: -20px;
-}
-
-.coach-name-tag .line {
-    width: 40px;
-    height: 2px;
-    background: var(--yellow-main);
-}
-
-
-.coach-name-tag .name {
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 2px;
-    font-size: 0.9rem;
-
-    /* CHANGE THIS LINE */
-    color: white;
-    /* Force white color to ensure visibility */
-}
-
-.about-container {
-    max-width: 1200px;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 60px;
-}
-
-/* Text Content Area */
-.about-content {
-    flex: 1;
-    max-width: 600px;
-    z-index: 5;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    line-height: 1.1;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
-
-.stats-grid {
-    display: flex;
-    gap: 40px;
-    border-top: 1px solid #222;
-    padding-top: 30px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    /* Prevents stats from squishing */
-}
-
-.stat-box {
-    min-width: 100px;
-}
-
-.stat-box h3 {
-    font-size: 2rem;
-    margin: 0;
-    color: var(--yellow-main);
-
-}
-
-.about-image {
-    flex: 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    cursor: pointer;
-    /* This height ensures the image area doesn't collapse */
-    min-height: 600px;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.hero-image-original {
-    position: absolute;
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    /* Rounded corners to match the professional look */
-    border-radius: 20px;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    will-change: opacity, transform;
-    /* Adds the soft shadow seen in your reference */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-}
-
-.hero-image-original.hidden {
-    opacity: 0;
-    transform: scale(0.98);
-    pointer-events: none;
-}
-
-.hero-image-original.active {
-    opacity: 1;
-    transform: scale(1);
-    z-index: 2;
-}
-
-.image-tap-hint {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--yellow-main);
-    color: black;
-    padding: 10px 25px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 800;
-    z-index: 10;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* =========================================
-   Smartphone Accuracy Fixes
-   ========================================= */
-@media (max-width: 768px) {
-    .about-section {
-        padding-top: 100px;
-        padding-bottom: 50px;
-    }
-
-
-
-    .coach-name-tag {
-        justify-content: center;
-    }
-
-    .about-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .about-content {
-        order: 1;
-        width: 100%;
-        margin-bottom: 40px;
-        /* Forces space before images start */
-    }
-
-    .about-image {
-        order: 2;
-        width: 100%;
-        /* Adjusted height for mobile screens to prevent overlap */
-        min-height: 450px;
-    }
-
-    .stats-grid {
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .hero-title {
-        font-size: 2.2rem;
-    }
-}
-
-
-/* Container for the image and hint */
-.about-image {
-    flex: 1;
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    /* Limits size on desktop */
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* The Fixed-Size Box */
-.image-wrapper {
-    position: relative;
-    top: 60px;
-    width: 100%;
-    /* 4:5 is the standard professional fitness/portrait ratio */
-    aspect-ratio: 4 / 5;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-}
-
-.hero-image-original {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* This ensures every image fills the 4:5 box without stretching */
-    object-fit: cover;
-    object-position: center top;
-    /* Keeps the face/upper body in view */
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.image-tap-hint {
-    position: absolute;
-    bottom: 15px;
-    /* Anchored to bottom of image box */
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--yellow-main);
-    color: black;
-    padding: 5px 10px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    z-index: 10;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    pointer-events: none;
-    /* Clicks go through to the image */
-    white-space: nowrap;
-}
-
-/* Mobile Tweaks to prevent height collapse */
-@media (max-width: 768px) {
-    .about-image {
-        min-height: auto;
-        /* Aspect ratio handles height now */
-        margin: 0 auto;
-    }
-
-    .image-wrapper {
-        width: 90vw;
-        /* Responsive width on mobile */
-        max-width: 380px;
-    }
-}
-
-
-.uk-certification-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(245, 196, 0, 0.07);
-    border: 1px solid rgba(245, 196, 0, 0.3);
-    padding: 6px 12px;
-    border-radius: 50px;
-    margin-bottom: 25px;
-    white-space: nowrap;
-    /* يمنع البوكس من تجاوز حدود الأب */
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-.uk-certification-badge .flag-icon {
-    background: var(--yellow-main);
-    color: #000;
-    font-weight: 900;
-    padding: 2px 4px;
-    border-radius: 4px;
-    margin-right: 8px;
-    flex-shrink: 0;
-    font-size: clamp(0.5rem, 2vw, 0.7rem);
-}
-
-.uk-certification-badge .cert-text {
-    color: var(--yellow-main);
-    font-weight: 700;
-    text-transform: uppercase;
-    /* تصغير الخط لضمان بقائه داخل الصندوق */
-    font-size: clamp(0.45rem, 2.5vw, 0.75rem);
-}
-
-@media (max-width: 767px) {
-
-    /* 1. ضبط القسم الرئيسي ليكون مرناً مع الهيدر */
-    .about-section {
-        padding-top: clamp(80px, 15vh, 120px) !important;
-        padding-bottom: 40px !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* 2. النصوص: استخدام clamp لجعل الخط يصغر في الهواتف الصغيرة جداً */
-    .hero-title {
-        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
-        line-height: 1.1;
-        text-align: center;
-        width: 90%;
-        margin: 0 auto 15px auto;
-    }
-
-    /* 3. حل مشكلة البادج (الشهادة): منعه من الخروج عن الحواف */
-    .uk-certification-badge {
-        display: flex;
-        align-items: center;
-        width: fit-content;
-        max-width: 95%;
-        /* ضمان بقائه داخل الشاشة */
-        margin: 0 auto 20px auto !important;
-        padding: 4px 10px;
-        transform: scale(0.95);
-    }
-
-    .cert-text {
-        font-size: clamp(0.6rem, 2.5vw, 0.8rem) !important;
-        white-space: normal;
-        /* السماح للنص بالنزول لسطر جديد إذا ضاقت الشاشة */
-        text-align: center;
-    }
-
-    /* 4. العدادات (Stats): ترتيب ذكي */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: clamp(5px, 2vw, 15px);
-        width: 100%;
-        max-width: 400px;
-        margin: 20px auto;
-        padding: 15px 5px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .stat-box h3 {
-        font-size: clamp(1.2rem, 5vw, 1.8rem) !important;
-    }
-
-    /* 5. الصورة: رفعها للأعلى وإلغاء الفراغ الميت */
-    .about-image {
-        margin-top: -20px !important;
-        /* سحب الصورة للأعلى */
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .image-wrapper {
-        width: 90vw !important;
-        /* مرونة كاملة مع عرض الهاتف */
-        max-width: 350px;
-        aspect-ratio: 4 / 5;
-        top: 0 !important;
-        margin-bottom: 0;
-    }
-
-    /* 6. الأزرار: التأكد من أنها لا تتداخل */
-    .cta-group {
-        display: flex;
-        flex-direction: row;
-        /* إبقاء الأزرار بجانب بعضها إن أمكن */
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        padding: 12px 15px;
-        font-size: 0.85rem;
-        flex: 1;
-        /* جعل الأزرار بنفس الحجم */
-        max-width: 150px;
-        text-align: center;
-    }
-}
-
-.stats-grid {
-    display: grid;
-    /* إجبار العناصر على البقاء في 3 أعمدة دائماً */
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    border-top: 1px solid #222;
-    padding-top: 25px;
-    margin-top: 20px;
-    width: 100%;
-}
-
-.highlighted-stat h3 {
-    color: var(--yellow-main);
-    font-style: italic;
-}
-
-/* --- تنظيف بعض الأخطاء في الكود الأصلي --- */
-.about-section {
-    position: relative;
-    padding: 60px 0;
-    background: var(--bg-main);
-    overflow: hidden;
-    /* ضروري جداً لمنع السكرول الجانبي */
-}
-
-.coach-name-tag {
-    margin-top: 0;
-    /* تم تصحيح الـ padding-top السالب الذي كان خطأ */
-}
-
-/* --- تحسين الموبايل --- */
-@media (max-width: 768px) {
-
-    /* 1. رفع حاوية الصورة للأعلى لتقليل الفراغ تحت العدادات */
-    .about-image {
-        margin-top: -30px;
-        /* يسحب الصورة للأعلى باتجاه العدادات */
-        order: 2;
-        width: 100%;
-        min-height: auto;
-    }
-
-    /* 2. تقليل الفراغ الداخلي للسكشن لتوفير مساحة للسكشن القادم */
-    .about-section {
-        padding-top: 60px;
-        padding-bottom: 40px;
-        /* تقليل الفراغ السفلي */
-    }
-
-    /* 3. التأكد من أن الـ wrapper لا يضيف مسافة علوية كبيرة */
-    .image-wrapper {
-        top: 20px;
-        /* تقليل الـ top الذي كان 60px سابقاً */
-        margin-bottom: 0;
-    }
-
-    /* 4. تصغير المسافة تحت العدادات مباشرة */
-    .about-content {
-        margin-bottom: 20px;
-        /* بدلاً من 40px */
-    }
-
-    /* 5. جعل العدادات متراصة أكثر لتوفير مساحة عمودية */
-    .stats-grid {
-        padding-top: 15px;
-        margin-top: 10px;
-        gap: 5px;
-    }
-
-    .glow-effect {
-        top: 45%;
-        /* تعديل طفيف ليتناسب مع رفع الصورة */
-        opacity: 0.12;
-        /* تعزيز التوهج قليلاً خلف الصورة المرفوعة */
-    }
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -598,41 +284,85 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1180px) {
-
-    /* زيادة المساحة العلوية لمنع التداخل مع الـ Navbar */
+/* =========================================
+   DESKTOP: > 1024px
+   image LEFT, text RIGHT (row-reverse)
+   ========================================= */
+@media (min-width: 1025px) {
     .about-section {
-        padding-top: 140px !important;
-        padding-bottom: 80px;
+        padding: 80px 0;
     }
 
+    .about-container {
+        flex-direction: row-reverse;
+    }
 
-    .coach-name-tag {
-        margin-top: 0;
-        margin-bottom: 20px;
-        z-index: 10;
-        position: relative;
+    [dir="rtl"] .about-container {
+        flex-direction: row-reverse;
+    }
+
+    .about-content {
+        text-align: left;
+    }
+
+    [dir="rtl"] .about-content {
+        text-align: right;
+    }
+
+    .image-wrapper {
+        top: 60px;
+        margin-bottom: 60px;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+/* =========================================
+   DESKTOP MID: 1025px – 1366px
+   ========================================= */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .about-image {
+        flex: 1.2;
+        max-width: 500px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+}
+
+/* =========================================
+   TABLET: 768px – 1024px
+   vertical stack — text top, image bottom
+   stats stay inside about-content (no reorder needed)
+   ========================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .about-section {
+        padding: 130px 0 80px;
+    }
+
     .about-container {
         flex-direction: column;
-        /* تحويل الترتيب لعمودي في التابلت لزيادة الحجم */
         text-align: center;
-        gap: 50px;
+        gap: 40px;
+    }
+
+    [dir="rtl"] .about-container {
+        flex-direction: column;
     }
 
     .about-content {
         max-width: 100%;
         width: 100%;
         order: 1;
+        text-align: center;
+    }
+
+    [dir="rtl"] .about-content {
+        text-align: center;
     }
 
     .about-image {
         width: 100%;
-        max-width: 500px;
-        /* تكبير الصورة بشكل ملحوظ */
+        max-width: 480px;
         margin: 0 auto;
         order: 2;
     }
@@ -645,8 +375,8 @@
 
     .stats-grid {
         justify-content: center;
-        gap: 40px;
-        margin-top: 30px;
+        gap: 30px;
+        margin-top: 25px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -659,34 +389,180 @@
     }
 }
 
-@media (min-width: 1023px) and (max-width: 1366px) {
-    .about-container {
-        gap: 60px;
+
+
+@media (max-width: 350px) {
+    .stats-grid {
+        /* بدلاً من 3 أعمدة متلاصقة، نجعلها عمودين أو نصغر الخط جداً */
+        gap: 1px !important;
+        justify-content: center;
+        
     }
 
-    .about-image {
-        flex: 1.2;
-        /* زيادة حصة الصورة من المساحة */
-        max-width: 500px;
+    .stat-box h3 {
+        /* نستخدم فونت أصغر للشاشات المتناهية الصغر */
+        font-size: 1rem !important;
+    }
+
+    .stat-box p {
+        font-size: 0.6rem !important;
+        /* نلغي الـ nowrap هنا للسماح للكلمة بالنزول لسطر جديد بدل التداخل */
+        white-space: normal !important;
+    }
+}
+
+/* =========================================
+   MOBILE: < 768px
+
+   TRICK: display:contents on .about-content
+   makes its children direct flex children of
+   .about-container → free ordering possible:
+     text elements  → order: 1  (top)
+     .about-image   → order: 2  (middle)
+     .stats-grid    → order: 3  (bottom)
+   ========================================= */
+@media (max-width: 768px) {
+
+    .about-section {
+        padding: clamp(80px, 15vh, 120px) 0 40px;
+    }
+
+    .about-container,
+    [dir="rtl"] .about-container {
+        flex-direction: column !important;
+        align-items: center;
+        gap: 0;
+        width: 90%;
+    }
+
+    /* Makes about-content "invisible" to flex layout */
+    .about-content,
+    [dir="rtl"] .about-content {
+        display: contents;
+    }
+
+    /* All text → top */
+    .coach-name-tag,
+    .subtitle,
+    .hero-title,
+    .uk-certification-badge,
+    .description,
+    .cta-group {
+        order: 1;
+        width: 100%;
+        text-align: center;
+    }
+
+
+
+
+    .coach-name-tag {
+        justify-content: center;
+        margin-top: 0;
     }
 
     .hero-title {
-        font-size: 3rem;
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+        width: 90%;
+        margin: 0 auto 15px auto;
     }
 
+    .uk-certification-badge {
+        width: fit-content !important;
+        margin: 0 auto 20px auto !important;
+        max-width: 95%;
+    }
+
+    .description {
+        max-width: 90%;
+        margin: 0 auto 20px auto;
+        font-size: 1rem;
+    }
+
+    .cta-group {
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* Image → middle */
+    .about-image,
+    [dir="rtl"] .about-image {
+        order: 2;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        min-height: auto;
+        margin-top: 20px;
+    }
+
+    .image-wrapper {
+        width: 90vw !important;
+        max-width: 380px;
+        aspect-ratio: 4 / 5;
+        top: 0 !important;
+        border-radius: 16px;
+    }
+
+    /* Stats → bottom */
+    .stats-grid {
+        order: 3;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(5px, 3vw, 20px);
+        padding: 20px 0;
+        margin-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+    }
+
+    .stat-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-box h3 {
+        font-size: clamp(1.3rem, 5vw, 1.8rem) !important;
+    }
+
+    .stat-box p {
+        font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 15px;
+        font-size: 0.85rem;
+        flex: 1;
+        max-width: 150px;
+        text-align: center;
+    }
 }
 
-/* عند تحويل الاتجاه لليمين، اعكس الهوامش */
-[dir='rtl'] .uk-certification-badge .flag-icon {
-    margin-right: 0;
-    margin-left: 8px;
-    /* بدلاً من اليمين */
-}
+/* =========================================
+   VERY SMALL PHONES: < 480px
+   ========================================= */
+@media (max-width: 480px) {
+    .cta-group {
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* لمنع خروج البادج عن الشاشة في الموبايل */
-.uk-certification-badge {
-    display: inline-flex;
-    flex-direction: row;
-    /* يضمن بقاء العلم بجانب النص دائماً */
-    max-width: 95%;
+    .coach-name-tag .name {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+
+    .coach-name-tag .line {
+        width: 8px;
+        height: 1px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        max-width: 180px;
+        margin: 5px;
+    }
 }

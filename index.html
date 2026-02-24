@@ -9,7 +9,7 @@
 
   <script>
   (function() {
-    const savedLng = localStorage.getItem('i18nextLng') || 'ar';
+const savedLng = localStorage.getItem('i18nextLng') || 'en';
     const dir = savedLng.startsWith('ar') ? 'rtl' : 'ltr';
     document.documentElement.dir = dir;
     document.documentElement.lang = savedLng;
