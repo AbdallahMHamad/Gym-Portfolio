@@ -84,7 +84,7 @@ section::after,
         rgba(245, 196, 0, 0.22) 0%,
         rgba(245, 196, 0, 0.08) 50%,
         transparent 80%);
-    filter: blur(25px);
+    filter: blur(30px);
   }
 }
 
