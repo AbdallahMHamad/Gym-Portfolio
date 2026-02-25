@@ -73,6 +73,21 @@ section::after,
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+
+  section::after,
+  .section::after {
+    bottom: -40px;
+    width: 100vw;
+    height: 100px;
+    background: radial-gradient(ellipse at center,
+        rgba(245, 196, 0, 0.22) 0%,
+        rgba(245, 196, 0, 0.08) 50%,
+        transparent 80%);
+    filter: blur(25px);
+  }
+}
+
 .duration-badge {
   display: inline-block;
   background: var(--yellow-main);

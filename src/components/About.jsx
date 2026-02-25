@@ -38,7 +38,7 @@ const CountUp = ({ end, duration = 1000 }) => {
 
 
 function About() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(); // جلب i18n لمعرفة اتجاه اللغة
 
   const originalImages = [
     "/images_resources/salman/1.jfif",
@@ -52,16 +52,45 @@ function About() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
-  const nextImage = () => {
-    setCurrentIndex((prev) => (prev + 1) % originalImages.length);
+  // تشغيل الكاروسيل تلقائياً كل 3.5 ثوانٍ
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % originalImages.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [originalImages.length]);
+
+  // دوال سحب الصورة (Swipe) للموبايل
+  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    // مراعاة اتجاه اللغة RTL أو LTR عند السحب
+    const isRTL = i18n.language === 'ar';
+
+    if (isLeftSwipe) {
+      setCurrentIndex((prev) => isRTL ? (prev === 0 ? originalImages.length - 1 : prev - 1) : (prev + 1) % originalImages.length);
+    }
+    if (isRightSwipe) {
+      setCurrentIndex((prev) => isRTL ? (prev + 1) % originalImages.length : (prev === 0 ? originalImages.length - 1 : prev - 1));
+    }
+    
+    setTouchStart(0);
+    setTouchEnd(0);
   };
 
   return (
     <section id="about" className="section dark about-section">
       <div className="about-container">
 
-        {/* ── TEXT SIDE (order 1 on all screens) ── */}
+        {/* ── TEXT SIDE ── */}
         <div className="about-content">
           <div className="coach-name-tag">
             <span className="line"></span>
@@ -84,8 +113,6 @@ function About() {
             {t('about_desc')}
           </p>
 
-          {/* On desktop: stats sit here inside about-content */}
-          {/* On mobile: CSS order:4 pushes it below the image */}
           <div className="stats-grid">
             <div className="stat-box highlighted-stat">
               <h3><CountUp end={100} duration={1000} />+</h3>
@@ -104,18 +131,42 @@ function About() {
           </div>
         </div>
 
-        {/* ── IMAGE SIDE (order 2 on desktop, order 3 on mobile) ── */}
-        <div className="about-image" onClick={nextImage}>
-          <div className="image-wrapper">
-            {originalImages.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`كوتش محمد سلمان مدرب لياقة بدنية أونلاين - صورة رقم ${index + 1}`}
-                className={`hero-image-original ${index === currentIndex ? "active" : "hidden"}`}
-              />
-            ))}
-            <div className="image-tap-hint">{t('about_tap_hint')}</div>
+        {/* ── IMAGE CAROUSEL SIDE ── */}
+        <div className="about-image">
+          <div 
+            className="image-wrapper"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* التراك الذي يحمل الصور ويتحرك */}
+            <div 
+              className="carousel-track"
+              style={{
+                // في اللغة العربية (RTL) يتحرك التراك باتجاه الموجب، وفي الإنجليزية (LTR) بالسالب
+                transform: `translateX(${i18n.language === 'ar' ? currentIndex * 100 : -currentIndex * 100}%)`
+              }}
+            >
+              {originalImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`كوتش محمد سلمان - صورة ${index + 1}`}
+                  className="carousel-slide"
+                />
+              ))}
+            </div>
+
+            {/* نقاط التنقل السفلية (Dots) */}
+            <div className="carousel-dots">
+              {originalImages.map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`dot ${currentIndex === idx ? "active" : ""}`}
+                  onClick={() => setCurrentIndex(idx)}
+                ></span>
+              ))}
+            </div>
           </div>
         </div>
 

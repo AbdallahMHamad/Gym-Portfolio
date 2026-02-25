@@ -67,7 +67,12 @@ const resources = {
             "facebook_name": "Mohammd Salman",
 
             "footer_rights": "All rights reserved.",
-            "footer_made_by": "Made by"
+            "footer_made_by": "Made by",
+
+
+
+            "whatsapp_training_msg": "Hello Coach Salman, I am interested in starting online training with you. Could you please provide more details?",
+            "whatsapp_collab_msg": "Hello Coach Salman, I would like to discuss a potential collaboration or partnership with you.",
         }
     },
     ar: {
@@ -135,7 +140,11 @@ const resources = {
             "facebook_name": "محمد سلمان",
 
             "footer_rights": "جميع الحقوق محفوظة.",
-            "footer_made_by": "صُنع بواسطة"
+            "footer_made_by": "صُنع بواسطة",
+
+
+            "whatsapp_training_msg": "أهلاً كوتش محمد، أنا مهتم بالبدء في التدريب أونلاين معك. هل يمكنك تزويدي بمزيد من التفاصيل؟",
+            "whatsapp_collab_msg": "أهلاً كوتش محمد، أرغب في مناقشة فرصة تعاون أو شراكة معك.",
 
         }
     }

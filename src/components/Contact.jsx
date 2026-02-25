@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import './Contact.css';
 
-// تعريف المصفوفة خارج المكون يمنع مشاكل تداخل الـ IDs أثناء الـ Render
 const socialLinks = [
   { id: 1, platform: "WhatsApp", username: "0581145883", url: "https://api.whatsapp.com/send/?phone=966581145883", icon: "fa-brands fa-whatsapp" },
   { id: 2, platform: "Instagram", username: "@_mohmmdsalman", url: "https://www.instagram.com/_mohmmdsalman", icon: "fa-brands fa-instagram" },
@@ -16,57 +15,51 @@ function Contact() {
   const { t } = useTranslation();
   const [tappedId, setTappedId] = useState(null);
 
-  // استخدام useCallback لضمان استقرار الدوال
   const handleTapStart = useCallback((id) => {
     setTappedId(id);
   }, []);
 
   const handleTapEnd = useCallback(() => {
-    // تأخير بسيط جداً لمسح الحالة لضمان رؤية التأثير البصري
-    setTimeout(() => setTappedId(null), 100);
+    setTimeout(() => setTappedId(null), 150);
   }, []);
 
   return (
     <section id="contact" className="section dark contact-section">
-      <div className="section-container">
+      <div className="contact-container">
+        
         <div className="section-header">
           <span className="subtitle">{t('contact_subtitle')}</span>
-          <h2>{t('contact_title')}<span className="highlight">{t('contact_highlight')}</span></h2>
+          <h2>{t('contact_title')} <span className="highlight">{t('contact_highlight')}</span></h2>
           <p className="contact-desc">{t('contact_desc')}</p>
         </div>
 
-        <div className="social-grid">
+        <div className="trendy-social-grid">
           {socialLinks.map((link) => (
             <a 
               key={link.id} 
               href={link.url} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`social-card ${tappedId === link.id ? 'tapped' : ''}`}
+              className={`trendy-card ${tappedId === link.id ? 'tapped' : ''} ${link.platform.toLowerCase()}`}
               
-              // التعديل الجوهري هنا:
               onTouchStart={() => handleTapStart(link.id)}
               onTouchEnd={handleTapEnd}
-              // إذا حرك المستخدم إصبعه لعمل سكرول، نلغي حالة الضغط فوراً لمنع اللخبطة
               onTouchMove={handleTapEnd} 
-              
               onMouseDown={() => handleTapStart(link.id)}
               onMouseUp={handleTapEnd}
               onMouseLeave={handleTapEnd}
             >
-              <div className="icon-box">
+              <div className="trendy-icon-wrapper">
                 <i className={link.icon}></i>
               </div>
-              <div className="link-info">
+              <div className="trendy-info">
                 <h3>{link.platform}</h3>
                 <span>{link.username}</span>
-              </div>
-              <div className="arrow-icon">
-                <i className="fa-solid fa-arrow-right"></i>
               </div>
             </a>
           ))}
         </div>
+
       </div>
     </section>
   );

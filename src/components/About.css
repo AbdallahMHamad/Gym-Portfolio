@@ -1,13 +1,12 @@
 /* =========================================
-   BREAKPOINT SYSTEM — لا تداخل إطلاقاً
-   
-   mobile:  < 768px      → عمودي + display:contents trick
-   tablet:  768–1024px   → عمودي عادي (about-content block)
-   desktop: > 1024px     → أفقي row-reverse
+   BREAKPOINT SYSTEM
+   mobile:  ≤ 768px   → column + display:contents trick
+   tablet:  768–1024px → column normal
+   desktop: > 1024px  → row-reverse
    ========================================= */
 
 /* =========================================
-   Base / Shared Styles
+   Base Styles
    ========================================= */
 .about-section {
     position: relative;
@@ -172,7 +171,7 @@
 }
 
 /* =========================================
-   Image Wrapper
+   Image Wrapper & Carousel
    ========================================= */
 .image-wrapper {
     position: relative;
@@ -183,110 +182,50 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.hero-image-original {
-    position: absolute;
-    top: 0;
-    left: 0;
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    will-change: opacity, transform;
+    -webkit-user-drag: none;
 }
 
-.hero-image-original.hidden {
-    opacity: 0;
-    transform: scale(0.98);
-    pointer-events: none;
-}
-
-.hero-image-original.active {
-    opacity: 1;
-    transform: scale(1);
-    z-index: 2;
-}
-
-/* =========================================
-   Image Tap Hint
-   ========================================= */
-.image-tap-hint {
+.carousel-dots {
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--yellow-main);
-    color: black;
-    padding: 5px 10px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    z-index: 10;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-/* =========================================
-   Buttons
-   ========================================= */
-.cta-group {
     display: flex;
-    justify-content: flex-start;
-    gap: 15px;
-    margin-bottom: 40px;
-    width: 100%;
+    gap: 10px;
+    z-index: 10;
 }
 
-.btn-primary {
-    background-color: var(--yellow-main);
-    color: black;
-    padding: 14px 35px;
-    font-weight: 700;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: 0.3s;
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
-    background-color: var(--yellow-glow);
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: white;
-    border: 1px solid #333;
-    padding: 14px 35px;
-    font-weight: 700;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.btn-secondary:hover {
-    border-color: var(--yellow-main);
-    color: var(--yellow-main);
-}
-
-/* =========================================
-   Animations
-   ========================================= */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.dot.active {
+    background: var(--yellow-main);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(245, 196, 0, 0.5);
 }
 
 /* =========================================
    DESKTOP: > 1024px
-   image LEFT, text RIGHT (row-reverse)
    ========================================= */
 @media (min-width: 1025px) {
     .about-section {
@@ -331,32 +270,24 @@
 
 /* =========================================
    TABLET: 768px – 1024px
-   vertical stack — text top, image bottom
-   stats stay inside about-content (no reorder needed)
    ========================================= */
 @media (min-width: 768px) and (max-width: 1024px) {
     .about-section {
         padding: 130px 0 80px;
     }
 
-    .about-container {
+    .about-container,
+    [dir="rtl"] .about-container {
         flex-direction: column;
         text-align: center;
         gap: 40px;
     }
 
-    [dir="rtl"] .about-container {
-        flex-direction: column;
-    }
-
-    .about-content {
+    .about-content,
+    [dir="rtl"] .about-content {
         max-width: 100%;
         width: 100%;
         order: 1;
-        text-align: center;
-    }
-
-    [dir="rtl"] .about-content {
         text-align: center;
     }
 
@@ -383,43 +314,13 @@
     .coach-name-tag {
         justify-content: center;
     }
-
-    .cta-group {
-        justify-content: center;
-    }
-}
-
-
-
-@media (max-width: 350px) {
-    .stats-grid {
-        /* بدلاً من 3 أعمدة متلاصقة، نجعلها عمودين أو نصغر الخط جداً */
-        gap: 1px !important;
-        justify-content: center;
-        
-    }
-
-    .stat-box h3 {
-        /* نستخدم فونت أصغر للشاشات المتناهية الصغر */
-        font-size: 1rem !important;
-    }
-
-    .stat-box p {
-        font-size: 0.6rem !important;
-        /* نلغي الـ nowrap هنا للسماح للكلمة بالنزول لسطر جديد بدل التداخل */
-        white-space: normal !important;
-    }
 }
 
 /* =========================================
-   MOBILE: < 768px
-
+   MOBILE: ≤ 768px
    TRICK: display:contents on .about-content
-   makes its children direct flex children of
-   .about-container → free ordering possible:
-     text elements  → order: 1  (top)
-     .about-image   → order: 2  (middle)
-     .stats-grid    → order: 3  (bottom)
+   → children become direct flex items of .about-container
+   → text(order:1) → image(order:2) → stats(order:3)
    ========================================= */
 @media (max-width: 768px) {
 
@@ -435,26 +336,21 @@
         width: 90%;
     }
 
-    /* Makes about-content "invisible" to flex layout */
     .about-content,
     [dir="rtl"] .about-content {
         display: contents;
     }
 
-    /* All text → top */
+    /* Text elements → top */
     .coach-name-tag,
     .subtitle,
     .hero-title,
     .uk-certification-badge,
-    .description,
-    .cta-group {
+    .description {
         order: 1;
         width: 100%;
         text-align: center;
     }
-
-
-
 
     .coach-name-tag {
         justify-content: center;
@@ -477,12 +373,6 @@
         max-width: 90%;
         margin: 0 auto 20px auto;
         font-size: 1rem;
-    }
-
-    .cta-group {
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 20px;
     }
 
     /* Image → middle */
@@ -530,39 +420,22 @@
     .stat-box p {
         font-size: clamp(0.65rem, 2.5vw, 0.85rem);
     }
-
-    .btn-primary,
-    .btn-secondary {
-        padding: 12px 15px;
-        font-size: 0.85rem;
-        flex: 1;
-        max-width: 150px;
-        text-align: center;
-    }
 }
 
 /* =========================================
-   VERY SMALL PHONES: < 480px
+   VERY SMALL PHONES: < 350px
    ========================================= */
-@media (max-width: 480px) {
-    .cta-group {
-        flex-direction: column;
-        align-items: center;
+@media (max-width: 350px) {
+    .stats-grid {
+        gap: 4px !important;
     }
 
-    .coach-name-tag .name {
-        font-size: 0.75rem;
-        letter-spacing: 1px;
+    .stat-box h3 {
+        font-size: 1rem !important;
     }
 
-    .coach-name-tag .line {
-        width: 8px;
-        height: 1px;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        max-width: 180px;
-        margin: 5px;
+    .stat-box p {
+        font-size: 0.6rem !important;
+        white-space: normal !important;
     }
 }

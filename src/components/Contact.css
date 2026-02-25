@@ -1,200 +1,216 @@
+/* =========================================
+   Contact Section - Modern Redesign
+   ========================================= */
+
 .contact-section {
-    padding: 80px 0;
+    padding: 100px 0;
     background-color: var(--bg-main);
     width: 100%;
     display: flex;
     justify-content: center;
-    overflow-x: hidden;
+    overflow: hidden;
+    position: relative;
 }
 
-/* توحيد الحاوية مع سكشن السبونسرز */
 .contact-container {
     width: 90%;
-    max-width: 1200px;
-    /* نفس مقاس السبونسرز لضمان التوازي */
-    padding: 0;
-    /* نفس الهامش الجانبي الموحد */
+    max-width: 1000px; /* تصغير العرض قليلاً ليصبح متمركزاً وأكثر أناقة */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-sizing: border-box;
+    z-index: 2;
 }
 
 .contact-desc {
     color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto 40px auto;
+    max-width: 500px;
+    margin: 0 auto 50px auto;
     font-size: 1.1rem;
     text-align: center;
     line-height: 1.6;
 }
 
-/* Grid Layout */
-.social-grid {
+/* =========================================
+   Trendy Grid Layout
+   ========================================= */
+.trendy-social-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    /* 3 أعمدة للكمبيوتر */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     width: 100%;
-    margin: 0 auto;
 }
 
-/* The Card Link */
-.social-card {
+/* =========================================
+   Trendy Card Style (Glassmorphism)
+   ========================================= */
+.trendy-card {
+    background: rgba(20, 20, 20, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 30px 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background: #0b0b0b;
-    border: 1px solid #222;
-    padding: 25px;
-    border-radius: 15px;
+    justify-content: center;
+    text-align: center;
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    box-sizing: border-box;
-    cursor: pointer;
+    
+    /* منع تحديد النص وتأثيرات اللمس الافتراضية */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    touch-action: manipulation;
 }
 
-/* Hover Effects */
-.social-card:hover {
-    border-color: var(--yellow-main);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(245, 196, 0, 0.1);
+/* التوهج الخلفي السري */
+.trendy-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(245, 196, 0, 0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
 }
 
-/* Icon Box (Left) */
-.icon-box {
-    width: 55px;
-    height: 55px;
-    background: #1a1a1a;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    color: white;
-    margin-right: 20px;
-    flex-shrink: 0;
-    /* منع انكماش الدائرة */
-    transition: 0.3s;
+.trendy-card:hover::before,
+.trendy-card.tapped::before {
+    opacity: 1;
 }
 
-.social-card:hover .icon-box {
-    background: var(--yellow-main);
-    color: black;
-}
-
-/* Text Info */
-.link-info {
-    flex: 1;
-}
-
-.link-info h3 {
-    margin: 0;
-    font-size: 1.25rem;
-    color: white;
-    font-weight: 700;
-}
-
-.link-info span {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    display: block;
-    margin-top: 4px;
-}
-
-.social-card:hover .link-info span {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* Arrow (Right) */
-.arrow-icon {
-    color: #444;
-    font-size: 1.2rem;
-    transition: 0.3s;
-}
-
-.social-card:hover .arrow-icon {
-    color: var(--yellow-main);
-    transform: translateX(5px);
+.trendy-card:hover,
+.trendy-card.tapped {
+    border-color: rgba(245, 196, 0, 0.4);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(245, 196, 0, 0.1);
+    background: rgba(30, 30, 30, 0.6);
 }
 
 /* =========================================
-   Responsive Breakpoints
+   Icon & Text Details
+   ========================================= */
+.trendy-icon-wrapper {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    z-index: 1;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.trendy-card:hover .trendy-icon-wrapper,
+.trendy-card.tapped .trendy-icon-wrapper {
+    background: var(--yellow-main);
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
+}
+
+.trendy-info {
+    z-index: 1;
+}
+
+.trendy-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.trendy-info span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.trendy-card:hover .trendy-info span,
+.trendy-card.tapped .trendy-info span {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* =========================================
+   Responsive Breakpoints (The Magic for Mobile)
    ========================================= */
 
-/* Tablets (1024px and below) */
-@media (max-width: 1024px) {
-    .social-grid {
+/* شاشات التابلت */
+@media (max-width: 992px) {
+    .trendy-social-grid {
         gap: 15px;
     }
 }
 
-/* Mobile Devices (768px and below) */
+/* شاشات الموبايل (السر هنا: عمودين بدلاً من واحد) */
 @media (max-width: 768px) {
     .contact-section {
-        padding: 60px 0;
+        padding: 70px 0;
     }
 
-
-    .social-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .trendy-social-grid {
+        /* هنا يكمن الحل! عمودين في الموبايل يختصر الطول للنصف */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 
     .contact-container {
-        padding: 0 15px;
-        width: 90%;
+        width: 92%;
     }
 
-    .social-card {
-        padding: 20px;
-    }
-}
-
-/* Specific Fix for Small Screens (480px and below) */
-@media (max-width: 480px) {
-    .icon-box {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
+    .trendy-card {
+        padding: 20px 10px;
+        border-radius: 18px;
     }
 
-    .link-info h3 {
-        font-size: 1.1rem;
+    .trendy-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
     }
 
-    .link-info span {
-        font-size: 0.85rem;
-        word-break: break-all;
-        /* حماية من النصوص الطويلة */
+    .trendy-info h3 {
+        font-size: 1rem;
     }
 
-    .arrow-icon {
-        display: none;
-        /* إخفاء السهم في الشاشات الصغيرة جداً لتوفير مساحة */
+    .trendy-info span {
+        font-size: 0.75rem;
+        /* إخفاء النص الطويل جداً إذا لزم الأمر في الشاشات الصغيرة جداً */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px; 
     }
 }
 
-.social-card {
-    position: relative;
-    /* يمنع ظهور اللون الرمادي الافتراضي للمتصفح خلف الضغطة */
-    -webkit-tap-highlight-color: transparent;
-    /* يمنع اختيار النصوص عند الضغط المطول */
-    user-select: none;
-    /* يضمن أن اللمس مخصص للتفاعل وليس للسكرول داخل الكارت نفسه */
-    touch-action: manipulation;
-    transition: all 0.2s ease;
-}
-
-/* التأكد من أن التنسيق يعمل فقط عند وجود كلاس tapped */
-.social-card.tapped {
-    border-color: var(--yellow-main) !important;
-    transform: scale(0.97) !important;
-    background: rgba(245, 196, 0, 0.05) !important;
-}
-
-.social-card.tapped .icon-box {
-    background: var(--yellow-main);
-    color: black;
+/* الشاشات الصغيرة جداً (مثل iPhone SE) */
+@media (max-width: 380px) {
+    .trendy-social-grid {
+        gap: 10px;
+    }
+    
+    .trendy-card {
+        padding: 15px 5px;
+    }
+    
+    .trendy-info span {
+        display: none; /* إخفاء اسم المستخدم لتركيز الانتباه على المنصة فقط في الشاشات الضيقة جداً */
+    }
 }
