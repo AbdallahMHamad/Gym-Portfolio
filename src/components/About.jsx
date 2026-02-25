@@ -59,7 +59,7 @@ function About() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % originalImages.length);
-    }, 3500);
+    }, 4000);
     return () => clearInterval(interval);
   }, [originalImages.length]);
 
@@ -139,11 +139,9 @@ function About() {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {/* التراك الذي يحمل الصور ويتحرك */}
             <div 
               className="carousel-track"
               style={{
-                // في اللغة العربية (RTL) يتحرك التراك باتجاه الموجب، وفي الإنجليزية (LTR) بالسالب
                 transform: `translateX(${i18n.language === 'ar' ? currentIndex * 100 : -currentIndex * 100}%)`
               }}
             >
