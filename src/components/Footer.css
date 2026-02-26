@@ -116,3 +116,85 @@
         margin: 0 auto;
     }
 }
+
+/* Mobile Phones (The 320px - 420px "Danger Zone") */
+@media screen and (max-width: 420px) {
+    .footer {
+        padding: 40px 10px;
+        /* Side padding for tiny screens */
+    }
+
+    .footer-container {
+        width: 100%;
+        /* Use full width but rely on footer padding */
+    }
+
+    .rights-text {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        max-width: 280px;
+        /* Forces wrap so it doesn't hit borders */
+        margin: 0 auto;
+    }
+
+    .made-by {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+}
+
+.made-by {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px 20px;
+    /* تكبير المساحة قليلاً للموبايل */
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* الرابط (اسمك) */
+.made-by a {
+    color: var(--yellow-main);
+    /* استخدام اللون الأصفر لتمييز الرابط فوراً */
+    text-decoration: none;
+    font-weight: 800;
+    position: relative;
+    padding: 2px 4px;
+    transition: 0.3s;
+}
+
+/* تأثير عند تمرير الماوس أو الضغط */
+.made-by:hover {
+    border-color: var(--yellow-main);
+    background: rgba(245, 196, 0, 0.05);
+    transform: translateY(-3px);
+    /* حركة للأعلى بسيطة */
+    box-shadow: 0 5px 15px rgba(245, 196, 0, 0.1);
+}
+
+.made-by:hover a {
+    text-shadow: 0 0 8px rgba(245, 196, 0, 0.6);
+    /* تأثير توهج نيون للاسم */
+}
+
+/* إضافة سهم صغير بجانب الاسم لزيادة نسبة الضغط */
+.made-by a::after {
+    content: '↗';
+    font-size: 0.7rem;
+    margin-left: 4px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.made-by:hover a::after {
+    transform: translate(2px, -2px);
+    /* حركة السهم عند الهوفر */
+}
