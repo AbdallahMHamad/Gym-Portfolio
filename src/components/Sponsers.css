@@ -69,6 +69,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    cursor: pointer;
 }
 
 /* Desktop: hover glow */
@@ -147,8 +148,7 @@
     max-height: 100%;
     object-fit: contain;
     filter: grayscale(100%) opacity(0.7);
-    filter: grayscale(0%) opacity(1);
-    transition: all 0.4s ease;
+    transition: filter 0.4s ease;
 }
 
 .sponsor-content h3 {
@@ -355,59 +355,24 @@
     }
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (hover: none) {
+
+    /* Always show logos in full color on mobile — no interaction needed */
     .sponsor-logo-wrapper img {
-        filter: grayscale(100%) opacity(0.6);
-        /* تبدأ باهتة فقط على الكمبيوتر */
-    }
-
-    .sponsor-card:hover {
-        transform: translateY(-10px);
-        border-color: var(--yellow-main);
-        box-shadow: 0 15px 35px rgba(245, 196, 0, 0.15);
-        background: #161616;
-    }
-
-    .sponsor-card:hover .sponsor-logo-wrapper img {
         filter: grayscale(0%) opacity(1);
     }
 
-    /* تأثير الـ Promo Banner على الكروت في الديسكطوب فقط */
-    .promo-banner:hover~.sponsers-grid .sponsor-card {
-        border-color: rgba(245, 196, 0, 0.3);
+    /* Cards have a subtle always-on glow so they feel premium */
+    .sponsor-card {
+        border-color: rgba(245, 196, 0, 0.25);
+        box-shadow: 0 0 15px rgba(245, 196, 0, 0.08);
     }
-}
 
-/* =========================================
-   Mobile ONLY: Interaction Feedback
-   ========================================= */
-@media (hover: none) {
-
-    /* لا نحتاج لـ .tapped class بالـ CSS، سنعتمد على الـ Active فقط لسرعة الاستجابة */
+    /* Clean, snappy press feedback — feels native */
     .sponsor-card:active {
-        transform: scale(0.96);
-        /* تأثير ضغطة الزر */
-        background: #1a1a1a;
+        transform: scale(0.97);
         border-color: var(--yellow-main);
+        box-shadow: 0 0 25px rgba(245, 196, 0, 0.3);
         transition: all 0.1s ease;
     }
-
-    .sponsor-logo-wrapper img {
-        filter: grayscale(0%) opacity(1) !important;
-        /* الشعارات دائماً ملونة للموبايل */
-    }
-}
-
-/* =========================================
-   Promo Banner Enhancement
-   ========================================= */
-.promo-banner {
-    /* ... كودك السابق ... */
-    touch-action: manipulation;
-    /* يحسن سرعة الضغط على الموبايل */
-}
-
-.promo-banner:active {
-    transform: scale(0.98);
-    background: rgba(245, 196, 0, 0.15);
 }
