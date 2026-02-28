@@ -38,7 +38,7 @@ const CountUp = ({ end, duration = 1000 }) => {
 
 
 function About() {
-  const { t, i18n } = useTranslation(); // جلب i18n لمعرفة اتجاه اللغة
+  const { t, i18n } = useTranslation();
 
   const originalImages = [
     "/images_resources/salman/1.jfif",
@@ -52,10 +52,12 @@ function About() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const isDraggingHorizontally = useRef(false);
+  const wrapperRef = useRef(null);
 
-  // تشغيل الكاروسيل تلقائياً كل 3.5 ثوانٍ
+  // Auto-play
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % originalImages.length);
@@ -63,28 +65,68 @@ function About() {
     return () => clearInterval(interval);
   }, [originalImages.length]);
 
-  // دوال سحب الصورة (Swipe) للموبايل
-  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
-  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    
-    // مراعاة اتجاه اللغة RTL أو LTR عند السحب
-    const isRTL = i18n.language === 'ar';
+  // Attach touch listeners with { passive: false } so we can preventDefault
+  // React's onTouchMove is passive by default and cannot preventDefault
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
 
-    if (isLeftSwipe) {
-      setCurrentIndex((prev) => isRTL ? (prev === 0 ? originalImages.length - 1 : prev - 1) : (prev + 1) % originalImages.length);
-    }
-    if (isRightSwipe) {
-      setCurrentIndex((prev) => isRTL ? (prev + 1) % originalImages.length : (prev === 0 ? originalImages.length - 1 : prev - 1));
-    }
-    
-    setTouchStart(0);
-    setTouchEnd(0);
-  };
+    const onTouchStart = (e) => {
+      touchStartX.current = e.targetTouches[0].clientX;
+      touchStartY.current = e.targetTouches[0].clientY;
+      isDraggingHorizontally.current = false;
+    };
+
+    const onTouchMove = (e) => {
+      const dx = Math.abs(e.targetTouches[0].clientX - touchStartX.current);
+      const dy = Math.abs(e.targetTouches[0].clientY - touchStartY.current);
+
+      // On first meaningful move, decide: horizontal swipe or vertical scroll?
+      if (!isDraggingHorizontally.current && (dx > 5 || dy > 5)) {
+        isDraggingHorizontally.current = dx > dy;
+      }
+
+      // Only hijack the event if user is clearly swiping horizontally
+      if (isDraggingHorizontally.current) {
+        e.preventDefault(); // stops page from scrolling
+      }
+    };
+
+    const onTouchEnd = (e) => {
+      if (!isDraggingHorizontally.current) return;
+
+      const distance = touchStartX.current - e.changedTouches[0].clientX;
+      const isRTL = i18n.language === 'ar';
+
+      if (distance > 50) {
+        // Swiped left
+        setCurrentIndex((prev) =>
+          isRTL
+            ? prev === 0 ? originalImages.length - 1 : prev - 1
+            : (prev + 1) % originalImages.length
+        );
+      } else if (distance < -50) {
+        // Swiped right
+        setCurrentIndex((prev) =>
+          isRTL
+            ? (prev + 1) % originalImages.length
+            : prev === 0 ? originalImages.length - 1 : prev - 1
+        );
+      }
+
+      isDraggingHorizontally.current = false;
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false }); // passive:false is the key
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [i18n.language, originalImages.length]);
 
   return (
     <section id="about" className="section dark about-section">
@@ -133,13 +175,11 @@ function About() {
 
         {/* ── IMAGE CAROUSEL SIDE ── */}
         <div className="about-image">
-          <div 
+          <div
             className="image-wrapper"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            ref={wrapperRef}
           >
-            <div 
+            <div
               className="carousel-track"
               style={{
                 transform: `translateX(${i18n.language === 'ar' ? currentIndex * 100 : -currentIndex * 100}%)`
@@ -155,7 +195,6 @@ function About() {
               ))}
             </div>
 
-            {/* نقاط التنقل السفلية (Dots) */}
             <div className="carousel-dots">
               {originalImages.map((_, idx) => (
                 <span
