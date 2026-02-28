@@ -11,6 +11,11 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  overflow-x: hidden;
+  /* Remove any accidental height constraints that force inner scroll */
+  height: auto;
+  min-height: 100%;
+
 }
 
 body {
@@ -22,6 +27,11 @@ body {
   color: var(--text-main);
   -webkit-user-select: none;
   user-select: none;
+  overflow-x: hidden;
+  /* Remove any accidental height constraints that force inner scroll */
+  height: auto;
+  min-height: 100%;
+
 }
 
 /* إصلاح الحاوية الأساسية لتناسب الموبايل */
@@ -33,6 +43,7 @@ body {
   padding: 0;
   /* حذف الـ 2rem التي كانت تسبب الفراغات */
   overflow-x: hidden;
+  overflow-y: hidden;
   /* قتل أي سكرول عرضي فوراً */
 }
 
@@ -51,6 +62,7 @@ section,
   background: transparent !important;
   overflow: visible !important;
   /* مهم جداً لكي يظهر الضوء بين السكاشن */
+
 }
 
 /* هذا هو الفاصل الضوئي الجديد */
