@@ -69,7 +69,6 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    cursor: pointer;
 }
 
 /* Desktop: hover glow */
@@ -84,13 +83,13 @@
         filter: grayscale(0%) opacity(1);
     }
 
-    .promo-banner:hover ~ .sponsers-grid .sponsor-card {
+    .promo-banner:hover~.sponsers-grid .sponsor-card {
         border-color: var(--yellow-main);
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(245, 196, 0, 0.15);
     }
 
-    .promo-banner:hover ~ .sponsers-grid .sponsor-card .sponsor-logo-wrapper img {
+    .promo-banner:hover~.sponsers-grid .sponsor-card .sponsor-logo-wrapper img {
         filter: grayscale(0%) opacity(1);
     }
 
@@ -148,7 +147,8 @@
     max-height: 100%;
     object-fit: contain;
     filter: grayscale(100%) opacity(0.7);
-    transition: filter 0.4s ease;
+    filter: grayscale(0%) opacity(1);
+    transition: all 0.4s ease;
 }
 
 .sponsor-content h3 {
@@ -211,9 +211,17 @@
 }
 
 @keyframes pulse-border {
-    0%   { border-color: rgba(245, 196, 0, 0.3); }
-    50%  { border-color: rgba(245, 196, 0, 1);   }
-    100% { border-color: rgba(245, 196, 0, 0.3); }
+    0% {
+        border-color: rgba(245, 196, 0, 0.3);
+    }
+
+    50% {
+        border-color: rgba(245, 196, 0, 1);
+    }
+
+    100% {
+        border-color: rgba(245, 196, 0, 0.3);
+    }
 }
 
 /* =========================================
@@ -347,4 +355,59 @@
     }
 }
 
+@media (hover: hover) and (pointer: fine) {
+    .sponsor-logo-wrapper img {
+        filter: grayscale(100%) opacity(0.6);
+        /* تبدأ باهتة فقط على الكمبيوتر */
+    }
 
+    .sponsor-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--yellow-main);
+        box-shadow: 0 15px 35px rgba(245, 196, 0, 0.15);
+        background: #161616;
+    }
+
+    .sponsor-card:hover .sponsor-logo-wrapper img {
+        filter: grayscale(0%) opacity(1);
+    }
+
+    /* تأثير الـ Promo Banner على الكروت في الديسكطوب فقط */
+    .promo-banner:hover~.sponsers-grid .sponsor-card {
+        border-color: rgba(245, 196, 0, 0.3);
+    }
+}
+
+/* =========================================
+   Mobile ONLY: Interaction Feedback
+   ========================================= */
+@media (hover: none) {
+
+    /* لا نحتاج لـ .tapped class بالـ CSS، سنعتمد على الـ Active فقط لسرعة الاستجابة */
+    .sponsor-card:active {
+        transform: scale(0.96);
+        /* تأثير ضغطة الزر */
+        background: #1a1a1a;
+        border-color: var(--yellow-main);
+        transition: all 0.1s ease;
+    }
+
+    .sponsor-logo-wrapper img {
+        filter: grayscale(0%) opacity(1) !important;
+        /* الشعارات دائماً ملونة للموبايل */
+    }
+}
+
+/* =========================================
+   Promo Banner Enhancement
+   ========================================= */
+.promo-banner {
+    /* ... كودك السابق ... */
+    touch-action: manipulation;
+    /* يحسن سرعة الضغط على الموبايل */
+}
+
+.promo-banner:active {
+    transform: scale(0.98);
+    background: rgba(245, 196, 0, 0.15);
+}
