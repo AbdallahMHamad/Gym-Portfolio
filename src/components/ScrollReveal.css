@@ -1,214 +1,58 @@
 /* =========================================
-   ScrollReveal.css
-   Pure CSS animations — compositor-thread only
-   (opacity + transform = never triggers layout)
+   ScrollReveal.css — fade + slide, no blur
    ========================================= */
 
-/* ── Base hidden state ── */
 .scroll-reveal {
     opacity: 0;
     will-change: opacity, transform;
     transition:
-        opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: visible !important;
+    width: 100%;
 }
 
-/* ── Distance variants (how far element starts from final position) ── */
-
-/* Small — subtle, good for cards/elements already on screen edge */
+/* Distance variants */
 .scroll-reveal--sm.scroll-reveal--up {
     transform: translateY(20px);
 }
 
-.scroll-reveal--sm.scroll-reveal--down {
-    transform: translateY(-20px);
-}
-
-.scroll-reveal--sm.scroll-reveal--left {
-    transform: translateX(20px);
-}
-
-.scroll-reveal--sm.scroll-reveal--right {
-    transform: translateX(-20px);
-}
-
-/* Medium — the default, perfect for sections */
 .scroll-reveal--md.scroll-reveal--up {
     transform: translateY(40px);
 }
 
-.scroll-reveal--md.scroll-reveal--down {
-    transform: translateY(-40px);
-}
-
-.scroll-reveal--md.scroll-reveal--left {
-    transform: translateX(40px);
-}
-
-.scroll-reveal--md.scroll-reveal--right {
-    transform: translateX(-40px);
-}
-
-/* Large — dramatic, for hero-level moments */
 .scroll-reveal--lg.scroll-reveal--up {
-    transform: translateY(70px);
+    transform: translateY(65px);
 }
 
-.scroll-reveal--lg.scroll-reveal--down {
-    transform: translateY(-70px);
-}
-
-.scroll-reveal--lg.scroll-reveal--left {
-    transform: translateX(70px);
-}
-
-.scroll-reveal--lg.scroll-reveal--right {
-    transform: translateX(-70px);
-}
-
-/* ── Visible state — snaps to final position ── */
+/* Visible */
 .scroll-reveal--visible {
     opacity: 1;
     transform: translate(0, 0);
 }
 
-/* =========================================
-   Mobile tuning
-   On phones we reduce distance and duration
-   slightly — feels snappier, less "website-y"
-   ========================================= */
+/* Mobile — shorter distance, faster */
 @media (max-width: 768px) {
     .scroll-reveal {
-        /* Faster on mobile — users scroll quickly */
         transition:
             opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
             transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Tighten all distances on mobile so nothing feels too far */
     .scroll-reveal--md.scroll-reveal--up {
-        transform: translateY(28px);
-    }
-
-    .scroll-reveal--md.scroll-reveal--down {
-        transform: translateY(-28px);
-    }
-
-    .scroll-reveal--md.scroll-reveal--left {
-        transform: translateX(28px);
-    }
-
-    .scroll-reveal--md.scroll-reveal--right {
-        transform: translateX(-28px);
+        transform: translateY(25px);
     }
 
     .scroll-reveal--lg.scroll-reveal--up {
-        transform: translateY(45px);
-    }
-
-    .scroll-reveal--lg.scroll-reveal--down {
-        transform: translateY(-45px);
-    }
-
-    .scroll-reveal--lg.scroll-reveal--left {
-        transform: translateX(45px);
-    }
-
-    .scroll-reveal--lg.scroll-reveal--right {
-        transform: translateX(-45px);
+        transform: translateY(40px);
     }
 }
 
-/* =========================================
-   Accessibility — respect user preference
-   (hook also handles this, but CSS is a
-   safety net for SSR / edge cases)
-   ========================================= */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
     .scroll-reveal {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
     }
-}
-
-/* =========================================
-   ScrollReveal.css
-   Pure CSS animations — compositor-thread only
-   (opacity + transform = never triggers layout)
-   ========================================= */
-
-/* ── Base hidden state ── */
-.scroll-reveal {
-  opacity: 0;
-  will-change: opacity, transform;
-  transition:
-    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-  overflow: visible !important;
-  width: 100%;
-}
-
-/* ── Distance variants (how far element starts from final position) ── */
-
-/* Small — subtle, good for cards/elements already on screen edge */
-.scroll-reveal--sm.scroll-reveal--up    { transform: translateY(20px); }
-.scroll-reveal--sm.scroll-reveal--down  { transform: translateY(-20px); }
-.scroll-reveal--sm.scroll-reveal--left  { transform: translateX(20px); }
-.scroll-reveal--sm.scroll-reveal--right { transform: translateX(-20px); }
-
-/* Medium — the default, perfect for sections */
-.scroll-reveal--md.scroll-reveal--up    { transform: translateY(40px); }
-.scroll-reveal--md.scroll-reveal--down  { transform: translateY(-40px); }
-.scroll-reveal--md.scroll-reveal--left  { transform: translateX(40px); }
-.scroll-reveal--md.scroll-reveal--right { transform: translateX(-40px); }
-
-/* Large — dramatic, for hero-level moments */
-.scroll-reveal--lg.scroll-reveal--up    { transform: translateY(70px); }
-.scroll-reveal--lg.scroll-reveal--down  { transform: translateY(-70px); }
-.scroll-reveal--lg.scroll-reveal--left  { transform: translateX(70px); }
-.scroll-reveal--lg.scroll-reveal--right { transform: translateX(-70px); }
-
-/* ── Visible state — snaps to final position ── */
-.scroll-reveal--visible {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-/* =========================================
-   Mobile tuning
-   On phones we reduce distance and duration
-   slightly — feels snappier, less "website-y"
-   ========================================= */
-@media (max-width: 768px) {
-  .scroll-reveal {
-    /* Faster on mobile — users scroll quickly */
-    transition:
-      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  /* Tighten all distances on mobile so nothing feels too far */
-  .scroll-reveal--md.scroll-reveal--up    { transform: translateY(28px); }
-  .scroll-reveal--md.scroll-reveal--down  { transform: translateY(-28px); }
-  .scroll-reveal--md.scroll-reveal--left  { transform: translateX(28px); }
-  .scroll-reveal--md.scroll-reveal--right { transform: translateX(-28px); }
-
-  .scroll-reveal--lg.scroll-reveal--up    { transform: translateY(45px); }
-  .scroll-reveal--lg.scroll-reveal--down  { transform: translateY(-45px); }
-  .scroll-reveal--lg.scroll-reveal--left  { transform: translateX(45px); }
-  .scroll-reveal--lg.scroll-reveal--right { transform: translateX(-45px); }
-}
-
-/* =========================================
-   Accessibility — respect user preference
-   (hook also handles this, but CSS is a
-   safety net for SSR / edge cases)
-   ========================================= */
-@media (prefers-reduced-motion: reduce) {
-  .scroll-reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
 }
