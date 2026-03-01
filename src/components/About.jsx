@@ -81,12 +81,10 @@ function About() {
       const dx = Math.abs(e.targetTouches[0].clientX - touchStartX.current);
       const dy = Math.abs(e.targetTouches[0].clientY - touchStartY.current);
 
-      // On first meaningful move, decide: horizontal swipe or vertical scroll?
       if (!isDraggingHorizontally.current && (dx > 5 || dy > 5)) {
         isDraggingHorizontally.current = dx > dy;
       }
 
-      // Only hijack the event if user is clearly swiping horizontally
       if (isDraggingHorizontally.current) {
         e.preventDefault(); // stops page from scrolling
       }

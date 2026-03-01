@@ -1,59 +1,24 @@
 /* =========================================
-   Transformations Section - Scoped Styles
+   Transformations Section
    ========================================= */
-
-/* =========================================
-   Transformations Section - Scoped Styles
-   ========================================= */
-
 .transformations-section {
     color: #ffffff;
     position: relative;
-    /* احذف background و overflow: hidden من هنا */
     background: transparent !important;
     overflow: visible !important;
+    padding: 80px 0;
 }
 
 .trans-container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-@media (max-width: 768px) {
-    .transformations-section {
-        padding: 60px 0;
-        width: 100%;
-        overflow: hidden;
-        /* مهم جداً لمنع الـ Scroll العرضي */
-    }
-
-    .trans-container {
-        width: 90%;
-        /* هذا يحافظ على مسافة أمان داخلية دون كسر الخلفية */
-        margin: 0 auto;
-    }
-}
-
-.trans-container {
-    max-width: 1200px;
+    width: 90%;
     margin: 0 auto;
 }
 
-/* Header Styles */
 .trans-header {
     text-align: center;
     margin-bottom: 60px;
 }
-
-/* .subtitle {
-    color: var(--yellow-main);
-    letter-spacing: 3px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    display: block;
-    margin-bottom: 10px;
-} */
 
 .trans-header h2 {
     font-size: clamp(2rem, 5vw, 3.5rem);
@@ -65,119 +30,221 @@
     color: var(--yellow-main);
 }
 
-/* Grid Layout */
+/* =========================================
+   Grid
+   ========================================= */
 .transformations-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
 }
 
-/* Card Design */
+/* =========================================
+   Card
+   ========================================= */
 .trans-card {
     background: #161616;
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid #252525;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.trans-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--yellow-main);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* Image Side-by-Side */
-.trans-images-box {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     display: flex;
-    height: 320px;
-    /* Taller images for a more dramatic effect */
-    background: #000;
-    position: relative;
+    flex-direction: column;
 }
 
-.trans-img-wrapper {
-    flex: 1;
+@media (hover: hover) {
+    .trans-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(245, 196, 0, 0.4);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+}
+
+@media (hover: none) {
+    .trans-card {
+        border-color: rgba(245, 196, 0, 0.12);
+    }
+
+    .trans-card:active {
+        transform: scale(0.98);
+        border-color: rgba(245, 196, 0, 0.5);
+        transition: all 0.1s ease;
+    }
+}
+
+/* =========================================
+   Slider Container
+   ========================================= */
+.trans-slider-container {
     position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #111;
     overflow: hidden;
+    user-select: none;
+    touch-action: none;
 }
 
-/* Subtle separator line between before/after */
-.trans-img-wrapper:first-child {
-    border-right: 1px solid rgba(245, 196, 0, 0.3);
-}
-
-.trans-img-wrapper img {
+/* ── Both images: same size, same position ── */
+.slider-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    object-position: center 15%;
+    pointer-events: none;
+    -webkit-user-drag: none;
 }
 
-.trans-card:hover .trans-img-wrapper img {
-    transform: scale(1.05);
+/* After image — behind */
+.slider-img--after {
+    z-index: 1;
 }
 
-/* Labels */
-.trans-label {
+/* Before image — on top, clipped via inline clipPath */
+.slider-img--before {
+    z-index: 2;
+}
+
+/* ── Hidden range (desktop fallback) ── */
+.slider-input {
     position: absolute;
-    bottom: 15px;
-    left: 50%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 10;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ── Divider line ── */
+.slider-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 8;
+    pointer-events: none;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Handle ── */
+.slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.slider-handle svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+/* ── Labels ── */
+.slider-label {
+    position: absolute;
+    bottom: 12px;
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(4px);
     color: #fff;
-    padding: 4px 12px;
-    font-size: 0.75rem;
+    padding: 3px 10px;
+    font-size: 0.72rem;
     border-radius: 4px;
     font-weight: 800;
     text-transform: uppercase;
-    z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    letter-spacing: 0.5px;
+    z-index: 9;
+}
+
+.label-before {
+    left: 12px;
+    z-index: 9;
 }
 
 .label-after {
+    right: 12px;
     color: var(--yellow-main);
+    z-index: 3;
 }
 
-/* Info Section */
+/* =========================================
+   Card Info
+   ========================================= */
 .trans-info {
-    padding: 25px;
+    padding: 20px;
     text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
 }
 
 .trans-info h3 {
-    margin: 0 0 8px 0;
-    font-size: 1.5rem;
+    margin: 0;
+    font-size: 1.2rem;
     font-weight: 700;
+    color: #fff;
 }
 
 .trans-info p {
     color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 20px;
+    font-size: 0.9rem;
+    margin: 0;
     line-height: 1.4;
 }
 
-/* Badge */
+/* Duration — gold shimmer text */
 .trans-duration {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--yellow-main);
-    color: #000;
-    padding: 8px 20px;
-    border-radius: 50px;
+    display: inline-block;
     font-weight: 800;
-    font-size: 0.85rem;
-    text-transform: uppercase;
+    font-size: 1rem;
+    background: linear-gradient(120deg,
+            var(--yellow-main) 0%,
+            #ffe77a 25%,
+            #ffffff 50%,
+            #ffe77a 75%,
+            var(--yellow-main) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 4px 15px rgba(245, 196, 0, 0.2);
+    animation: goldShine 6s linear infinite;
+    padding: 0;
+    border: none;
+}
+
+@keyframes goldShine {
+    to {
+        background-position: 200% center;
+    }
 }
 
 /* =========================================
-   Responsiveness
+   Responsive
    ========================================= */
-
-@media (max-width: 968px) {
+@media (max-width: 1024px) {
     .transformations-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -185,185 +252,33 @@
 
 @media (max-width: 768px) {
     .transformations-section {
-        padding: 60px 15px;
+        padding: 40px 0 60px;
     }
 
-    .transformations-grid {
-        grid-template-columns: 1fr;
-        max-width: 450px;
-        margin: 0 auto;
-    }
-
-    .trans-images-box {
-        height: 280px;
-        /* Slightly shorter on mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    .trans-header h2 {
-        font-size: 1.8rem;
-    }
-
-    .trans-info h3 {
-        font-size: 1.3rem;
-    }
-}
-
-/* =========================================
-   Enhanced Responsiveness
-   ========================================= */
-
-/* Desktop & Large Tablets */
-=========================================*/ @media (max-width: 1024px) {
-    .transformations-grid {
-        grid-template-columns: 1fr;
-        /* Single column as you requested */
-        gap: 30px;
-        width: 100%;
-    }
-
-    .trans-images-box {
-        /* Use aspect-ratio instead of fixed height to prevent over-stretching */
-        height: auto;
-        aspect-ratio: 4 / 3;
-        max-height: 500px;
-    }
-}
-
-/* Mobile & Small Tablets (The 768px break) */
-@media (max-width: 768px) {
-    .transformations-section {
-        padding: 60px 0;
-        /* Vertical padding only */
+    .trans-header {
+        margin-bottom: 35px;
     }
 
     .trans-container {
         width: 90%;
-        /* Creates the safety margin on left/right */
-        margin: 0 auto;
-    }
-
-    .trans-img-wrapper img {
-        /* Ensure the image doesn't 'zoom' too deep, preserving clarity */
-        object-fit: cover;
-        object-position: center top;
-        /* Keeps faces/shoulders visible */
-        width: 100%;
-        height: 100%;
     }
 
     .transformations-grid {
         grid-template-columns: 1fr;
-        /* Stack vertically */
-        max-width: 100%;
-        width: 95%;
-    }
-
-    .trans-images-box {
-        height: 450px;
-        /* Adjust height for better mobile aspect ratio */
-    }
-
-    .trans-card {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        /* Critical for border containment */
-    }
-}
-
-/* Fix for phones between 320px and 416px (Your target range) */
-@media (max-width: 480px) {
-    .trans-header {
-        margin-bottom: 35px;
-        padding: 0 10px;
-    }
-
-    .transformations-grid {
-        grid-template-columns: 1fr;
-        /* Stack vertically */
-        max-width: 100%;
-        width: 90%;
-    }
-
-
-    .trans-header h2 {
-        /* Ensures "Transformations" doesn't clip on the right */
-        font-size: clamp(1.5rem, 8vw, 2rem);
-        line-height: 1.2;
-        word-wrap: break-word;
-    }
-
-    .trans-subtitle {
-        font-size: 0.8rem;
-        letter-spacing: 2px;
+        gap: 16px;
     }
 
     .trans-info {
-        padding: 20px 15px;
+        padding: 16px;
     }
 
     .trans-info h3 {
-        font-size: 1.25rem;
-    }
-
-    .trans-info p {
-        font-size: 0.9rem;
-        width: 100%;
-        /* Prevents text from pushing width */
-    }
-
-    .trans-duration {
-        padding: 6px 16px;
-        font-size: 0.75rem;
-    }
-
-    .trans-images-box {
-        height: 310px;
-        /* Prevent tall cards on tiny phones */
+        font-size: 1.1rem;
     }
 }
 
-/* Ultra-small screens safety */
-@media (max-width: 330px) {
-    .trans-container {
-        width: 92%;
-        /* Slightly more room for tiny screens */
-    }
-
-
-    .transformations-grid {
-        grid-template-columns: 1fr;
-        /* Stack vertically */
-        max-width: 90%;
-        width: 80%;
-    }
-
-    .trans-images-box {
-        height: 250px;
-        /* Prevent tall cards on tiny phones */
-    }
-}
-
-@media (hover: none) {
-
-    /* Cards always feel alive, no interaction required */
-    .trans-card {
-        border-color: rgba(245, 196, 0, 0.2);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Images always sharp, never waiting for a tap */
-    .trans-img-wrapper img {
-        transform: none !important;
-    }
-
-    /* Native-feeling press — satisfying and instant */
-    .trans-card:active {
-        transform: scale(0.98);
-        border-color: var(--yellow-main);
-        box-shadow: 0 0 25px rgba(245, 196, 0, 0.25);
-        transition: all 0.1s ease;
+@media (max-width: 480px) {
+    .trans-header h2 {
+        font-size: clamp(1.5rem, 8vw, 2rem);
     }
 }

@@ -229,11 +229,14 @@
    ========================================= */
 @media (min-width: 1025px) {
     .about-section {
-        padding: 80px 0;
+        padding: 30px 0 60px;
+        /* تقليل الفراغ العلوي من 80 إلى 40 */
     }
 
     .about-container {
         flex-direction: row-reverse;
+        align-items: flex-start;
+        padding-top: 20px;
     }
 
     [dir="rtl"] .about-container {
@@ -242,15 +245,17 @@
 
     .about-content {
         text-align: left;
+        padding-bottom: 10px;
     }
 
     [dir="rtl"] .about-content {
         text-align: right;
+        padding-top: 10px;
     }
 
     .image-wrapper {
-        top: 60px;
-        margin-bottom: 60px;
+        bottom: 50px;
+        margin-bottom: 0;
     }
 }
 
@@ -273,7 +278,7 @@
    ========================================= */
 @media (min-width: 768px) and (max-width: 1024px) {
     .about-section {
-        padding: 130px 0 80px;
+        padding: 80px 0 60px;
     }
 
     .about-container,
@@ -325,7 +330,7 @@
 @media (max-width: 768px) {
 
     .about-section {
-        padding: clamp(80px, 15vh, 120px) 0 40px;
+        padding: 20px 0 40px;
     }
 
     .about-container,
@@ -341,7 +346,13 @@
         display: contents;
     }
 
-    /* Text elements → top */
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+        width: 90%;
+        margin: 0 auto 10px auto;
+        /* تقليل الهامش السفلي من 15 إلى 10 */
+    }
+
     .coach-name-tag,
     .subtitle,
     .hero-title,
@@ -365,14 +376,17 @@
 
     .uk-certification-badge {
         width: fit-content !important;
-        margin: 0 auto 20px auto !important;
+        margin: 0 auto 15px auto !important;
+        /* تقليل الهامش من 20 إلى 15 */
         max-width: 95%;
     }
 
     .description {
         max-width: 90%;
-        margin: 0 auto 20px auto;
-        font-size: 1rem;
+        margin: 0 auto 15px auto;
+        /* تقليل الهامش من 20 إلى 15 */
+        font-size: 0.95rem;
+        /* تصغير الخط قليلاً لتوفير مساحة */
     }
 
     /* Image → middle */
@@ -383,12 +397,12 @@
         display: flex;
         justify-content: center;
         min-height: auto;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     .image-wrapper {
-        width: 90vw !important;
-        max-width: 380px;
+        width: 85vw !important;
+        max-width: 320px;
         aspect-ratio: 4 / 5;
         top: 0 !important;
         border-radius: 16px;
