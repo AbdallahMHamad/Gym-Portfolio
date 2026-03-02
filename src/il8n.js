@@ -28,7 +28,6 @@ const resources = {
             "about_stat_uk": "Certified Coach",
             "about_tap_hint": "Tap to swap",
 
-
             "trans_subtitle": "REAL RESULTS",
             "trans_title": "Client",
             "trans_highlight": "Transformations",
@@ -36,16 +35,12 @@ const resources = {
             "trans_after": "After",
             "month": "Month",
             "months": "Months",
-            // أوصاف النتائج
             "desc_fat_loss": "Lost 8kg fat and diet plan",
             "desc_muscle_growth": "Muscle growth & definition",
             "desc_fat_loss_journey": "Incredible fat loss journey",
             "desc_clean_bulk": "Clean bulk & muscle gain",
 
-
-
             "sponsors_subtitle": "Partnerships",
-            "sponsors_title": "Our Trusted ",
             "sponsors_highlight": "Sponsors",
             "sponsors_description": "Collaborating with industry leaders to bring you the best results.",
             "promo_label": "Special Offer",
@@ -53,11 +48,9 @@ const resources = {
             "promo_for": "for a",
             "promo_discount": "10% Discount",
             "promo_on_products": "on all the products of our sponsors",
-            // وصف الشركات
             "desc_myprotein": "Premium supplements fueling our athletes with the purest whey isolate and pre-workout formulas.",
             "desc_squatwolf": "Clothing brand for athletes and fitness enthusiasts based in Dubai.",
             "desc_ghithaa": "Health food for athletes and fitness enthusiasts.",
-
 
             "contact_subtitle": "CONNECT WITH ME",
             "contact_title": "Join The ",
@@ -69,10 +62,15 @@ const resources = {
             "footer_rights": "All rights reserved.",
             "footer_made_by": "Made by",
 
-
-
             "whatsapp_training_msg": "Hello Coach Salman, I am interested in starting online training with you. Could you please provide more details?",
             "whatsapp_collab_msg": "Hello Coach Salman, I would like to discuss a potential collaboration or partnership with you.",
+
+            "whatsapp_subscription": "Subscriptions",
+            "whatsapp_subscription_sub": "Training & nutrition plans",
+            "whatsapp_collab": "Collaboration",
+            "whatsapp_collab_sub": "Partnerships & sponsorships",
+            "whatsapp_cta": "Contact us",
+            "free_consultation": "Get a Free Consultation"
         }
     },
     ar: {
@@ -99,7 +97,6 @@ const resources = {
             "about_stat_uk": "مدرب معتمد",
             "about_tap_hint": "اضغط لتغيير الصورة",
 
-
             "trans_subtitle": "نتائج حقيقية",
             "trans_title": "نتائج",
             "trans_highlight": "المتدربين",
@@ -107,13 +104,10 @@ const resources = {
             "trans_after": "بعد",
             "month": "شهر",
             "months": "شهور",
-            // أوصاف النتائج
             "desc_fat_loss": "خسارة 8 كيلو دهون مع نظام غذائي",
             "desc_muscle_growth": "بناء عضلي وإبراز تفاصيل الجسم",
             "desc_fat_loss_journey": "رحلة مذهلة في خسارة الوزن",
             "desc_clean_bulk": "ضخامة عضلية صافية",
-
-
 
             "sponsors_subtitle": "الشراكات",
             "sponsors_title": "الرعاة ",
@@ -124,13 +118,9 @@ const resources = {
             "promo_for": "للحصول على خصم",
             "promo_discount": "10%",
             "promo_on_products": "على جميع منتجات شركائنا",
-            // وصف الشركات
             "desc_myprotein": "مكملات غذائية ممتازة تدعم رياضيينا بأنقى أنواع الواي بروتين وتركيبات ما قبل التمرين.",
             "desc_squatwolf": "علامة تجارية للملابس الرياضية مخصصة للرياضيين ومحبي اللياقة البدنية، مقرها دبي.",
             "desc_ghithaa": "وجبات صحية مخصصة للرياضيين والمهتمين بالرشاقة واللياقة البدنية.",
-
-
-
 
             "contact_subtitle": "تواصل معي",
             "contact_title": "انضم إلى ",
@@ -142,10 +132,15 @@ const resources = {
             "footer_rights": "جميع الحقوق محفوظة.",
             "footer_made_by": "صُنع بواسطة",
 
-
             "whatsapp_training_msg": "أهلاً كوتش محمد، أنا مهتم بالبدء في التدريب أونلاين معك. هل يمكنك تزويدي بمزيد من التفاصيل؟",
             "whatsapp_collab_msg": "أهلاً كوتش محمد، أرغب في مناقشة فرصة تعاون أو شراكة معك.",
 
+            "whatsapp_subscription": "الاشتراكات",
+            "whatsapp_subscription_sub": "برامج التدريب والتغذية",
+            "whatsapp_collab": "التعاون",
+            "whatsapp_collab_sub": "شراكات وإعلانات",
+            "whatsapp_cta": "تواصل معنا",
+            "free_consultation": "احصل على استشارة مجانية الآن"
         }
     }
 };
@@ -155,7 +150,7 @@ i18n
     .use(initReactI18next)
     .init({
         resources,
-        fallbackLng: 'ar', // اجعل العربية هي الأساسية إذا أردت
+        fallbackLng: 'ar',
         interpolation: { escapeValue: false }
     });
 
@@ -163,6 +158,5 @@ i18n.on('languageChanged', (lng) => {
     document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = lng;
 });
-
 
 export default i18n;

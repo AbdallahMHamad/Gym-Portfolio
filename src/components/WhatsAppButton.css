@@ -1,40 +1,51 @@
 /* =========================================
    WhatsApp Floating Button
    ========================================= */
+
 .whatsapp-float {
     position: fixed;
     bottom: 24px;
-    right: 16px;
-    left: auto;
-    /* force right side on both LTR and RTL */
     z-index: 9999;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     gap: 10px;
-    /* prevent any layout from pushing it around */
-    width: fit-content;
-    max-width: calc(100vw - 32px);
 }
 
-/* RTL: keep it on the right side still */
-[dir="rtl"] .whatsapp-float {
+/* RTL — button bottom RIGHT, options expand to the LEFT */
+.whatsapp-float.rtl {
     right: 16px;
     left: auto;
+    align-items: flex-end;
+    direction: ltr;
+    /* prevent browser RTL from moving the container */
 }
 
-/* ── Options menu ── */
+/* LTR — button bottom LEFT, options expand to the RIGHT */
+.whatsapp-float.ltr {
+    left: 16px;
+    right: auto;
+    align-items: flex-start;
+}
+
+/* ── Options — hidden by default, slide up ── */
 .whatsapp-options {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    align-items: flex-end;
+    gap: 8px;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(10px);
+    transform: translateY(12px);
     transition: opacity 0.25s ease, transform 0.25s ease;
-    /* prevent options from overflowing screen left edge */
-    max-width: calc(100vw - 32px);
+}
+
+/* RTL: options align to the right (stack toward right edge) */
+.whatsapp-float.rtl .whatsapp-options {
+    align-items: flex-end;
+}
+
+/* LTR: options align to the left (stack toward left edge) */
+.whatsapp-float.ltr .whatsapp-options {
+    align-items: flex-start;
 }
 
 .whatsapp-float.open .whatsapp-options {
@@ -43,29 +54,29 @@
     transform: translateY(0);
 }
 
-/* ── Individual option card ── */
+/* ── Option card ── */
 .whatsapp-option {
     display: flex;
     align-items: center;
     gap: 10px;
     background: #1a1a1a;
-    border: 1px solid rgba(245, 196, 0, 0.25);
+    border: 1px solid rgba(245, 196, 0, 0.3);
     border-radius: 50px;
     padding: 10px 16px 10px 12px;
     text-decoration: none;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
-    /* prevent tap highlight on mobile */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: background 0.2s ease, transform 0.2s ease;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    direction: ltr;
+    /* always keep icon-then-text order */
 }
 
 @media (hover: hover) {
     .whatsapp-option:hover {
         background: var(--yellow-main);
-        border-color: var(--yellow-main);
-        transform: translateX(-4px);
+        transform: translateY(-2px);
     }
 
     .whatsapp-option:hover .option-icon {
@@ -73,95 +84,61 @@
         color: var(--yellow-main);
     }
 
-    .whatsapp-option:hover .option-label,
-    .whatsapp-option:hover .option-sublabel {
+    .whatsapp-option:hover .option-label {
         color: #000;
     }
 }
 
-/* Touch press feedback */
 @media (hover: none) {
     .whatsapp-option:active {
         background: var(--yellow-main);
-        border-color: var(--yellow-main);
-        transform: scale(0.97);
         transition: all 0.1s ease;
     }
 
-    .whatsapp-option:active .option-label,
-    .whatsapp-option:active .option-sublabel {
+    .whatsapp-option:active .option-label {
         color: #000;
     }
 }
 
 .option-icon {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
     background: var(--yellow-main);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #000;
-    font-size: 1rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
     transition: all 0.2s ease;
 }
 
-.option-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
 .option-label {
-    color: white;
+    color: #fff;
     font-weight: 800;
     font-size: 0.85rem;
-    line-height: 1;
-}
-
-.option-sublabel {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.7rem;
-    font-weight: 500;
-    line-height: 1;
-}
-
-/* ── Drag indicator ── */
-.whatsapp-float {
-    cursor: grab;
-}
-
-.whatsapp-float:active {
-    cursor: grabbing;
-}
-
-.whatsapp-option {
-    cursor: pointer;
-    /* override grab on links */
 }
 
 /* ── Main trigger button ── */
 .whatsapp-trigger {
     position: relative;
-    width: 56px;
-    height: 56px;
-    min-width: 56px;
+    width: 54px;
+    height: 54px;
     background: var(--yellow-main);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #000;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     box-shadow: 0 6px 20px rgba(245, 196, 0, 0.4);
     cursor: pointer;
-    transition: transform 0.3s ease, background 0.3s ease;
     border: none;
     outline: none;
     flex-shrink: 0;
+    transition: transform 0.3s ease, background 0.3s ease;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
 }
@@ -199,67 +176,25 @@
     }
 }
 
-/* Hover label — desktop only */
-.whatsapp-trigger-label {
-    position: absolute;
-    right: 66px;
-    background: #1a1a1a;
-    color: white;
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 5px 12px;
-    border-radius: 20px;
-    white-space: nowrap;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-}
-
-@media (hover: hover) {
-    .whatsapp-float:not(.open) .whatsapp-trigger:hover .whatsapp-trigger-label {
-        opacity: 1;
-    }
-}
-
 /* =========================================
    Mobile
    ========================================= */
 @media (max-width: 600px) {
-    .whatsapp-float {
-        bottom: 20px;
+    .whatsapp-float.rtl {
         right: 14px;
     }
 
-    .whatsapp-trigger {
-        width: 52px;
-        height: 52px;
-        min-width: 52px;
-        font-size: 1.6rem;
+    .whatsapp-float.ltr {
+        left: 14px;
     }
 
-    .option-sublabel {
-        display: none;
-    }
-
-    .whatsapp-option {
-        padding: 10px 14px;
-    }
-
-    /* Prevent label from going off screen */
-    .whatsapp-trigger-label {
-        display: none;
-    }
-}
-
-/* Very small phones */
-@media (max-width: 360px) {
     .whatsapp-float {
-        right: 10px;
-        bottom: 16px;
+        bottom: 20px;
     }
 
-    .option-label {
-        font-size: 0.78rem;
+    .whatsapp-trigger {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
     }
 }
