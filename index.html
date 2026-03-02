@@ -1,23 +1,23 @@
 <!doctype html>
 <html lang="en" dir="ltr"> 
   
-
-
 <head>
-
-
 
   <script>
   (function() {
-const savedLng = localStorage.getItem('i18nextLng') || 'en';
+    const savedLng = localStorage.getItem('i18nextLng') || 'en';
     const dir = savedLng.startsWith('ar') ? 'rtl' : 'ltr';
     document.documentElement.dir = dir;
     document.documentElement.lang = savedLng;
   })();
-</script>
+  </script>
+
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/images_resources/Logos/salman.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- viewport-fit=cover enables safe-area-inset on iPhone notch/home bar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet"> 
     
     <title>كوتش سلمان | مدرب لياقة أونلاين وأخصائي تغذية رياضية معتمد</title>
@@ -33,7 +33,8 @@ const savedLng = localStorage.getItem('i18nextLng') || 'en';
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Coach Salman - Online Fitness Coaching" />
     <meta name="twitter:description" content="Certified Nutritionist - UK. Expertise in muscle building and fat loss." />
-  </head>
+
+</head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

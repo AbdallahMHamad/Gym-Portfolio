@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Transformations from "./components/Transformations";
@@ -7,37 +8,46 @@ import Footer from "./components/Footer";
 import ScrollReveal from "./components/ScrollReveal";
 import WhatsAppButton from "./components/whatsappbutton";
 import "./index.css";
+
+// Inline viewport fix — no separate file needed
+const useStableViewport = () => {
+  useEffect(() => {
+    const setVH = () => {
+      const vh = (window.visualViewport?.height ?? window.innerHeight) * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+    setVH();
+    window.addEventListener("resize", setVH);
+    return () => window.removeEventListener("resize", setVH);
+  }, []);
+};
+
 function App() {
+  useStableViewport();
+
   return (
     <>
-    <WhatsAppButton />
-
+      <WhatsAppButton />
       <Navbar />
 
       <main className="content">
-
-        {/* About — no delay, first section the user sees */}
         <ScrollReveal direction="up" distance="md">
           <About />
         </ScrollReveal>
 
-        {/* Transformations — slight extra travel for drama */}
         <ScrollReveal direction="up" distance="lg" delay={50}>
           <Transformations />
         </ScrollReveal>
 
-        {/* Sponsors — comes up from below, brief delay */}
         <ScrollReveal direction="up" distance="md" delay={50}>
           <Sponsers />
         </ScrollReveal>
 
-        {/* Contact — final section, clean entrance */}
         <ScrollReveal direction="up" distance="md" delay={50}>
           <Contact />
         </ScrollReveal>
-
       </main>
-      {/* Footer fades in last — subtle, no movement needed */}
+
       <ScrollReveal direction="up" distance="sm">
         <Footer />
       </ScrollReveal>

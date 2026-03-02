@@ -130,3 +130,31 @@ section::after,
   letter-spacing: 0;
   font-weight: 700;
 }
+
+html {
+  /* svh fallback chain for older Safari */
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  /* iOS Safari stable height */
+}
+
+/* Prevent content reflow when toolbar appears/disappears */
+.content {
+  min-height: 100svh;
+  /* stays at toolbar-visible height */
+}
+
+/* WhatsApp button: respect iPhone home bar */
+.whatsapp-float {
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Navbar: respect iPhone notch */
+.navbar,
+nav {
+  padding-top: env(safe-area-inset-top, 0px);
+}
