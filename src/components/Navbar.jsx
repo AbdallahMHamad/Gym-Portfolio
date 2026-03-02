@@ -56,7 +56,7 @@ function Navbar() {
                <button onClick={() => changeLanguage('en')} className={i18n.language === 'en' ? 'active' : ''}>EN</button>
             </div>
           </li>
-
+{/* 
           <span className="mobile-only-item">
             <a href={trainingLink} target="_blank" rel="noreferrer" className="cta-btn mobile-only-btn">
               💪 {t('btn_training')}
@@ -64,7 +64,7 @@ function Navbar() {
             <a href={collabLink} target="_blank" rel="noreferrer" className="cta-btn mobile-only-btn collab-btn">
               🤝 {t('btn_collab')}
             </a>
-          </span>
+          </span> */}
         </ul>
 
         {/* Desktop Actions (Buttons + Lang Switcher) */}
@@ -78,13 +78,13 @@ function Navbar() {
               {i18n.language === 'ar' ? 'English' : 'العربية'}
             </button>
           </div>
-
+{/* 
           <a href={trainingLink} target="_blank" rel="noreferrer" className="cta-btn desktop-only-btn">
              {t('btn_training')}
           </a>
           <a href={collabLink} target="_blank" rel="noreferrer" className="cta-btn desktop-only-btn collab-btn">
              {t('btn_collab')}
-          </a>
+          </a> */}
         </div>
 
       </div>

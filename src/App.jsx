@@ -5,12 +5,13 @@ import Sponsers from "./components/Sponsers";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ScrollReveal from "./components/ScrollReveal";
+import WhatsAppButton from "./components/whatsappbutton";
 import "./index.css";
-
 function App() {
   return (
     <>
       <Navbar />
+<WhatsAppButton />
 
       <main className="content">
 
@@ -35,7 +36,6 @@ function App() {
         </ScrollReveal>
 
       </main>
-
       {/* Footer fades in last — subtle, no movement needed */}
       <ScrollReveal direction="up" distance="sm">
         <Footer />

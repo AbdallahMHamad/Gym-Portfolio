@@ -15,6 +15,7 @@
     margin: 0 auto;
 }
 
+/* ── Header ── */
 .trans-header {
     text-align: center;
     margin-bottom: 60px;
@@ -48,16 +49,16 @@
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid #252525;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 @media (hover: hover) {
     .trans-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(245, 196, 0, 0.4);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        transform: translateY(-6px);
+        border-color: rgba(245, 196, 0, 0.45);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
     }
 }
 
@@ -74,117 +75,75 @@
 }
 
 /* =========================================
-   Slider Container
+   Images Box
+   — aspect-ratio on the BOX, not the images
+   — both images are equal halves of the box
    ========================================= */
-.trans-slider-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    background: #111;
-    overflow: hidden;
-    user-select: none;
-    touch-action: none;
-}
-
-/* ── Both images: same size, same position ── */
-.slider-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 15%;
-    pointer-events: none;
-    -webkit-user-drag: none;
-}
-
-/* After image — behind */
-.slider-img--after {
-    z-index: 1;
-}
-
-/* Before image — on top, clipped via inline clipPath */
-.slider-img--before {
-    z-index: 2;
-}
-
-/* ── Hidden range (desktop fallback) ── */
-.slider-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: ew-resize;
-    z-index: 10;
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* ── Divider line ── */
-.slider-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: rgba(255, 255, 255, 0.95);
-    z-index: 8;
-    pointer-events: none;
-    transform: translateX(-50%);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-}
-
-/* ── Handle ── */
-.slider-handle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    background: #fff;
-    border-radius: 50%;
+.trans-images-box {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
-}
-
-.slider-handle svg {
-    width: 15px;
-    height: 15px;
+    width: 100%;
+    /* 4:3 ratio — wide enough to show both bodies side by side */
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    position: relative;
     flex-shrink: 0;
 }
 
+/* Each half takes exactly 50% */
+.trans-img-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    /* prevents flex blowout */
+}
+
+/* Subtle gold separator between before/after */
+.trans-img-wrapper:first-child {
+    border-right: 1px solid rgba(245, 196, 0, 0.25);
+}
+
+/* Image fills its half perfectly — no gaps, no overflow */
+.trans-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    /* keep faces/bodies in frame */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+@media (hover: hover) {
+    .trans-card:hover .trans-img-wrapper img {
+        transform: scale(1.04);
+    }
+}
+
 /* ── Labels ── */
-.slider-label {
+.trans-label {
     position: absolute;
-    bottom: 12px;
-    background: rgba(0, 0, 0, 0.75);
+    bottom: 10px;
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(4px);
     color: #fff;
     padding: 3px 10px;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     border-radius: 4px;
     font-weight: 800;
     text-transform: uppercase;
-    pointer-events: none;
     letter-spacing: 0.5px;
-    z-index: 9;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .label-before {
-    left: 12px;
-    z-index: 9;
+    left: 10px;
 }
 
 .label-after {
-    right: 12px;
+    right: 10px;
     color: var(--yellow-main);
-    z-index: 3;
 }
 
 /* =========================================
@@ -214,23 +173,23 @@
     line-height: 1.4;
 }
 
-/* Duration — gold shimmer text */
+/* Duration — gold shimmer, matches site theme */
 .trans-duration {
-    display: inline-block;
+    display: inline;
     font-weight: 800;
     font-size: 1rem;
     background: linear-gradient(120deg,
-            var(--yellow-main) 0%,
-            #ffe77a 25%,
+            #f5c400 0%,
+            #ffe566 30%,
             #ffffff 50%,
-            #ffe77a 75%,
-            var(--yellow-main) 100%);
+            #ffe566 70%,
+            #f5c400 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 4px 15px rgba(245, 196, 0, 0.2);
-    animation: goldShine 6s linear infinite;
+    text-shadow: 0 4px 15px rgba(245, 196, 0, 0.3);
+    animation: goldShine 5s linear infinite;
     padding: 0;
     border: none;
 }
@@ -259,6 +218,7 @@
         margin-bottom: 35px;
     }
 
+    /* Match About section exactly: 90vw container, image is 90vw max 380px */
     .trans-container {
         width: 90%;
     }
@@ -266,6 +226,14 @@
     .transformations-grid {
         grid-template-columns: 1fr;
         gap: 16px;
+        max-width: 320px;
+        /* same max-width as .image-wrapper in About */
+        margin: 0 auto;
+        /* center it */
+    }
+
+    .trans-images-box {
+        aspect-ratio: 3 / 2;
     }
 
     .trans-info {
@@ -280,5 +248,10 @@
 @media (max-width: 480px) {
     .trans-header h2 {
         font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+
+    .trans-images-box {
+        aspect-ratio: 1 / 1;
+        /* square on small phones — more image, less crop */
     }
 }
