@@ -10,7 +10,7 @@
 }
 
 .trans-container {
-    max-width: 900px;
+    max-width: 1200px;
     width: 90%;
     margin: 0 auto;
 }
@@ -220,7 +220,7 @@
 
     /* Match About section exactly: 90vw container, image is 90vw max 380px */
     .trans-container {
-        width: 90%;
+        width: 85%;
     }
 
     .transformations-grid {
