@@ -24,8 +24,10 @@ const WhatsAppButton = () => {
     };
   }, []);
 
-  const subscriptionMsg = encodeURIComponent("مرحباً كوتش سلمان، دخلت من الموقع وأريد الحصول على استشارة مجانية وبدء التحول الخاص بي.");
-  const collabMsg       = encodeURIComponent("مرحباً كوتش سلمان، دخلت من الموقع وأريد التحدث معك بخصوص فرصة تعاون.");
+  // التعديل هنا: استخدام t() لجلب الرسالة حسب اللغة الحالية للموقع
+  const subscriptionMsg = encodeURIComponent(t('whatsapp_training_msg'));
+  const collabMsg       = encodeURIComponent(t('whatsapp_collab_msg'));
+  
   const subscriptionUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${subscriptionMsg}`;
   const collabUrl       = `https://wa.me/${COLLAB_NUMBER}?text=${collabMsg}`;
 
@@ -34,7 +36,6 @@ const WhatsAppButton = () => {
       ref={floatRef}
       className={`whatsapp-float ${open ? "open" : ""} ${isRTL ? "rtl" : "ltr"}`}
     >
-      {/* Options slide up above the trigger */}
       <div className="whatsapp-options">
         <a
           href={subscriptionUrl}

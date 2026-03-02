@@ -1,3 +1,6 @@
+/* =========================================
+   Base Settings & Variables
+   ========================================= */
 :root {
   --bg-main: #0b0b0b;
   --bg-secondary: #111111;
@@ -11,49 +14,40 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  overflow-x: hidden;
-  /* Remove any accidental height constraints that force inner scroll */
   height: auto;
   min-height: 100%;
-
+  height: -webkit-fill-available;
 }
 
 body {
-  background-color: #0b0b0b;
+  background-color: var(--bg-main);
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background: var(--bg-main);
   color: var(--text-main);
   -webkit-user-select: none;
   user-select: none;
   overflow-x: hidden;
-  /* Remove any accidental height constraints that force inner scroll */
-  height: auto;
-  min-height: 100%;
-
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
-/* إصلاح الحاوية الأساسية لتناسب الموبايل */
 #root {
   width: 100%;
   max-width: 100vw;
-  /* ضمان عدم تجاوز عرض الشاشة */
   margin: 0;
   padding: 0;
-  /* حذف الـ 2rem التي كانت تسبب الفراغات */
   overflow-x: hidden;
   overflow-y: hidden;
-  /* قتل أي سكرول عرضي فوراً */
 }
 
-/* ضبط حسابات العرض لجميع العناصر */
 * {
   box-sizing: border-box;
 }
 
-
-/* استبدل كود السكشن القديم في index.css بهذا */
+/* =========================================
+   Section Styles & Cinematic Separator
+   ========================================= */
 section,
 .section {
   width: 100%;
@@ -61,25 +55,18 @@ section,
   position: relative;
   background: transparent !important;
   overflow: visible !important;
-  /* مهم جداً لكي يظهر الضوء بين السكاشن */
-
 }
 
-/* هذا هو الفاصل الضوئي الجديد */
 section::after,
 .section::after {
   content: "";
   position: absolute;
   bottom: -60px;
-  /* يبرز خارج السكشن قليلاً ليغطي الفاصل */
   left: 50%;
   transform: translateX(-50%);
   width: 60%;
   height: 120px;
-  background: radial-gradient(ellipse at center,
-      rgba(245, 196, 0, 0.15) 0%,
-      rgba(245, 196, 0, 0.05) 50%,
-      transparent 80%);
+  background: radial-gradient(ellipse at center, rgba(245, 196, 0, 0.15) 0%, rgba(245, 196, 0, 0.05) 50%, transparent 80%);
   filter: blur(40px);
   z-index: 1;
   pointer-events: none;
@@ -92,14 +79,14 @@ section::after,
     bottom: -40px;
     width: 100vw;
     height: 100px;
-    background: radial-gradient(ellipse at center,
-        rgba(245, 196, 0, 0.22) 0%,
-        rgba(245, 196, 0, 0.08) 50%,
-        transparent 80%);
+    background: radial-gradient(ellipse at center, rgba(245, 196, 0, 0.22) 0%, rgba(245, 196, 0, 0.08) 50%, transparent 80%);
     filter: blur(30px);
   }
 }
 
+/* =========================================
+   Typography & RTL
+   ========================================= */
 .duration-badge {
   display: inline-block;
   background: var(--yellow-main);
@@ -120,9 +107,7 @@ section::after,
 [dir='rtl'] .section-title {
   font-family: 'Cairo', sans-serif !important;
   font-weight: 900;
-  /* لجعل العناوين ضخمة واحترافية */
   letter-spacing: 0;
-  /* ضروري جداً للعربي */
 }
 
 [dir='rtl'] .subtitle {
@@ -131,57 +116,71 @@ section::after,
   font-weight: 700;
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  -webkit-user-select: none;
-  user-select: none;
-  overflow-x: hidden;
-
-  /* الحل السحري 1: نستخدم dvh (Dynamic Viewport Height) للـ body */
-  min-height: 100dvh;
-}
-
-#root {
+/* =========================================
+   Cinematic Enhancements
+   ========================================= */
+.image-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
+  height: 40%;
+  background: linear-gradient(to top, var(--bg-main) 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* الحل السحري 2: تأمين قسم الـ Hero (About) */
-/* نستخدم svh (Small Viewport Height) لكي يأخذ قياس الشاشة وكأن شريط سفاري ظاهر دائماً، بالتالي لا يقفز عند التمرير */
-.content {
-  width: 100%;
+.hero-title {
+  background: linear-gradient(to bottom, #ffffff 0%, #a1a1a1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
 }
 
-/* أضف هذا الكلاس للقسم الأول عندك (غالباً About) 
-إذا كان اسمه مختلفاً في ملف About.jsx، قم بتغييره هنا 
-*/
-.hero-section,
-.about-container {
-  min-height: 100svh;
-  /* هذا ما يمنع القفزة المزعجة */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.stat-box h3 {
+  text-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
+  font-variant-numeric: tabular-nums;
 }
 
-/* WhatsApp button: respect iPhone home bar */
-.whatsapp-float {
-  /* تأكد أن الزر لا يختفي تحت شريط الآيفون السفلي */
-  bottom: max(30px, env(safe-area-inset-bottom, 24px)) !important;
+.description {
+  border-right: 2px solid var(--yellow-main);
+  padding-right: 20px;
+  background: linear-gradient(to left, rgba(245, 196, 0, 0.03), transparent);
 }
 
-/* Navbar: respect iPhone notch */
-.navbar,
-nav {
-  padding-top: env(safe-area-inset-top, 0px);
+[dir="ltr"] .description {
+  border-right: none;
+  border-left: 2px solid var(--yellow-main);
+  padding-left: 20px;
+  padding-right: 0;
+  background: linear-gradient(to right, rgba(245, 196, 0, 0.05), transparent);
+}
+
+.coach-name-tag .line {
+  box-shadow: 0 0 10px var(--yellow-main);
+  animation: line-glow 3s infinite;
+}
+
+@keyframes line-glow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    width: 40px;
+  }
+
+  50% {
+    opacity: 1;
+    width: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .description {
+    border: none;
+    padding: 0;
+    background: none;
+  }
 }

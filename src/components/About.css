@@ -453,3 +453,79 @@
         white-space: normal !important;
     }
 }
+
+/* =========================================
+   اللمسة السينمائية الجديدة (Cinematic Enhancements)
+   ========================================= */
+
+/* تأثير التدرج خلف الصورة لدمجها مع الخلفية السوداء */
+.image-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, var(--bg-main) 0%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* جعل العنوان الرئيسي أكثر ضخامة وسينمائية */
+.hero-title {
+    background: linear-gradient(to bottom, #ffffff 0%, #a1a1a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
+}
+
+/* توهج خفيف للأرقام (Stats) لتبدو كأنها شاشة رقمية احترافية */
+.stat-box h3 {
+    text-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
+    font-variant-numeric: tabular-nums;
+}
+
+/* تحسين شكل الـ Description ليصبح أكثر عمقاً */
+.description {
+    border-right: 2px solid var(--yellow-main);
+    padding-right: 20px;
+    background: linear-gradient(to left, rgba(245, 196, 0, 0.03), transparent);
+}
+
+[dir="ltr"] .description {
+    border-right: none;
+    border-left: 2px solid var(--yellow-main);
+    padding-left: 20px;
+    padding-right: 0;
+    background: linear-gradient(to right, rgba(245, 196, 0, 0.05), transparent);
+}
+
+/* تأثير نبض خفيف لـ Coach Name Tag */
+.coach-name-tag .line {
+    box-shadow: 0 0 10px var(--yellow-main);
+    animation: line-glow 3s infinite;
+}
+
+@keyframes line-glow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        width: 40px;
+    }
+
+    50% {
+        opacity: 1;
+        width: 60px;
+    }
+}
+
+/* تحسين استجابة الموبايل للقسم السينمائي */
+@media (max-width: 768px) {
+    .description {
+        border: none;
+        padding: 0;
+        background: none;
+    }
+}
