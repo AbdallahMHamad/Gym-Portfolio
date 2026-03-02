@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Transformations from "./components/Transformations";
@@ -9,21 +8,7 @@ import ScrollReveal from "./components/ScrollReveal";
 import WhatsAppButton from "./components/whatsappbutton";
 import "./index.css";
 
-// Inline viewport fix — no separate file needed
-const useStableViewport = () => {
-  useEffect(() => {
-    const setVH = () => {
-      const vh = (window.visualViewport?.height ?? window.innerHeight) * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-    setVH();
-    window.addEventListener("resize", setVH);
-    return () => window.removeEventListener("resize", setVH);
-  }, []);
-};
-
 function App() {
-  useStableViewport();
 
   return (
     <>

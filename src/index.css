@@ -132,25 +132,52 @@ section::after,
 }
 
 html {
-  /* svh fallback chain for older Safari */
-  height: -webkit-fill-available;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  /* iOS Safari stable height */
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow-x: hidden;
+
+  /* الحل السحري 1: نستخدم dvh (Dynamic Viewport Height) للـ body */
+  min-height: 100dvh;
 }
 
-/* Prevent content reflow when toolbar appears/disappears */
+#root {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* الحل السحري 2: تأمين قسم الـ Hero (About) */
+/* نستخدم svh (Small Viewport Height) لكي يأخذ قياس الشاشة وكأن شريط سفاري ظاهر دائماً، بالتالي لا يقفز عند التمرير */
 .content {
+  width: 100%;
+}
+
+/* أضف هذا الكلاس للقسم الأول عندك (غالباً About) 
+إذا كان اسمه مختلفاً في ملف About.jsx، قم بتغييره هنا 
+*/
+.hero-section,
+.about-container {
   min-height: 100svh;
-  /* stays at toolbar-visible height */
+  /* هذا ما يمنع القفزة المزعجة */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* WhatsApp button: respect iPhone home bar */
 .whatsapp-float {
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+  /* تأكد أن الزر لا يختفي تحت شريط الآيفون السفلي */
+  bottom: max(30px, env(safe-area-inset-bottom, 24px)) !important;
 }
 
 /* Navbar: respect iPhone notch */
