@@ -518,7 +518,7 @@
 .description {
     transition: all 0.3s ease;
     margin-top: 10px;
-} 
+}
 
 
 [dir="rtl"] .hero-title {
@@ -561,45 +561,56 @@
 
 @media (max-width: 768px) {
     .about-section {
-        padding: 10px 0 20px; /* Reduced padding */
-        min-height: 100vh; /* Optional: ensures section fills screen */
+        padding: 10px 0 20px;
+        /* Reduced padding */
+        min-height: 100vh;
+        /* Optional: ensures section fills screen */
         display: flex;
-        align-items: flex-start; /* Start from top */
+        align-items: flex-start;
+        /* Start from top */
     }
 
     .about-container {
         flex-direction: column !important;
-        gap: 15px !important; /* Tightened gap */
+        gap: 15px !important;
+        /* Tightened gap */
     }
 
-    .coach-name-tag { order: 1; margin-bottom: 5px; }
-    .hero-title { 
-        order: 2; 
+    .coach-name-tag {
+        order: 1;
+        margin-bottom: 5px;
+    }
+
+    .hero-title {
+        order: 2;
         font-size: clamp(1.8rem, 10vw, 2.4rem) !important;
         margin: 0 auto 10px auto !important;
         line-height: 1.1;
     }
 
     .about-image {
-        order: 3; /* Image is now high up */
+        order: 3;
+        /* Image is now high up */
     }
 
-    
 
-    .uk-certification-badge { 
-        order: 4; 
-        margin: 10px auto !important; 
-        padding: 4px 10px; /* Slimmer badge */
+
+    .uk-certification-badge {
+        order: 4;
+        margin: 10px auto !important;
+        padding: 4px 10px;
+        /* Slimmer badge */
     }
 
     .description {
         order: 5;
         font-size: 0.9rem;
-        max-width: 85%;
+        max-width: 95%;
         margin: 0 auto 10px auto;
         /* Limit height or lines if it's too long */
         display: -webkit-box;
-        -webkit-line-clamp: 4; /* Show only 4 lines on small screens */
+        -webkit-line-clamp: 4;
+        /* Show only 4 lines on small screens */
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
