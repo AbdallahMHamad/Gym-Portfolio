@@ -10,8 +10,9 @@ import "./index.css";
 function App() {
   return (
     <>
+    <WhatsAppButton />
+
       <Navbar />
-<WhatsAppButton />
 
       <main className="content">
 

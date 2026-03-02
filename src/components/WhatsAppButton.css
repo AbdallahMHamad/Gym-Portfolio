@@ -3,27 +3,38 @@
    ========================================= */
 .whatsapp-float {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 24px;
+    right: 16px;
+    left: auto;
+    /* force right side on both LTR and RTL */
     z-index: 9999;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
+    /* prevent any layout from pushing it around */
+    width: fit-content;
+    max-width: calc(100vw - 32px);
 }
 
-/* ── Options menu (shown when expanded) ── */
+/* RTL: keep it on the right side still */
+[dir="rtl"] .whatsapp-float {
+    right: 16px;
+    left: auto;
+}
+
+/* ── Options menu ── */
 .whatsapp-options {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: flex-end;
-
-    /* Hidden by default */
     opacity: 0;
     pointer-events: none;
     transform: translateY(10px);
     transition: opacity 0.25s ease, transform 0.25s ease;
+    /* prevent options from overflowing screen left edge */
+    max-width: calc(100vw - 32px);
 }
 
 .whatsapp-float.open .whatsapp-options {
@@ -40,31 +51,53 @@
     background: #1a1a1a;
     border: 1px solid rgba(245, 196, 0, 0.25);
     border-radius: 50px;
-    padding: 10px 18px 10px 14px;
+    padding: 10px 16px 10px 12px;
     text-decoration: none;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
+    /* prevent tap highlight on mobile */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
-.whatsapp-option:hover {
-    background: var(--yellow-main);
-    border-color: var(--yellow-main);
-    transform: translateX(-4px);
+@media (hover: hover) {
+    .whatsapp-option:hover {
+        background: var(--yellow-main);
+        border-color: var(--yellow-main);
+        transform: translateX(-4px);
+    }
+
+    .whatsapp-option:hover .option-icon {
+        background: #000;
+        color: var(--yellow-main);
+    }
+
+    .whatsapp-option:hover .option-label,
+    .whatsapp-option:hover .option-sublabel {
+        color: #000;
+    }
 }
 
-.whatsapp-option:hover .option-icon {
-    background: white;
-    color: var(--yellow-main);
-}
+/* Touch press feedback */
+@media (hover: none) {
+    .whatsapp-option:active {
+        background: var(--yellow-main);
+        border-color: var(--yellow-main);
+        transform: scale(0.97);
+        transition: all 0.1s ease;
+    }
 
-.whatsapp-option:hover .option-text {
-    color: #000;
+    .whatsapp-option:active .option-label,
+    .whatsapp-option:active .option-sublabel {
+        color: #000;
+    }
 }
 
 .option-icon {
     width: 34px;
     height: 34px;
+    min-width: 34px;
     background: var(--yellow-main);
     border-radius: 50%;
     display: flex;
@@ -79,19 +112,35 @@
 .option-text {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 2px;
 }
 
 .option-label {
     color: white;
     font-weight: 800;
     font-size: 0.85rem;
+    line-height: 1;
 }
 
 .option-sublabel {
     color: rgba(255, 255, 255, 0.5);
     font-size: 0.7rem;
     font-weight: 500;
+    line-height: 1;
+}
+
+/* ── Drag indicator ── */
+.whatsapp-float {
+    cursor: grab;
+}
+
+.whatsapp-float:active {
+    cursor: grabbing;
+}
+
+.whatsapp-option {
+    cursor: pointer;
+    /* override grab on links */
 }
 
 /* ── Main trigger button ── */
@@ -99,6 +148,7 @@
     position: relative;
     width: 56px;
     height: 56px;
+    min-width: 56px;
     background: var(--yellow-main);
     border-radius: 50%;
     display: flex;
@@ -106,12 +156,14 @@
     justify-content: center;
     color: #000;
     font-size: 1.8rem;
-    box-shadow: 0 8px 25px rgba(245, 196, 0, 0.35);
+    box-shadow: 0 6px 20px rgba(245, 196, 0, 0.4);
     cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease;
     border: none;
     outline: none;
     flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .whatsapp-float.open .whatsapp-trigger {
@@ -128,6 +180,7 @@
     background: var(--yellow-main);
     animation: pulse-ring 2s infinite;
     z-index: -1;
+    pointer-events: none;
 }
 
 .whatsapp-float.open .pulse-effect {
@@ -146,7 +199,7 @@
     }
 }
 
-/* ── Close hint label ── */
+/* Hover label — desktop only */
 .whatsapp-trigger-label {
     position: absolute;
     right: 66px;
@@ -163,9 +216,10 @@
     transition: opacity 0.2s ease;
 }
 
-/* Show label only when closed */
-.whatsapp-float:not(.open) .whatsapp-trigger:hover .whatsapp-trigger-label {
-    opacity: 1;
+@media (hover: hover) {
+    .whatsapp-float:not(.open) .whatsapp-trigger:hover .whatsapp-trigger-label {
+        opacity: 1;
+    }
 }
 
 /* =========================================
@@ -174,12 +228,13 @@
 @media (max-width: 600px) {
     .whatsapp-float {
         bottom: 20px;
-        right: 16px;
+        right: 14px;
     }
 
     .whatsapp-trigger {
         width: 52px;
         height: 52px;
+        min-width: 52px;
         font-size: 1.6rem;
     }
 
@@ -188,6 +243,23 @@
     }
 
     .whatsapp-option {
-        padding: 9px 14px 9px 12px;
+        padding: 10px 14px;
+    }
+
+    /* Prevent label from going off screen */
+    .whatsapp-trigger-label {
+        display: none;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .whatsapp-float {
+        right: 10px;
+        bottom: 16px;
+    }
+
+    .option-label {
+        font-size: 0.78rem;
     }
 }
