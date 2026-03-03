@@ -14,7 +14,8 @@
 
 .contact-container {
     width: 90%;
-    max-width: 1000px; /* تصغير العرض قليلاً ليصبح متمركزاً وأكثر أناقة */
+    max-width: 1000px;
+    /* تصغير العرض قليلاً ليصبح متمركزاً وأكثر أناقة */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -61,7 +62,7 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    
+
     /* منع تحديد النص وتأثيرات اللمس الافتراضية */
     -webkit-tap-highlight-color: transparent;
     user-select: none;
@@ -112,7 +113,7 @@
     margin-bottom: 15px;
     transition: all 0.3s ease;
     z-index: 1;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .trendy-card:hover .trendy-icon-wrapper,
@@ -196,7 +197,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 120px; 
+        max-width: 120px;
     }
 }
 
@@ -205,12 +206,13 @@
     .trendy-social-grid {
         gap: 10px;
     }
-    
+
     .trendy-card {
         padding: 15px 5px;
     }
-    
+
     .trendy-info span {
-        display: none; /* إخفاء اسم المستخدم لتركيز الانتباه على المنصة فقط في الشاشات الضيقة جداً */
+        display: none;
+        /* إخفاء اسم المستخدم لتركيز الانتباه على المنصة فقط في الشاشات الضيقة جداً */
     }
 }
