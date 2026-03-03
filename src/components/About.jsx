@@ -61,7 +61,7 @@ function About() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % originalImages.length);
-    }, 4000);
+    }, 7000);
     return () => clearInterval(interval);
   }, [originalImages.length]);
 
