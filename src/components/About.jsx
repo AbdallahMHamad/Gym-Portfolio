@@ -39,8 +39,8 @@ const CountUp = ({ end, duration = 1000 }) => {
 
 
 function About() {
-  const { t, i18n } = useTranslation();
-  const timerRef = useRef(null); // مرجع التايمر لمنع الـ Glitch
+  const { t } = useTranslation();
+  const timerRef = useRef(null);
 
   const originalImages = [
     "/images_resources/salman/1.jfif",
@@ -59,7 +59,7 @@ function About() {
   const isDraggingHorizontally = useRef(false);
   const wrapperRef = useRef(null);
 
-  // دالة إعادة تشغيل التايمر (تعمل Reset للعد التنازلي عند تدخل المستخدم)
+  // دالة تشغيل التايمر مع إعادة الضبط (Reset)
   const startAutoPlay = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -67,7 +67,6 @@ function About() {
     }, 7000);
   }, [originalImages.length]);
 
-  // تشغيل التايمر عند تحميل المكون
   useEffect(() => {
     startAutoPlay();
     return () => {
@@ -75,7 +74,7 @@ function About() {
     };
   }, [startAutoPlay]);
 
-  // التعامل مع اللمس والسحب
+  // منطق السحب (Swipe Logic) - معدل ليكون السحب لليسار هو "التالي"
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
@@ -103,29 +102,20 @@ function About() {
       if (!isDraggingHorizontally.current) return;
 
       const distance = touchStartX.current - e.changedTouches[0].clientX;
-      const isRTL = i18n.language === 'ar';
 
       if (Math.abs(distance) > 50) {
-        // إذا حدث سحب ناجح، نقوم بتصفير التايمر فوراً
-        startAutoPlay(); 
+        startAutoPlay(); // تصفير التايمر لمنع الـ Glitch
 
         if (distance > 50) {
-          // Swiped left
-          setCurrentIndex((prev) =>
-            isRTL
-              ? prev === 0 ? originalImages.length - 1 : prev - 1
-              : (prev + 1) % originalImages.length
-          );
+          // سحب اليد من اليمين إلى اليسار (Swipe Left) -> اذهب للصورة التالية
+          setCurrentIndex((prev) => (prev + 1) % originalImages.length);
         } else {
-          // Swiped right
-          setCurrentIndex((prev) =>
-            isRTL
-              ? (prev + 1) % originalImages.length
-              : prev === 0 ? originalImages.length - 1 : prev - 1
+          // سحب اليد من اليسار إلى اليمين (Swipe Right) -> اذهب للصورة السابقة
+          setCurrentIndex((prev) => 
+            prev === 0 ? originalImages.length - 1 : prev - 1
           );
         }
       }
-
       isDraggingHorizontally.current = false;
     };
 
@@ -138,19 +128,17 @@ function About() {
       el.removeEventListener("touchmove", onTouchMove);
       el.removeEventListener("touchend", onTouchEnd);
     };
-  }, [i18n.language, originalImages.length, startAutoPlay]);
+  }, [originalImages.length, startAutoPlay]);
 
-  // دالة التنقل عبر النقاط (Dots)
   const handleDotClick = (idx) => {
     setCurrentIndex(idx);
-    startAutoPlay(); // تصفير التايمر عند الضغط اليدوي
+    startAutoPlay();
   };
 
   return (
     <section id="about" className="section dark about-section">
       <div className="about-container">
 
-        {/* ── TEXT SIDE ── */}
         <div className="about-content">
           <div className="coach-name-tag">
             <span className="line"></span>
@@ -191,27 +179,30 @@ function About() {
           </div>
         </div>
 
-        {/* ── IMAGE CAROUSEL SIDE ── */}
         <div className="about-image">
           <div className="image-wrapper" ref={wrapperRef}>
             <div
               className="carousel-track"
               style={{
-                transform: `translateX(${i18n.language === 'ar' ? currentIndex * 100 : -currentIndex * 100}%)`
+                transform: `translateX(-${currentIndex * 100}%)`,
+                direction: 'ltr',
+                display: 'flex',
+                transition: 'transform 0.6s ease-in-out'
               }}
             >
               {originalImages.map((img, index) => (
                 <img
                   key={index}
                   src={img}
-                  alt={`كوتش محمد سلمان - صورة ${index + 1}`}
+                  alt={`Coach Salman - ${index + 1}`}
                   className="carousel-slide"
+                  style={{ minWidth: '100%', objectFit: 'cover' }}
                   loading={index === 0 ? "eager" : "lazy"}
                 />
               ))}
             </div>
 
-            <div className="carousel-dots">
+            <div className="carousel-dots" style={{ direction: 'ltr' }}>
               {originalImages.map((_, idx) => (
                 <span
                   key={idx}
