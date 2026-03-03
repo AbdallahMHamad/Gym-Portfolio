@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from "react-i18next"; 
 import "./About.css";
 
+// مكون العداد الرقمي
 const CountUp = ({ end, duration = 1000 }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef(null);
@@ -39,6 +40,7 @@ const CountUp = ({ end, duration = 1000 }) => {
 
 function About() {
   const { t, i18n } = useTranslation();
+  const timerRef = useRef(null); // مرجع التايمر لمنع الـ Glitch
 
   const originalImages = [
     "/images_resources/salman/1.jfif",
@@ -57,16 +59,23 @@ function About() {
   const isDraggingHorizontally = useRef(false);
   const wrapperRef = useRef(null);
 
-  // Auto-play
-  useEffect(() => {
-    const interval = setInterval(() => {
+  // دالة إعادة تشغيل التايمر (تعمل Reset للعد التنازلي عند تدخل المستخدم)
+  const startAutoPlay = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % originalImages.length);
     }, 7000);
-    return () => clearInterval(interval);
   }, [originalImages.length]);
 
-  // Attach touch listeners with { passive: false } so we can preventDefault
-  // React's onTouchMove is passive by default and cannot preventDefault
+  // تشغيل التايمر عند تحميل المكون
+  useEffect(() => {
+    startAutoPlay();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [startAutoPlay]);
+
+  // التعامل مع اللمس والسحب
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
@@ -86,7 +95,7 @@ function About() {
       }
 
       if (isDraggingHorizontally.current) {
-        e.preventDefault(); // stops page from scrolling
+        e.preventDefault(); 
       }
     };
 
@@ -96,27 +105,32 @@ function About() {
       const distance = touchStartX.current - e.changedTouches[0].clientX;
       const isRTL = i18n.language === 'ar';
 
-      if (distance > 50) {
-        // Swiped left
-        setCurrentIndex((prev) =>
-          isRTL
-            ? prev === 0 ? originalImages.length - 1 : prev - 1
-            : (prev + 1) % originalImages.length
-        );
-      } else if (distance < -50) {
-        // Swiped right
-        setCurrentIndex((prev) =>
-          isRTL
-            ? (prev + 1) % originalImages.length
-            : prev === 0 ? originalImages.length - 1 : prev - 1
-        );
+      if (Math.abs(distance) > 50) {
+        // إذا حدث سحب ناجح، نقوم بتصفير التايمر فوراً
+        startAutoPlay(); 
+
+        if (distance > 50) {
+          // Swiped left
+          setCurrentIndex((prev) =>
+            isRTL
+              ? prev === 0 ? originalImages.length - 1 : prev - 1
+              : (prev + 1) % originalImages.length
+          );
+        } else {
+          // Swiped right
+          setCurrentIndex((prev) =>
+            isRTL
+              ? (prev + 1) % originalImages.length
+              : prev === 0 ? originalImages.length - 1 : prev - 1
+          );
+        }
       }
 
       isDraggingHorizontally.current = false;
     };
 
     el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchmove", onTouchMove, { passive: false }); // passive:false is the key
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
     el.addEventListener("touchend", onTouchEnd, { passive: true });
 
     return () => {
@@ -124,7 +138,13 @@ function About() {
       el.removeEventListener("touchmove", onTouchMove);
       el.removeEventListener("touchend", onTouchEnd);
     };
-  }, [i18n.language, originalImages.length]);
+  }, [i18n.language, originalImages.length, startAutoPlay]);
+
+  // دالة التنقل عبر النقاط (Dots)
+  const handleDotClick = (idx) => {
+    setCurrentIndex(idx);
+    startAutoPlay(); // تصفير التايمر عند الضغط اليدوي
+  };
 
   return (
     <section id="about" className="section dark about-section">
@@ -173,10 +193,7 @@ function About() {
 
         {/* ── IMAGE CAROUSEL SIDE ── */}
         <div className="about-image">
-          <div
-            className="image-wrapper"
-            ref={wrapperRef}
-          >
+          <div className="image-wrapper" ref={wrapperRef}>
             <div
               className="carousel-track"
               style={{
@@ -189,6 +206,7 @@ function About() {
                   src={img}
                   alt={`كوتش محمد سلمان - صورة ${index + 1}`}
                   className="carousel-slide"
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
               ))}
             </div>
@@ -198,7 +216,7 @@ function About() {
                 <span
                   key={idx}
                   className={`dot ${currentIndex === idx ? "active" : ""}`}
-                  onClick={() => setCurrentIndex(idx)}
+                  onClick={() => handleDotClick(idx)}
                 ></span>
               ))}
             </div>
