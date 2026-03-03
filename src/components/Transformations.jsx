@@ -6,12 +6,54 @@ const Transformations = () => {
   const { t } = useTranslation();
 
   const transformationsData = [
-    { id: 1, name: "Ashraf S.", duration: `1 ${t('month')}`,   description: t('desc_fat_loss'),         beforeImg: "/images_resources/Transformations/12b.jpg",  afterImg: "/images_resources/Transformations/12a.jpg"  },
-    { id: 2, name: "Sarah K.", duration: `1 ${t('month')}`,   description: t('desc_muscle_growth'),    beforeImg: "/images_resources/Transformations/10b.jpg",  afterImg: "/images_resources/Transformations/10a.jpg"  },
-    { id: 3, name: "Mike D.",  duration: `11 ${t('months')}`, description: t('desc_fat_loss_journey'), beforeImg: "/images_resources/Transformations/4b.jpg",   afterImg: "/images_resources/Transformations/4a.jpg"   },
-    { id: 4, name: "Omar Y.",  duration: `6 ${t('months')}`,  description: t('desc_clean_bulk'),       beforeImg: "/images_resources/Transformations/2b.jpg",   afterImg: "/images_resources/Transformations/2a.jpg"   },
-    { id: 5, name: "Omar Y.",  duration: `6 ${t('months')}`,  description: t('desc_clean_bulk'),       beforeImg: "/images_resources/Transformations/11b.jpg",  afterImg: "/images_resources/Transformations/11a.jpg"  },
-    { id: 6, name: "Omar Y.",  duration: `6 ${t('months')}`,  description: t('desc_clean_bulk'),       beforeImg: "/images_resources/Transformations/ashb.jpg", afterImg: "/images_resources/Transformations/asha.jpg" },
+    { 
+      id: 1, 
+      name: t('client_1_name'), // سميرة
+      duration: t('client_1_duration'), // 3 أشهر
+      description: t('desc_fat_loss'), 
+      beforeImg: "/images_resources/Transformations/12b.jpg", 
+      afterImg: "/images_resources/Transformations/12a.jpg" 
+    },
+    { 
+      id: 2, 
+      name: t('client_2_name'), // رائد
+      duration: t('client_2_duration'), // 5 أشهر
+      description: t('desc_muscle_growth'), 
+      beforeImg: "/images_resources/Transformations/10b.jpg", 
+      afterImg: "/images_resources/Transformations/10a.jpg" 
+    },
+    { 
+      id: 3, 
+      name: t('client_3_name'), // محمد
+      duration: t('client_3_duration'), // سنة كاملة
+      description: t('desc_fat_loss_journey'), 
+      beforeImg: "/images_resources/Transformations/4b.jpg", 
+      afterImg: "/images_resources/Transformations/4a.jpg" 
+    },
+    { 
+      id: 4, 
+      name: t('client_4_name'), // أسامة
+      duration: t('client_4_duration'), // 6 أشهر
+      description: t('desc_clean_bulk'), 
+      beforeImg: "/images_resources/Transformations/2b.jpg", 
+      afterImg: "/images_resources/Transformations/2a.jpg" 
+    },
+    { 
+      id: 5, 
+      name: t('client_5_name'), // خالد
+      duration: t('client_5_duration'), // 5 أشهر
+      description: t('desc_clean_bulk'), 
+      beforeImg: "/images_resources/Transformations/11b.jpg", 
+      afterImg: "/images_resources/Transformations/11a.jpg" 
+    },
+    { 
+      id: 6, 
+      name: t('client_6_name'), // أشرف
+      duration: t('client_6_duration'), // شهر واحد
+      description: t('desc_fat_loss'), 
+      beforeImg: "/images_resources/Transformations/ashb.jpg", 
+      afterImg: "/images_resources/Transformations/asha.jpg" 
+    },
   ];
 
   return (
@@ -27,7 +69,6 @@ const Transformations = () => {
           {transformationsData.map((item) => (
             <div key={item.id} className="trans-card">
 
-              {/* Images box — fixed aspect ratio, both images equal */}
               <div className="trans-images-box">
                 <div className="trans-img-wrapper">
                   <img

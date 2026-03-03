@@ -27,6 +27,19 @@ const resources = {
             "about_stat_years": "Years Experience",
             "about_stat_uk": "Certified Coach",
             "about_tap_hint": "Tap to swap",
+            // Transformations Data - English
+            "client_1_name": "Samira",
+            "client_1_duration": "3 Months",
+            "client_2_name": "Raed",
+            "client_2_duration": "5 Months",
+            "client_3_name": "Mohammad",
+            "client_3_duration": "1 Year",
+            "client_4_name": "Osama",
+            "client_4_duration": "6 Months",
+            "client_5_name": "Khaled",
+            "client_5_duration": "5 Months",
+            "client_6_name": "Ashraf",
+            "client_6_duration": "1 Month",
 
             "trans_subtitle": "REAL RESULTS",
             "trans_title": "Client",
@@ -97,6 +110,25 @@ const resources = {
             "about_stat_uk": "مدرب معتمد",
             "about_tap_hint": "اضغط لتغيير الصورة",
 
+
+
+
+
+            // بيانات التحولات - عربي
+            "client_1_name": "سميرة",
+            "client_1_duration": "3 أشهر",
+            "client_2_name": "رائد",
+            "client_2_duration": "5 أشهر",
+            "client_3_name": "محمد",
+            "client_3_duration": "سنة كاملة",
+            "client_4_name": "أسامة",
+            "client_4_duration": "6 أشهر",
+            "client_5_name": "خالد",
+            "client_5_duration": "5 أشهر",
+            "client_6_name": "أشرف",
+            "client_6_duration": "شهر واحد",
+
+            
             "trans_subtitle": "نتائج حقيقية",
             "trans_title": "نتائج",
             "trans_highlight": "المتدربين",
