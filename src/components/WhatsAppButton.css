@@ -1,33 +1,39 @@
 /* =========================================
    WhatsApp Floating Button
+   — Safari iOS safe-area aware
    ========================================= */
 
 .whatsapp-float {
     position: fixed;
-    bottom: 24px;
+    /* bottom مش موجود هنا — بيجي من JS (bottomOffset state) */
     z-index: 9999;
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    /* transition سلس لما JS يغير الـ bottom */
+    transition: bottom 0.2s ease;
+
+    /* تأكد إنه فوق أي iOS toolbar */
+    will-change: bottom;
 }
 
-/* RTL — button bottom RIGHT, options expand to the LEFT */
+/* RTL */
 .whatsapp-float.rtl {
     right: 16px;
     left: auto;
     align-items: flex-end;
     direction: ltr;
-    /* prevent browser RTL from moving the container */
 }
 
-/* LTR — button bottom LEFT, options expand to the RIGHT */
+/* LTR */
 .whatsapp-float.ltr {
     left: 16px;
     right: auto;
     align-items: flex-start;
 }
 
-/* ── Options — hidden by default, slide up ── */
+/* ── Options ── */
 .whatsapp-options {
     display: flex;
     flex-direction: column;
@@ -38,12 +44,10 @@
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* RTL: options align to the right (stack toward right edge) */
 .whatsapp-float.rtl .whatsapp-options {
     align-items: flex-end;
 }
 
-/* LTR: options align to the left (stack toward left edge) */
 .whatsapp-float.ltr .whatsapp-options {
     align-items: flex-start;
 }
@@ -70,7 +74,6 @@
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     direction: ltr;
-    /* always keep icon-then-text order */
 }
 
 @media (hover: hover) {
@@ -121,7 +124,7 @@
     font-size: 0.85rem;
 }
 
-/* ── Main trigger button ── */
+/* ── Main trigger ── */
 .whatsapp-trigger {
     position: relative;
     width: 54px;
@@ -148,7 +151,7 @@
     transform: rotate(45deg);
 }
 
-/* Pulse ring */
+/* Pulse */
 .pulse-effect {
     position: absolute;
     width: 80%;
@@ -176,9 +179,7 @@
     }
 }
 
-/* =========================================
-   Mobile
-   ========================================= */
+/* ── Mobile ── */
 @media (max-width: 600px) {
     .whatsapp-float.rtl {
         right: 14px;
@@ -186,10 +187,6 @@
 
     .whatsapp-float.ltr {
         left: 14px;
-    }
-
-    .whatsapp-float {
-        bottom: 20px;
     }
 
     .whatsapp-trigger {

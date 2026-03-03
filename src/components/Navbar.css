@@ -56,7 +56,7 @@
     color: var(--text-main);
 }
 
-.logo span {
+[rtl].logo span {
     color: var(--text-main);
 }
 
@@ -165,7 +165,7 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    
+
 }
 
 

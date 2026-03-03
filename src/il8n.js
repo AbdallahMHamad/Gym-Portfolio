@@ -41,6 +41,16 @@ const resources = {
             "client_6_name": "Ashraf",
             "client_6_duration": "1 Month",
 
+
+
+            "tab_male": "Male",
+            "tab_female": "Female",
+            "female_privacy_label": "Photos kept private — out of respect",
+            "female_card_badge": "✓ Verified Result",
+
+
+
+
             "trans_subtitle": "REAL RESULTS",
             "trans_title": "Client",
             "trans_highlight": "Transformations",
@@ -128,7 +138,12 @@ const resources = {
             "client_6_name": "أشرف",
             "client_6_duration": "شهر واحد",
 
-            
+
+            "tab_male": "ذكور",
+            "tab_female": "إناث",
+            "female_privacy_label": "الصور محجوبة — احتراماً للخصوصية",
+            "female_card_badge": "✓ نتيجة موثقة",
+
             "trans_subtitle": "نتائج حقيقية",
             "trans_title": "نتائج",
             "trans_highlight": "المتدربين",

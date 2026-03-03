@@ -255,3 +255,452 @@
         /* square on small phones — more image, less crop */
     }
 }
+
+
+
+/* =========================================
+   Tabs  — أضف في نهاية Transformations.css
+   ========================================= */
+
+.trans-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #161616;
+    border: 1px solid #252525;
+    border-radius: 12px;
+    padding: 5px;
+    gap: 0;
+    width: fit-content;
+    margin: 0 auto 40px;
+}
+
+.trans-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 28px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.25s ease;
+}
+
+.trans-tab svg {
+    transition: stroke 0.25s ease;
+    flex-shrink: 0;
+}
+
+.trans-tab.active {
+    color: #000;
+}
+
+.trans-tab.active svg {
+    stroke: #000;
+}
+
+/* sliding gold pill */
+.trans-tab-indicator {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: calc(50% - 5px);
+    background: var(--yellow-main, #f5c400);
+    border-radius: 8px;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+}
+
+.trans-tab-indicator.male {
+    left: 5px;
+}
+
+.trans-tab-indicator.female {
+    left: calc(50%);
+}
+
+/* ── Tab content fade-in ── */
+.tab-content {
+    animation: tabFadeIn 0.35s ease forwards;
+}
+
+@keyframes tabFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   Female Privacy Card
+   ========================================= */
+
+.female-placeholder {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at 50% 55%, rgba(245, 196, 0, 0.08) 0%, transparent 65%),
+        repeating-linear-gradient(45deg,
+            transparent, transparent 18px,
+            rgba(245, 196, 0, 0.025) 18px, rgba(245, 196, 0, 0.025) 19px);
+    border-bottom: 1px solid rgba(245, 196, 0, 0.12);
+    position: relative;
+}
+
+.female-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    z-index: 1;
+}
+
+.female-icon {
+    width: 76px;
+    height: 76px;
+    filter: drop-shadow(0 0 14px rgba(245, 196, 0, 0.3));
+    transition: filter 0.4s ease;
+}
+
+@media (hover: hover) {
+    .female-card:hover .female-icon {
+        filter: drop-shadow(0 0 22px rgba(245, 196, 0, 0.6));
+    }
+}
+
+.female-headline {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+.female-sub {
+    color: var(--text-muted, #888);
+    font-size: 0.78rem;
+    margin: 0;
+    line-height: 1.55;
+    max-width: 210px;
+}
+
+.female-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--yellow-main, #f5c400);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Female tab: center the single card */
+.tab-content:has(.female-card) {
+    grid-template-columns: 1fr !important;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .trans-tabs {
+        width: 90%;
+        max-width: 280px;
+    }
+
+    .trans-tab {
+        padding: 8px 18px;
+        font-size: 0.82rem;
+    }
+}
+
+/* =========================================
+   أضف هذا في نهاية Transformations.css
+   ========================================= */
+
+/* ── Tabs container ── */
+.trans-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #161616;
+    border: 1px solid #252525;
+    border-radius: 12px;
+    padding: 5px;
+    width: fit-content;
+    margin: 0 auto 40px;
+}
+
+.trans-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 30px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.25s ease;
+    white-space: nowrap;
+}
+
+.trans-tab svg {
+    transition: stroke 0.25s ease;
+    flex-shrink: 0;
+}
+
+.trans-tab.active {
+    color: #000;
+}
+
+.trans-tab.active svg {
+    stroke: #000;
+}
+
+/* الـ pill الذهبية المتحركة */
+.trans-tab-indicator {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: calc(50% - 5px);
+    background: var(--yellow-main, #f5c400);
+    border-radius: 8px;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.trans-tab-indicator.male {
+    left: 5px;
+}
+
+.trans-tab-indicator.female {
+    left: calc(50%);
+}
+
+/* RTL support */
+[dir="rtl"] .trans-tab-indicator.male {
+    right: 5px;
+    left: auto;
+}
+
+[dir="rtl"] .trans-tab-indicator.female {
+    right: calc(50%);
+    left: auto;
+}
+
+/* ── Tab content animation ── */
+.tab-content {
+    animation: tabFadeIn 0.32s ease forwards;
+}
+
+@keyframes tabFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Female tab: center the card ── */
+.tab-content:has(.female-card) {
+    grid-template-columns: 1fr !important;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   Female Card
+   ========================================= */
+.female-placeholder {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at 50% 55%, rgba(245, 196, 0, 0.09) 0%, transparent 65%),
+        repeating-linear-gradient(45deg,
+            transparent, transparent 18px,
+            rgba(245, 196, 0, 0.025) 18px, rgba(245, 196, 0, 0.026) 19px);
+    border-bottom: 1px solid rgba(245, 196, 0, 0.12);
+    position: relative;
+}
+
+.female-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 32px 24px;
+    text-align: center;
+    z-index: 1;
+}
+
+.female-icon-wrap svg {
+    filter: drop-shadow(0 0 12px rgba(245, 196, 0, 0.3));
+    transition: filter 0.4s ease;
+}
+
+@media (hover: hover) {
+    .female-card:hover .female-icon-wrap svg {
+        filter: drop-shadow(0 0 20px rgba(245, 196, 0, 0.6));
+    }
+}
+
+.female-privacy-label {
+    color: var(--text-muted, #888);
+    font-size: 0.78rem;
+    margin: 0;
+    line-height: 1.55;
+    max-width: 190px;
+    font-style: italic;
+}
+
+.female-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--yellow-main, #f5c400);
+    color: #000;
+    font-size: 0.63rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .trans-tabs {
+        width: 90%;
+        max-width: 260px;
+    }
+
+    .trans-tab {
+        padding: 8px 20px;
+        font-size: 0.82rem;
+    }
+}
+
+[dir="rtl"],
+[dir="rtl"] body {
+    font-family: var(--font-ar);
+    font-weight: 600;
+    /* Cairo تبدو أجمل بوزن 600+ */
+    letter-spacing: 0;
+}
+
+/* اللغة الإنجليزية */
+[dir="ltr"],
+body {
+    font-family: var(--font-en);
+    letter-spacing: 0.3px;
+}
+
+
+/* =============================================
+   3. تحسينات مخصصة للعناوين (اختياري لكن مميز)
+   ============================================= */
+
+/* عناوين h1 h2 بالعربي — Cairo Black */
+[dir="rtl"] h1,
+[dir="rtl"] h2 {
+    font-family: var(--font-ar);
+    font-weight: 900;
+}
+
+/* عناوين h1 h2 بالإنجليزي — Barlow Condensed ExtraBold */
+[dir="ltr"] h1,
+[dir="ltr"] h2 {
+    font-family: var(--font-en);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* trans-header خاصة — أكبر وأثقل */
+[dir="rtl"] .trans-header h2 {
+    font-weight: 900;
+    line-height: 1.3;
+}
+
+[dir="ltr"] .trans-header h2 {
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+/* الـ subtitle فوق العنوان */
+[dir="rtl"] .subtitle {
+    font-family: var(--font-ar);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+[dir="ltr"] .subtitle {
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* trans-duration — الرقم الذهبي */
+[dir="rtl"] .trans-duration {
+    font-family: var(--font-ar);
+    font-weight: 900;
+}
+
+[dir="ltr"] .trans-duration {
+    font-family: var(--font-en);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* trans-tab buttons */
+[dir="rtl"] .trans-tab {
+    font-family: var(--font-ar);
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+[dir="ltr"] .trans-tab {
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
