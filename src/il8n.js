@@ -9,7 +9,7 @@ const resources = {
             "nav_home": "Home",
             "nav_sponsors": "Sponsors",
             "nav_contact": "Contact",
-            "sponsors_title": "Our Trusted Sponsors",
+            "sponsors_title": "Our Trusted ",
             "contact_title": "Join The Community",
             "contact_subtitle": "CONNECT WITH ME",
             "whatsapp_label": "Chat Directly",

@@ -216,3 +216,20 @@
         /* إخفاء اسم المستخدم لتركيز الانتباه على المنصة فقط في الشاشات الضيقة جداً */
     }
 }
+
+.contact-section .section-header h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    /* نفس sponsors */
+    letter-spacing: 1px;
+    /* نفس [dir="ltr"] h2 */
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+    .contact-section .section-header h2 {
+        font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+}

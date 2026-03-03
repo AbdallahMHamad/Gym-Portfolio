@@ -409,3 +409,9 @@
         transition: all 0.1s ease;
     }
 }
+
+.highlight {
+
+    color: var(--yellow-main);
+
+}
