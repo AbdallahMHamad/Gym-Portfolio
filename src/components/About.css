@@ -563,60 +563,37 @@
 
 
 @media (max-width: 768px) {
-    .about-section {
-        padding: 10px 0 20px;
-        /* Reduced padding */
-        min-height: 100vh;
-        /* Optional: ensures section fills screen */
-        display: flex;
-        align-items: flex-start;
-        /* Start from top */
-    }
 
-    .about-container {
-        flex-direction: column !important;
-        gap: 15px !important;
-        /* Tightened gap */
-    }
-
+    /* النص فوق */
     .coach-name-tag {
         order: 1;
-        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        order: 1;
     }
 
     .hero-title {
         order: 2;
-        font-size: clamp(1.8rem, 10vw, 2.4rem) !important;
-        margin: 0 auto 10px auto !important;
-        line-height: 1.1;
     }
 
-    .about-image {
-        order: 3;
-        /* Image is now high up */
+    /* الصورة أول شي */
+    .about-image,
+    [dir="rtl"] .about-image {
+        order: 1;
+        margin-top: 0;
     }
-
-
 
     .uk-certification-badge {
-        order: 4;
-        margin: 10px auto !important;
-        padding: 4px 10px;
-        /* Slimmer badge */
+        order: 3;
     }
 
     .description {
-        order: 5;
-        font-size: 0.9rem;
-        max-width: 95%;
-        margin: 0 auto 10px auto;
-        /* Limit height or lines if it's too long */
+        order: 3;
     }
 
     .stats-grid {
-        order: 6;
-        padding: 15px 0;
-        margin-top: 5px;
+        order: 4;
     }
 }
 
