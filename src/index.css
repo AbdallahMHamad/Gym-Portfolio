@@ -19,7 +19,7 @@
   /*font sizes*/
 
 
-  Typography Scale - Mobile First=========================================*/ --text-xs: 0.75rem;
+  --text-xs: 0.75rem;
   /* 12px - labels, badges */
   --text-sm: 0.875rem;
   /* 14px - captions, hints */
@@ -180,32 +180,12 @@ section::after,
   pointer-events: none;
 }
 
-.hero-title {
-  background: linear-gradient(to bottom, #ffffff 0%, #a1a1a1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
-}
 
 .stat-box h3 {
   text-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
   font-variant-numeric: tabular-nums;
 }
 
-.description {
-  border-right: 2px solid var(--yellow-main);
-  padding-right: 20px;
-  background: linear-gradient(to left, rgba(245, 196, 0, 0.03), transparent);
-}
-
-[dir="ltr"] .description {
-  border-right: none;
-  border-left: 2px solid var(--yellow-main);
-  padding-left: 20px;
-  padding-right: 0;
-  background: linear-gradient(to right, rgba(245, 196, 0, 0.05), transparent);
-}
 
 .coach-name-tag .line {
   box-shadow: 0 0 10px var(--yellow-main);
