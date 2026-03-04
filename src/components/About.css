@@ -331,7 +331,9 @@
 @media (max-width: 768px) {
 
     .about-section {
-        padding: 20px 0 40px;
+        padding: 75px 0 20px !important;
+        display: flex;
+        align-items: flex-start;
     }
 
     .about-container,
@@ -563,16 +565,6 @@
 
 
 @media (max-width: 768px) {
-    .about-section {
-        padding: 75px 0px 20px;
-        /* 75px = ارتفاع الـ navbar */
-        /* Reduced padding */
-        min-height: 100vh;
-        /* Optional: ensures section fills screen */
-        display: flex;
-        align-items: flex-start;
-        /* Start from top */
-    }
 
     .about-container {
         flex-direction: column !important;
