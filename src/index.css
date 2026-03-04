@@ -9,10 +9,6 @@
   --text-main: #ffffff;
   --text-muted: #9ca3af;
   --border-accent: #f5c400;
-
-  /* ← أضف هذين السطرين */
-  --font-ar: 'Cairo', sans-serif;
-  --font-en: 'Barlow Condensed', sans-serif;
 }
 
 html {
@@ -27,31 +23,13 @@ body {
   background-color: var(--bg-main);
   margin: 0;
   padding: 0;
-
-  /* ← بدل 'Arial' */
-  font-family: var(--font-en);
-  font-size: 16px;
-
+  font-family: 'Arial', sans-serif;
   color: var(--text-main);
   -webkit-user-select: none;
   user-select: none;
   overflow-x: hidden;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-}
-
-/* ← أضف هذا */
-[dir="rtl"] body,
-[dir="rtl"] {
-  font-family: var(--font-ar) !important;
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-[dir="ltr"] body,
-[dir="ltr"] {
-  font-family: var(--font-en);
-  letter-spacing: 0.3px;
 }
 
 #root {
