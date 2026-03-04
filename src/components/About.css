@@ -564,7 +564,7 @@
 
 @media (max-width: 768px) {
     .about-section {
-        padding: 75px 0 20px;
+        padding: 75px 0px 20px;
         /* 75px = ارتفاع الـ navbar */
         /* Reduced padding */
         min-height: 100vh;
@@ -577,20 +577,21 @@
     .about-container {
         flex-direction: column !important;
         gap: 15px !important;
-        padding-top: 10px;
+        padding-bottom: 10px;
         /* Tightened gap */
     }
 
 
 
-    .subtitle{
-        padding-bottom: 10px;
-        margin-bottom: 5px;
+    .subtitle {
+        padding-bottom: 1px;
+        margin-bottom: 1px;
 
 
 
 
     }
+
     .coach-name-tag {
         order: 1;
         margin-bottom: 5px;
