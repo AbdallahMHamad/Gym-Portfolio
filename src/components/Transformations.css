@@ -22,7 +22,7 @@
 }
 
 .trans-header h2 {
-    font-size: var(--text-3xl);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
     margin: 0;
 }
@@ -76,32 +76,40 @@
 
 /* =========================================
    Images Box
+   — aspect-ratio on the BOX, not the images
+   — both images are equal halves of the box
    ========================================= */
 .trans-images-box {
     display: flex;
     width: 100%;
+    /* 4:3 ratio — wide enough to show both bodies side by side */
     aspect-ratio: 4 / 3;
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
 }
 
+/* Each half takes exactly 50% */
 .trans-img-wrapper {
     flex: 1;
     position: relative;
     overflow: hidden;
     min-width: 0;
+    /* prevents flex blowout */
 }
 
+/* Subtle gold separator between before/after */
 .trans-img-wrapper:first-child {
     border-right: 1px solid rgba(245, 196, 0, 0.25);
 }
 
+/* Image fills its half perfectly — no gaps, no overflow */
 .trans-img-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
+    /* keep faces/bodies in frame */
     display: block;
     transition: transform 0.5s ease;
 }
@@ -120,7 +128,7 @@
     backdrop-filter: blur(4px);
     color: #fff;
     padding: 3px 10px;
-    font-size: var(--text-xs);
+    font-size: 0.68rem;
     border-radius: 4px;
     font-weight: 800;
     text-transform: uppercase;
@@ -153,25 +161,29 @@
 
 .trans-info h3 {
     margin: 0;
-    font-size: var(--text-xl);
+    font-size: 1.2rem;
     font-weight: 700;
     color: #fff;
 }
 
 .trans-info p {
     color: var(--text-muted);
-    font-size: var(--text-sm);
+    font-size: 0.9rem;
     margin: 0;
     line-height: 1.4;
 }
 
-/* Duration — gold shimmer */
+/* Duration — gold shimmer, matches site theme */
 .trans-duration {
     display: inline;
     font-weight: 800;
-    font-size: var(--text-base);
+    font-size: 1rem;
     background: linear-gradient(120deg,
-            #f5c400 0%, #ffe566 30%, #ffffff 50%, #ffe566 70%, #f5c400 100%);
+            #f5c400 0%,
+            #ffe566 30%,
+            #ffffff 50%,
+            #ffe566 70%,
+            #f5c400 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -189,8 +201,247 @@
 }
 
 /* =========================================
-   Tabs
+   Responsive
    ========================================= */
+@media (max-width: 1024px) {
+    .transformations-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .transformations-section {
+        padding: 20px 0 20px;
+    }
+
+    .trans-header {
+        margin-bottom: 35px;
+    }
+
+    /* Match About section exactly: 90vw container, image is 90vw max 380px */
+    .trans-container {
+        width: 85%;
+    }
+
+    .transformations-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 320px;
+        /* same max-width as .image-wrapper in About */
+        margin: 0 auto;
+        /* center it */
+    }
+
+    .trans-images-box {
+        aspect-ratio: 3 / 2;
+    }
+
+    .trans-info {
+        padding: 16px;
+    }
+
+    .trans-info h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .trans-header h2 {
+        font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+
+    .trans-images-box {
+        aspect-ratio: 1 / 1;
+        /* square on small phones — more image, less crop */
+    }
+}
+
+
+
+/* =========================================
+   Tabs  — أضف في نهاية Transformations.css
+   ========================================= */
+
+.trans-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #161616;
+    border: 1px solid #252525;
+    border-radius: 12px;
+    padding: 5px;
+    gap: 0;
+    width: fit-content;
+    margin: 0 auto 40px;
+}
+
+.trans-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 28px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.25s ease;
+}
+
+.trans-tab svg {
+    transition: stroke 0.25s ease;
+    flex-shrink: 0;
+}
+
+.trans-tab.active {
+    color: #000;
+}
+
+.trans-tab.active svg {
+    stroke: #000;
+}
+
+/* sliding gold pill */
+.trans-tab-indicator {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: calc(50% - 5px);
+    background: var(--yellow-main, #f5c400);
+    border-radius: 8px;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+}
+
+.trans-tab-indicator.male {
+    left: 5px;
+}
+
+.trans-tab-indicator.female {
+    left: calc(50%);
+}
+
+/* ── Tab content fade-in ── */
+.tab-content {
+    animation: tabFadeIn 0.35s ease forwards;
+}
+
+@keyframes tabFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   Female Privacy Card
+   ========================================= */
+
+.female-placeholder {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at 50% 55%, rgba(245, 196, 0, 0.08) 0%, transparent 65%),
+        repeating-linear-gradient(45deg,
+            transparent, transparent 18px,
+            rgba(245, 196, 0, 0.025) 18px, rgba(245, 196, 0, 0.025) 19px);
+    border-bottom: 1px solid rgba(245, 196, 0, 0.12);
+    position: relative;
+}
+
+.female-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    z-index: 1;
+}
+
+.female-icon {
+    width: 76px;
+    height: 76px;
+    filter: drop-shadow(0 0 14px rgba(245, 196, 0, 0.3));
+    transition: filter 0.4s ease;
+}
+
+@media (hover: hover) {
+    .female-card:hover .female-icon {
+        filter: drop-shadow(0 0 22px rgba(245, 196, 0, 0.6));
+    }
+}
+
+.female-headline {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+.female-sub {
+    color: var(--text-muted, #888);
+    font-size: 0.78rem;
+    margin: 0;
+    line-height: 1.55;
+    max-width: 210px;
+}
+
+.female-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--yellow-main, #f5c400);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Female tab: center the single card */
+.tab-content:has(.female-card) {
+    grid-template-columns: 1fr !important;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .trans-tabs {
+        width: 90%;
+        max-width: 280px;
+    }
+
+    .trans-tab {
+        padding: 8px 18px;
+        font-size: 0.82rem;
+    }
+}
+
+/* =========================================
+   أضف هذا في نهاية Transformations.css
+   ========================================= */
+
+/* ── Tabs container ── */
 .trans-tabs {
     display: flex;
     align-items: center;
@@ -212,7 +463,7 @@
     border: none;
     background: transparent;
     color: #666;
-    font-size: var(--text-sm);
+    font-size: 0.88rem;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -237,13 +488,13 @@
     stroke: #000;
 }
 
-/* Sliding gold pill */
+/* الـ pill الذهبية المتحركة */
 .trans-tab-indicator {
     position: absolute;
     top: 5px;
     bottom: 5px;
     width: calc(50% - 5px);
-    background: var(--yellow-main);
+    background: var(--yellow-main, #f5c400);
     border-radius: 8px;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 0;
@@ -269,7 +520,7 @@
     left: auto;
 }
 
-/* Tab content animation */
+/* ── Tab content animation ── */
 .tab-content {
     animation: tabFadeIn 0.32s ease forwards;
 }
@@ -286,7 +537,7 @@
     }
 }
 
-/* Female tab: center the card */
+/* ── Female tab: center the card ── */
 .tab-content:has(.female-card) {
     grid-template-columns: 1fr !important;
     max-width: 340px;
@@ -295,7 +546,7 @@
 }
 
 /* =========================================
-   Female Privacy Card
+   Female Card
    ========================================= */
 .female-placeholder {
     display: flex !important;
@@ -331,17 +582,9 @@
     }
 }
 
-.female-headline {
-    color: #fff;
-    font-size: var(--text-base);
-    font-weight: 700;
-    margin: 0;
-    letter-spacing: 0.3px;
-}
-
 .female-privacy-label {
-    color: var(--text-muted);
-    font-size: var(--text-xs);
+    color: var(--text-muted, #888);
+    font-size: 0.78rem;
     margin: 0;
     line-height: 1.55;
     max-width: 190px;
@@ -352,9 +595,9 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
-    background: var(--yellow-main);
+    background: var(--yellow-main, #f5c400);
     color: #000;
-    font-size: var(--text-xs);
+    font-size: 0.63rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -364,47 +607,8 @@
     pointer-events: none;
 }
 
-/* =========================================
-   Responsive
-   ========================================= */
-@media (max-width: 1024px) {
-    .transformations-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
+/* ── Responsive ── */
 @media (max-width: 768px) {
-    .transformations-section {
-        padding: 20px 0 20px;
-    }
-
-    .trans-header {
-        margin-bottom: 35px;
-    }
-
-    .trans-container {
-        width: 85%;
-    }
-
-    .transformations-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        max-width: 320px;
-        margin: 0 auto;
-    }
-
-    .trans-images-box {
-        aspect-ratio: 3 / 2;
-    }
-
-    .trans-info {
-        padding: 16px;
-    }
-
-    .trans-info h3 {
-        font-size: var(--text-lg);
-    }
-
     .trans-tabs {
         width: 90%;
         max-width: 260px;
@@ -412,43 +616,91 @@
 
     .trans-tab {
         padding: 8px 20px;
-        font-size: var(--text-xs);
+        font-size: 0.82rem;
     }
 }
 
-@media (max-width: 480px) {
-    .trans-header h2 {
-        font-size: var(--text-2xl);
-    }
-
-    .trans-images-box {
-        aspect-ratio: 1 / 1;
-    }
-}
-
-/* =========================================
-   Typography — RTL / LTR
-   ========================================= */
 [dir="rtl"],
 [dir="rtl"] body {
     font-family: var(--font-ar);
     font-weight: 600;
+    /* Cairo تبدو أجمل بوزن 600+ */
     letter-spacing: 0;
 }
 
+/* اللغة الإنجليزية */
 [dir="ltr"],
 body {
     font-family: var(--font-en);
     letter-spacing: 0.3px;
 }
 
+
+/* =============================================
+   3. تحسينات مخصصة للعناوين (اختياري لكن مميز)
+   ============================================= */
+
+/* عناوين h1 h2 بالعربي — Cairo Black */
 [dir="rtl"] h1,
 [dir="rtl"] h2 {
     font-family: var(--font-ar);
     font-weight: 900;
 }
 
+/* عناوين h1 h2 بالإنجليزي — Barlow Condensed ExtraBold */
 [dir="ltr"] h1,
 [dir="ltr"] h2 {
     font-family: var(--font-en);
-    font-weight:
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* trans-header خاصة — أكبر وأثقل */
+[dir="rtl"] .trans-header h2 {
+    font-weight: 900;
+    line-height: 1.3;
+}
+
+[dir="ltr"] .trans-header h2 {
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+/* الـ subtitle فوق العنوان */
+[dir="rtl"] .subtitle {
+    font-family: var(--font-ar);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+[dir="ltr"] .subtitle {
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* trans-duration — الرقم الذهبي */
+[dir="rtl"] .trans-duration {
+    font-family: var(--font-ar);
+    font-weight: 900;
+}
+
+[dir="ltr"] .trans-duration {
+    font-family: var(--font-en);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* trans-tab buttons */
+[dir="rtl"] .trans-tab {
+    font-family: var(--font-ar);
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+[dir="ltr"] .trans-tab {
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}

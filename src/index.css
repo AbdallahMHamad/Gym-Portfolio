@@ -13,31 +13,6 @@
   /* ← أضف هذين السطرين */
   --font-ar: 'Cairo', sans-serif;
   --font-en: 'Barlow Condensed', sans-serif;
-
-
-
-  /*font sizes*/
-
-
-  --text-xs: 0.75rem;
-  /* 12px - labels, badges */
-  --text-sm: 0.875rem;
-  /* 14px - captions, hints */
-  --text-base: 1rem;
-  /* 16px - body text */
-  --text-md: 1.1rem;
-  /* 17.6px - description */
-  --text-lg: 1.25rem;
-  /* 20px - subtitle */
-  --text-xl: 1.5rem;
-  /* 24px - card titles */
-  --text-2xl: 2rem;
-  /* 32px - stat numbers */
-  --text-3xl: clamp(1.8rem, 6vw, 3rem);
-  /* section titles */
-  --text-4xl: clamp(2rem, 8vw, 3.5rem);
-  /* hero title */
-
 }
 
 html {
@@ -46,8 +21,6 @@ html {
   height: auto;
   min-height: 100%;
   height: -webkit-fill-available;
-
-
 }
 
 body {
@@ -180,12 +153,32 @@ section::after,
   pointer-events: none;
 }
 
+.hero-title {
+  background: linear-gradient(to bottom, #ffffff 0%, #a1a1a1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
+}
 
 .stat-box h3 {
   text-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
   font-variant-numeric: tabular-nums;
 }
 
+.description {
+  border-right: 2px solid var(--yellow-main);
+  padding-right: 20px;
+  background: linear-gradient(to left, rgba(245, 196, 0, 0.03), transparent);
+}
+
+[dir="ltr"] .description {
+  border-right: none;
+  border-left: 2px solid var(--yellow-main);
+  padding-left: 20px;
+  padding-right: 0;
+  background: linear-gradient(to right, rgba(245, 196, 0, 0.05), transparent);
+}
 
 .coach-name-tag .line {
   box-shadow: 0 0 10px var(--yellow-main);
@@ -204,19 +197,6 @@ section::after,
     opacity: 1;
     width: 60px;
   }
-}
-
-
-.contact-section::after {
-  background: radial-gradient(ellipse at center,
-      rgba(245, 196, 0, 0.06) 50%,
-      /* بدل 0.15 */
-      rgba(245, 196, 0, 0.02) 50%,
-      /* بدل 0.05 */
-      transparent 80%);
-  filter: blur(50px);
-  /* أكثر ضبابية */
-  opacity: 0.7;
 }
 
 @media (max-width: 768px) {
