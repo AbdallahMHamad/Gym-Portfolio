@@ -1,8 +1,8 @@
 /* =========================================
    BREAKPOINT SYSTEM
-   mobile:  ≤ 768px
-   tablet:  768–1024px
-   desktop: > 1024px
+   mobile:  ≤ 768px   → column + display:contents trick
+   tablet:  768–1024px → column normal
+   desktop: > 1024px  → row-reverse
    ========================================= */
 
 /* =========================================
@@ -46,7 +46,7 @@
    ========================================= */
 .coach-name-tag {
     margin-top: 0;
-    font-family: var(--font-ar);
+    font-family: 'Cairo', sans-serif;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -63,7 +63,7 @@
     text-transform: uppercase;
     font-weight: 800;
     letter-spacing: 2px;
-    font-size: var(--text-sm);
+    font-size: 0.9rem;
     color: white;
 }
 
@@ -72,7 +72,7 @@
    ========================================= */
 .subtitle {
     color: var(--yellow-main);
-    font-size: var(--text-lg);
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -84,16 +84,10 @@
    Hero Title
    ========================================= */
 .hero-title {
-    font-size: var(--text-4xl);
+    font-size: 3.5rem;
     line-height: 1.1;
     font-weight: 800;
     margin-bottom: 20px;
-    display: block;
-    background: linear-gradient(to bottom, #ffffff 0%, #a1a1a1 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
 }
 
 /* =========================================
@@ -140,29 +134,10 @@
    ========================================= */
 .description {
     color: var(--text-muted);
-    font-size: var(--text-md);
+    font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 35px;
-    margin-top: 10px;
     max-width: 95%;
-    transition: all 0.3s ease;
-}
-
-[dir="rtl"] .description {
-    font-family: var(--font-ar);
-    font-weight: 600;
-    line-height: 1.8;
-    text-align: right !important;
-    border-right: 3px solid var(--yellow-main);
-    padding-right: 15px;
-}
-
-[dir="ltr"] .description {
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    text-align: left !important;
-    border-left: 3px solid var(--yellow-main);
-    padding-left: 15px;
 }
 
 /* =========================================
@@ -183,17 +158,15 @@
 }
 
 .stat-box h3 {
-    font-size: var(--text-2xl);
+    font-size: 2rem;
     margin: 0;
     color: var(--yellow-main);
     font-style: italic;
-    text-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
-    font-variant-numeric: tabular-nums;
 }
 
 .stat-box p {
     color: var(--text-muted);
-    font-size: var(--text-sm);
+    font-size: 0.9rem;
     margin: 5px 0 0 0;
 }
 
@@ -209,39 +182,21 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.image-wrapper::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40%;
-    background: linear-gradient(to top, var(--bg-main) 0%, transparent 100%);
-    z-index: 2;
-    pointer-events: none;
-}
-
 .carousel-track {
     display: flex;
-    flex-direction: row;
     width: 100%;
     height: 100%;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 }
 
 .carousel-slide {
     flex: 0 0 100%;
-    min-width: 100%;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
     -webkit-user-drag: none;
-}
-
-[dir="rtl"] .carousel-track {
-    flex-direction: row;
 }
 
 .carousel-dots {
@@ -270,33 +225,12 @@
 }
 
 /* =========================================
-   Coach Name Tag Animation
-   ========================================= */
-.coach-name-tag .line {
-    box-shadow: 0 0 10px var(--yellow-main);
-    animation: line-glow 3s infinite;
-}
-
-@keyframes line-glow {
-
-    0%,
-    100% {
-        opacity: 0.5;
-        width: 40px;
-    }
-
-    50% {
-        opacity: 1;
-        width: 60px;
-    }
-}
-
-/* =========================================
    DESKTOP: > 1024px
    ========================================= */
 @media (min-width: 1025px) {
     .about-section {
         padding: 30px 0 60px;
+        /* تقليل الفراغ العلوي من 80 إلى 40 */
     }
 
     .about-container {
@@ -389,7 +323,10 @@
 }
 
 /* =========================================
-   MOBILE: ≤ 768px — واحدة فقط
+   MOBILE: ≤ 768px
+   TRICK: display:contents on .about-content
+   → children become direct flex items of .about-container
+   → text(order:1) → image(order:2) → stats(order:3)
    ========================================= */
 @media (max-width: 768px) {
 
@@ -403,9 +340,8 @@
     [dir="rtl"] .about-container {
         flex-direction: column !important;
         align-items: center;
-        gap: 15px !important;
+        gap: 0;
         width: 90%;
-        padding-bottom: 10px;
     }
 
     .about-content,
@@ -413,68 +349,77 @@
         display: contents;
     }
 
-    .coach-name-tag {
-        order: 1;
-        justify-content: center;
-        margin-bottom: 0;
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+        width: 90%;
+        margin: 0 auto 10px auto;
+        /* تقليل الهامش السفلي من 15 إلى 10 */
     }
 
-    .subtitle {
+    .coach-name-tag,
+    .subtitle,
+    .hero-title,
+    .uk-certification-badge,
+    .description {
         order: 1;
+        width: 100%;
         text-align: center;
-        margin-bottom: 5px;
+    }
+
+    .coach-name-tag {
+        justify-content: center;
+        margin-top: 0;
     }
 
     .hero-title {
-        order: 2;
-        font-size: clamp(1.8rem, 10vw, 2.4rem) !important;
-        margin: 0 auto 8px auto !important;
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
         width: 90%;
-        text-align: center;
-        line-height: 1.1;
+        margin: 0 auto 15px auto;
     }
 
+    .uk-certification-badge {
+        width: fit-content !important;
+        margin: 0 auto 15px auto !important;
+        /* تقليل الهامش من 20 إلى 15 */
+        max-width: 95%;
+    }
+
+    .description {
+        max-width: 90%;
+        margin: 0 auto 15px auto;
+        /* تقليل الهامش من 20 إلى 15 */
+        font-size: 0.95rem;
+        /* تصغير الخط قليلاً لتوفير مساحة */
+    }
+
+    /* Image → middle */
     .about-image,
     [dir="rtl"] .about-image {
-        order: 3;
+        order: 2;
         width: 100%;
         display: flex;
         justify-content: center;
-        margin-top: 5px;
+        min-height: auto;
+        margin-top: 10px;
     }
 
     .image-wrapper {
         width: 85vw !important;
         max-width: 320px;
-        aspect-ratio: 4 / 3 !important;
+        aspect-ratio: 4 / 5;
         top: 0 !important;
         border-radius: 16px;
     }
 
-    .uk-certification-badge {
-        order: 4;
-        width: fit-content !important;
-        margin: 8px auto !important;
-        padding: 4px 10px;
-    }
-
-    .description {
-        order: 5;
-        font-size: var(--text-sm) !important;
-        max-width: 95%;
-        margin: 0 auto 10px auto !important;
-        text-align: center !important;
-        border: none !important;
-        padding: 0 !important;
-    }
-
+    /* Stats → bottom */
     .stats-grid {
-        order: 6;
+        order: 3;
         width: 100%;
+        display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: clamp(5px, 3vw, 20px);
-        padding: 15px 0;
-        margin-top: 5px;
+        padding: 20px 0;
+        margin-top: 16px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         text-align: center;
     }
@@ -506,4 +451,199 @@
         font-size: 1rem !important;
     }
 
+    .stat-box p {
+        font-size: 0.6rem !important;
+        white-space: normal !important;
+    }
+}
+
+.image-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, var(--bg-main) 0%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* جعل العنوان الرئيسي أكثر ضخامة وسينمائية */
+.hero-title {
+    background: linear-gradient(to bottom, #ffffff 0%, #a1a1a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
+}
+
+/* توهج خفيف للأرقام (Stats) لتبدو كأنها شاشة رقمية احترافية */
+.stat-box h3 {
+    text-shadow: 0 0 15px rgba(245, 196, 0, 0.4);
+    font-variant-numeric: tabular-nums;
+}
+
+
+
+
+
+
+
+/* تأثير نبض خفيف لـ Coach Name Tag */
+.coach-name-tag .line {
+    box-shadow: 0 0 10px var(--yellow-main);
+    animation: line-glow 3s infinite;
+}
+
+
+/* =========================================
+   تعديلات خاصة لتوحيد الخط العربي مع الإنجليزي
+   ========================================= */
+
+
+.description {
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    max-width: 95%;
+}
+
+/* ── إعدادات اللغة العربية ── */
+[dir="rtl"] .description {
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: 600;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    /* حجم النص العربي */
+    text-align: right !important;
+    /* إجبار النص على محاذاة اليمين ليلتصق بالخط */
+    border-right: 3px solid var(--yellow-main);
+    padding-right: 15px;
+    /* المسافة بين الخط والنص */
+}
+
+/* ── إعدادات اللغة الإنجليزية ── */
+[dir="ltr"] .description {
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    /* تعديل الحجم ليتقارب بصرياً مع العربي */
+    text-align: left !important;
+    /* إجبار النص على محاذاة اليسار ليلتصق بالخط */
+    border-left: 3px solid var(--yellow-main);
+    /* إضافة الخط الأصفر للإنجليزي */
+    padding-left: 15px;
+    /* المسافة بين الخط والنص */
+}
+
+.coach-name-tag .name {
+    font-weight: 800;
+}
+
+
+
+
+
+
+
+@keyframes line-glow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        width: 40px;
+    }
+
+    50% {
+        opacity: 1;
+        width: 60px;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+
+    .about-container {
+        flex-direction: column !important;
+        gap: 15px !important;
+        padding-bottom: 10px;
+        /* Tightened gap */
+    }
+
+
+
+    .subtitle {
+        padding-bottom: 1px;
+        margin-bottom: 1px;
+
+
+
+
+    }
+
+    .coach-name-tag {
+        order: 1;
+        margin-bottom: -10px;
+        padding-bottom: -10px;
+    }
+
+    .hero-title {
+        order: 2;
+        font-size: clamp(1.8rem, 10vw, 2.4rem) !important;
+        margin: 0px auto 10px auto !important;
+        line-height: 1.1;
+        padding-bottom: 4px;
+    }
+
+    .about-image {
+        order: 3;
+    }
+
+
+
+    .uk-certification-badge {
+        order: 4;
+        margin: 10px auto !important;
+        padding: 4px 10px;
+        /* Slimmer badge */
+    }
+
+    .description {
+        order: 5;
+        font-size: 0.9rem;
+        max-width: 95%;
+        margin: 0 auto 10px auto;
+        /* Limit height or lines if it's too long */
+    }
+
+    .stats-grid {
+        order: 6;
+        padding: 15px 0;
+        margin-top: 5px;
+    }
+}
+
+.carousel-track {
+    display: flex;
+    flex-direction: row;
+    /* يضمن ترتيب الصور من 0 إلى الأخير */
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    width: 100%;
+}
+
+/* تأكد من أن الصور تأخذ كامل العرض ولا تتقلص */
+.carousel-slide {
+    min-width: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* في حالة العربي (RTL) */
+[dir="rtl"] .carousel-track {
+    /* المتصفح سيتعامل مع الـ translateX(-) بشكل صحيح من اليمين */
+    flex-direction: row;
 }
