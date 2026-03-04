@@ -185,14 +185,3 @@ section::after,
   }
 }
 
-.contact-section::after {
-  background: radial-gradient(ellipse at center,
-      rgba(245, 196, 0, 0.06) 50%,
-      /* بدل 0.15 */
-      rgba(245, 196, 0, 0.02) 50%,
-      /* بدل 0.05 */
-      transparent 80%);
-  filter: blur(50px);
-  /* أكثر ضبابية */
-  opacity: 0.7;
-}
