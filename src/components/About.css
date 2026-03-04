@@ -594,7 +594,8 @@
 
     .coach-name-tag {
         order: 1;
-        margin-bottom: 5px;
+        margin-bottom: -10px;
+        padding-bottom: -10px;
     }
 
     .hero-title {
