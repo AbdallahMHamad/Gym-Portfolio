@@ -563,37 +563,72 @@
 
 
 @media (max-width: 768px) {
-
-    /* النص فوق */
-    .coach-name-tag {
-        order: 1;
+    .about-section {
+        padding: 75px 0 20px;
+        /* 75px = ارتفاع الـ navbar */
+        /* Reduced padding */
+        min-height: 100vh;
+        /* Optional: ensures section fills screen */
+        display: flex;
+        align-items: flex-start;
+        /* Start from top */
     }
 
-    .subtitle {
+    .about-container {
+        flex-direction: column !important;
+        gap: 15px !important;
+        padding-top: 10px;
+        /* Tightened gap */
+    }
+
+
+
+    .subtitle{
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+
+
+
+
+    }
+    .coach-name-tag {
         order: 1;
+        margin-bottom: 5px;
     }
 
     .hero-title {
         order: 2;
+        font-size: clamp(1.8rem, 10vw, 2.4rem) !important;
+        margin: 0px auto 10px auto !important;
+        line-height: 1.1;
+        padding-bottom: 4px;
     }
 
-    /* الصورة أول شي */
-    .about-image,
-    [dir="rtl"] .about-image {
-        order: 1;
-        margin-top: 0;
+    .about-image {
+        order: 3;
     }
+
+
 
     .uk-certification-badge {
-        order: 3;
+        order: 4;
+        margin: 10px auto !important;
+        padding: 4px 10px;
+        /* Slimmer badge */
     }
 
     .description {
-        order: 3;
+        order: 5;
+        font-size: 0.9rem;
+        max-width: 95%;
+        margin: 0 auto 10px auto;
+        /* Limit height or lines if it's too long */
     }
 
     .stats-grid {
-        order: 4;
+        order: 6;
+        padding: 15px 0;
+        margin-top: 5px;
     }
 }
 
