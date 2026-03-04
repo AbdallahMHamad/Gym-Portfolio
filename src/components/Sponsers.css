@@ -1,7 +1,6 @@
 /* =========================================
    Sponsors Section Base
    ========================================= */
-
 .sponsers-section {
     padding: 80px 0;
     background-color: var(--bg-main);
@@ -28,7 +27,7 @@
 }
 
 .section-header .section-title {
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-size: var(--text-3xl);
     color: white;
     font-weight: 800;
     line-height: 1.1;
@@ -37,7 +36,7 @@
 
 .section-description {
     color: var(--text-muted);
-    font-size: clamp(1rem, 2vw, 1.1rem);
+    font-size: var(--text-md);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -46,7 +45,6 @@
 /* =========================================
    Grid
    ========================================= */
-
 .sponsers-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -58,7 +56,6 @@
 /* =========================================
    Sponsor Card
    ========================================= */
-
 .sponsor-card {
     background: #111;
     border: 1px solid #222;
@@ -71,11 +68,9 @@
     align-items: center;
     position: relative;
     cursor: pointer;
-    /* يضمن أن البطاقة تملأ كامل مساحة الـ Grid المتاحة */
     height: 100%;
 }
 
-/* Desktop: hover glow */
 @media (hover: hover) {
     .sponsor-card:hover {
         transform: translateY(-10px);
@@ -103,22 +98,23 @@
     }
 }
 
-/* Touch devices: tap glow via React .tapped class */
 @media (hover: none) {
-
-    /* Logos always fully visible on touch */
     .sponsor-logo-wrapper img {
         filter: grayscale(0%) opacity(1) !important;
     }
 
-    /* Brief press feedback */
-    .sponsor-card:active {
-        transform: translateY(-4px);
-        border-color: var(--yellow-main);
-        box-shadow: 0 0 20px rgba(245, 196, 0, 0.2);
+    .sponsor-card {
+        border-color: rgba(245, 196, 0, 0.25);
+        box-shadow: 0 0 15px rgba(245, 196, 0, 0.08);
     }
 
-    /* Persistent glow after tap — toggled by React state */
+    .sponsor-card:active {
+        transform: scale(0.97);
+        border-color: var(--yellow-main);
+        box-shadow: 0 0 25px rgba(245, 196, 0, 0.3);
+        transition: all 0.1s ease;
+    }
+
     .sponsor-card.tapped {
         transform: translateY(-8px);
         border-color: var(--yellow-main);
@@ -136,7 +132,6 @@
 /* =========================================
    Logo & Content
    ========================================= */
-
 .sponsor-logo-wrapper {
     height: 80px;
     width: 100%;
@@ -144,7 +139,6 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
-    /* يعمل كمرساة تضمن بقاء الشعار في الأعلى */
     flex-shrink: 0;
 }
 
@@ -156,9 +150,7 @@
     transition: filter 0.4s ease;
 }
 
-
 .sponsor-content {
-    /* هذا السطر السحري يدفع المحتوى ليتوزع بالتساوي ويجعل الأسماء على خط واحد */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -167,7 +159,14 @@
 
 .sponsor-content h3 {
     color: white;
-    font-size: 1.4rem;
+    font-size: var(--text-xl);
+    margin: 0;
+}
+
+.sponsor-content p {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
     margin: 0;
 }
 
@@ -181,7 +180,6 @@
 /* =========================================
    Promo Banner
    ========================================= */
-
 .promo-banner {
     background: rgba(245, 196, 0, 0.05);
     border: 2px dashed var(--yellow-main);
@@ -202,7 +200,7 @@
     color: var(--yellow-main);
     text-transform: uppercase;
     font-weight: 800;
-    font-size: 0.8rem;
+    font-size: var(--text-xs);
     letter-spacing: 2px;
     margin-bottom: 8px;
 }
@@ -215,12 +213,12 @@
     font-weight: 900;
     border-radius: 4px;
     margin: 0 5px;
-    font-size: 1.3rem;
+    font-size: var(--text-xl);
 }
 
 .promo-content p {
     color: white;
-    font-size: 1.2rem;
+    font-size: var(--text-lg);
     margin: 0;
 }
 
@@ -238,10 +236,13 @@
     }
 }
 
-/* =========================================
-   Responsive Breakpoints
-   ========================================= */
+.highlight {
+    color: var(--yellow-main);
+}
 
+/* =========================================
+   Responsive
+   ========================================= */
 @media (max-width: 1024px) and (min-width: 769px) {
     .sponsers-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -254,13 +255,8 @@
     }
 }
 
-/* =========================================
-   التعديل الموحد للموبايل (ليتطابق مع بقية الموقع)
-   ========================================= */
-
 @media (max-width: 768px) {
     .section-container {
-        /* توحيد العرض مع بقية الأقسام */
         width: 90%;
         max-width: 1200px;
         margin: 0 auto;
@@ -268,13 +264,9 @@
     }
 
     .sponsers-grid {
-        /* جعل الشبكة تأخذ كامل عرض الحاوية */
         width: 100%;
         grid-template-columns: 1fr;
         gap: 16px;
-        /* نفس الفجوة في قسم التحولات */
-
-        /* السر هنا: توحيد الحد الأقصى مع صورة About وكروت التحولات */
         max-width: 320px;
         margin: 0 auto;
     }
@@ -286,11 +278,16 @@
     }
 
     .promo-banner {
-        /* جعل عرض الكود الترويجي موازياً لعرض البطاقات */
         width: 100%;
         max-width: 320px;
         margin: 0 auto 30px auto;
         box-sizing: border-box;
+    }
+
+    .section-header .section-title {
+        font-size: var(--text-2xl);
+        width: 100%;
+        word-break: break-word;
     }
 }
 
@@ -303,115 +300,8 @@
     .promo-banner {
         max-width: 280px;
     }
-}
-
-@media (max-width: 528px) {
-    .section-header .section-title {
-        font-size: clamp(1.2rem, 4vw, 1.8rem);
-        width: 100%;
-        word-break: break-word;
-    }
-
-    .section-container {
-        /* بدلاً من 80% لجعلها متناسقة مع قسم الـ Transformations */
-        width: 90%;
-    }
-
-    .sponsers-grid {
-        /* بدلاً من 80% */
-        width: 100%;
-        padding: 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .section-header .section-title {
-        font-size: clamp(1.3rem, 8vw, 1.8rem);
-        word-break: break-word;
-    }
-
-    .section-container {
-        width: 80%;
-    }
-
-    .sponsers-grid {
-        max-width: 380px;
-        padding: 0;
-
-    }
-
-    .sponsor-card {
-        padding: 30px 20px;
-        width: 100%;
-    }
-
-    .promo-banner {
-        width: 90%;
-        box-sizing: border-box;
-    }
-
-    .promo-code {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 420px) {
-    .section-header .section-title {
-        font-size: 1.4rem;
-        line-height: 1.2;
-    }
-
-    .section-container {
-        width: 80%;
-    }
-
-    .sponsor-card {
-        max-width: 100%;
-    }
-
-    .promo-banner {
-        width: 82%;
-    }
-}
-
-@media (max-width: 330px) {
-    .section-container {
-        width: 95%;
-    }
-
-    .sponsers-grid {
-        width: 100%;
-    }
 
     .sponsor-card {
         padding: 20px 10px;
     }
-}
-
-@media (hover: none) {
-
-    /* Always show logos in full color on mobile — no interaction needed */
-    .sponsor-logo-wrapper img {
-        filter: grayscale(0%) opacity(1);
-    }
-
-    /* Cards have a subtle always-on glow so they feel premium */
-    .sponsor-card {
-        border-color: rgba(245, 196, 0, 0.25);
-        box-shadow: 0 0 15px rgba(245, 196, 0, 0.08);
-    }
-
-    /* Clean, snappy press feedback — feels native */
-    .sponsor-card:active {
-        transform: scale(0.97);
-        border-color: var(--yellow-main);
-        box-shadow: 0 0 25px rgba(245, 196, 0, 0.3);
-        transition: all 0.1s ease;
-    }
-}
-
-.highlight {
-
-    color: var(--yellow-main);
-
 }

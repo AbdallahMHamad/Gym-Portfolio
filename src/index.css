@@ -13,6 +13,31 @@
   /* ← أضف هذين السطرين */
   --font-ar: 'Cairo', sans-serif;
   --font-en: 'Barlow Condensed', sans-serif;
+
+
+
+  /*font sizes*/
+
+
+  Typography Scale - Mobile First=========================================*/ --text-xs: 0.75rem;
+  /* 12px - labels, badges */
+  --text-sm: 0.875rem;
+  /* 14px - captions, hints */
+  --text-base: 1rem;
+  /* 16px - body text */
+  --text-md: 1.1rem;
+  /* 17.6px - description */
+  --text-lg: 1.25rem;
+  /* 20px - subtitle */
+  --text-xl: 1.5rem;
+  /* 24px - card titles */
+  --text-2xl: 2rem;
+  /* 32px - stat numbers */
+  --text-3xl: clamp(1.8rem, 6vw, 3rem);
+  /* section titles */
+  --text-4xl: clamp(2rem, 8vw, 3.5rem);
+  /* hero title */
+
 }
 
 html {
@@ -21,6 +46,8 @@ html {
   height: auto;
   min-height: 100%;
   height: -webkit-fill-available;
+
+
 }
 
 body {
@@ -197,6 +224,19 @@ section::after,
     opacity: 1;
     width: 60px;
   }
+}
+
+
+.contact-section::after {
+  background: radial-gradient(ellipse at center,
+      rgba(245, 196, 0, 0.06) 50%,
+      /* بدل 0.15 */
+      rgba(245, 196, 0, 0.02) 50%,
+      /* بدل 0.05 */
+      transparent 80%);
+  filter: blur(50px);
+  /* أكثر ضبابية */
+  opacity: 0.7;
 }
 
 @media (max-width: 768px) {
