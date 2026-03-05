@@ -5,17 +5,12 @@
 
 .whatsapp-float {
     position: fixed;
-    /* bottom مش موجود هنا — بيجي من JS (bottomOffset state) */
     z-index: 9999;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-
-    /* transition سلس لما JS يغير الـ bottom */
-    transition: bottom 0.2s ease;
-
-    /* تأكد إنه فوق أي iOS toolbar */
-    will-change: bottom;
+    /* نستخدم padding بدلاً من gap في الحاوية الرئيسية لضمان اتصال العناصر */
+    padding: 10px;
+    margin: -10px;
 }
 
 /* RTL */
@@ -42,6 +37,10 @@
     pointer-events: none;
     transform: translateY(12px);
     transition: opacity 0.25s ease, transform 0.25s ease;
+
+    /* الجسر الشفاف: يملأ الفراغات تحت وحول الأزرار */
+    padding-bottom: 15px;
+    margin-bottom: -5px;
 }
 
 .whatsapp-float.rtl .whatsapp-options {
@@ -70,10 +69,23 @@
     text-decoration: none;
     white-space: nowrap;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    transition: background 0.2s ease, transform 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    direction: ltr;
+    transition: all 0.3s ease;
+    /* جعل الحركة أنعم */
+    position: relative;
+    /* ضروري للجسر */
+}
+
+.whatsapp-option::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -10px;
+    /* يغطي الفراغ العلوي */
+    bottom: -10px;
+    /* يغطي الفراغ السفلي */
+    background: transparent;
+    z-index: -1;
 }
 
 @media (hover: hover) {
@@ -194,33 +206,4 @@
         height: 50px;
         font-size: 1.5rem;
     }
-}
-
-/* 1. زيادة مساحة التفاعل للزرين */
-.trans-tabs button {
-    position: relative;
-    /* تأكد من عدم وجود margin كبير يفصل بينهما */
-    margin: 0 5px;
-}
-
-/* 2. إضافة طبقة وهمية خلف الزر لسد الفراغ (Pseudo-element) */
-.trans-tabs button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -10px;
-    /* تمتد لليسار لسد الفراغ */
-    right: -10px;
-    /* تمتد لليمين لسد الفراغ */
-    background: transparent;
-    z-index: -1;
-}
-
-/* 3. إذا كانت الأزرار داخل حاوية (Container) */
-.trans-tabs {
-    display: flex;
-    gap: 0;
-    /* اجعل الفجوة صفر واستخدم padding للأزرار بدل margin */
-    padding: 10px;
 }

@@ -53,14 +53,13 @@
     /* حل مشكلة القفز واختلاف العرض */
     display: inline-block;
     line-height: 1;
+
 }
 
-/* تعديل خاص لخط Cairo في العربي ليناسب الإنجليزي في الارتفاع */
 [dir="rtl"] .logo span {
     padding-bottom: 7px;
-    font-size: 1.15rem;
-    display: flex;
-    /* الخط العربي أحياناً يحتاج تكبير بسيط جداً ليوازي الإنجليزي بصرياً */
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
 }
 
 .logo img {
