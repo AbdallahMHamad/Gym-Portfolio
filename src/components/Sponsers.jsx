@@ -6,25 +6,28 @@ function Sponsers() {
     const { t } = useTranslation();
     const [tappedId, setTappedId] = useState(null);
 
-    // نقلنا البيانات للداخل لاستخدام t()
+    // إضافة روابط الإنستغرام داخل البيانات
     const sponsorsData = [
         {
             id: 1,
             name: "Myprotein ME",
             description: t('desc_myprotein'),
             logo: "/images_resources/Logos/Myproteinme.jpg",
+            link: "https://www.instagram.com/myproteinme/",
         },
         {
             id: 2,
             name: "Squatwolf",
             description: t('desc_squatwolf'),
             logo: "/images_resources/Logos/Squatwolf.jpg",
+            link: "https://www.instagram.com/squatwolf/",
         },
         {
             id: 3,
             name: "Ghithaa - غذاء",
             description: t('desc_ghithaa'),
             logo: "/images_resources/Logos/ghithaa_sa.jpg",
+            link: "https://www.instagram.com/ghithaa_sa/",
         }
     ];
 
@@ -47,18 +50,19 @@ function Sponsers() {
                 </div>
 
                 {/* Promo Banner */}
-{/* Promo Banner */}
-<div className="promo-banner">
-    <div className="promo-content">
-        <span className="promo-label">{t('promo_label')}</span>
-<p>
-  {t('promo_use_code')} 
-  <span className="promo-code">MS99</span> 
-  {t('promo_for')} 
-  <strong> {t('promo_discount')} </strong> 
-  {t('promo_on_products')}
-</p>    </div>
-</div>
+                <div className="promo-banner">
+                    <div className="promo-content">
+                        <span className="promo-label">{t('promo_label')}</span>
+                        <p>
+                            {t('promo_use_code')} 
+                            <span className="promo-code">MS99</span> 
+                            {t('promo_for')} 
+                            <strong> {t('promo_discount')} </strong> 
+                            {t('promo_on_products')}
+                        </p>    
+                    </div>
+                </div>
+
                 {/* Grid */}
                 <div
                     className="sponsers-grid"
@@ -67,10 +71,15 @@ function Sponsers() {
                     }}
                 >
                     {sponsorsData.map((sponsor) => (
-                        <div
+                        // تحويل الـ div إلى a tag مع الرابط
+                        <a
                             key={sponsor.id}
+                            href={sponsor.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className={`sponsor-card ${tappedId === sponsor.id ? 'tapped' : ''}`}
                             onClick={() => handleCardClick(sponsor.id)}
+                            style={{ textDecoration: 'none', color: 'inherit' }} // عشان الرابط ما يخرب تصميم النصوص (يضيف خط تحتها)
                         >
                             <div className="sponsor-logo-wrapper">
                                 <img
@@ -85,7 +94,7 @@ function Sponsers() {
                                 <div className="divider"></div>
                                 <p>{sponsor.description}</p>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
 
