@@ -197,12 +197,13 @@ i18n
     .use(initReactI18next)
     .init({
         resources,
-        lng: 'ar',              // ← اللغة الافتراضية دايماً عربي
         fallbackLng: 'ar',
-        detection: {
-            order: ['localStorage'], // ← بس قرا من localStorage، تجاهل لغة المتصفح
-            caches: ['localStorage'],
-        },
         interpolation: { escapeValue: false }
     });
+
+i18n.on('languageChanged', (lng) => {
+    document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lng;
+});
+
 export default i18n;
