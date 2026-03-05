@@ -30,7 +30,6 @@ function Contact() {
         <div className="section-header">
           <span className="subtitle">{t('contact_subtitle')}</span>
           <h2>{t('contact_title')} <span className="highlight">{t('contact_highlight')}</span></h2>
-          <p className="contact-desc">{t('contact_desc')}</p>
         </div>
 
         <div className="trendy-social-grid">

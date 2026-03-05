@@ -1,7 +1,6 @@
 /* =========================================
-   Contact Section - Modern Redesign
+   Contact Section
    ========================================= */
-
 .contact-section {
     padding: 100px 0;
     background-color: var(--bg-main);
@@ -15,7 +14,6 @@
 .contact-container {
     width: 90%;
     max-width: 1000px;
-    /* تصغير العرض قليلاً ليصبح متمركزاً وأكثر أناقة */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -23,28 +21,36 @@
     z-index: 2;
 }
 
+.contact-section .section-header h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
+}
+
 .contact-desc {
     color: var(--text-muted);
     max-width: 500px;
     margin: 0 auto 50px auto;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     text-align: center;
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 /* =========================================
-   Trendy Grid Layout
+   Grid
    ========================================= */
 .trendy-social-grid {
     display: grid;
-    /* 3 أعمدة للكمبيوتر */
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
 }
 
 /* =========================================
-   Trendy Card Style (Glassmorphism)
+   Card
    ========================================= */
 .trendy-card {
     background: rgba(20, 20, 20, 0.4);
@@ -62,14 +68,11 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-
-    /* منع تحديد النص وتأثيرات اللمس الافتراضية */
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     touch-action: manipulation;
 }
 
-/* التوهج الخلفي السري */
 .trendy-card::before {
     content: '';
     position: absolute;
@@ -98,7 +101,7 @@
 }
 
 /* =========================================
-   Icon & Text Details
+   Icon & Text
    ========================================= */
 .trendy-icon-wrapper {
     width: 65px;
@@ -137,7 +140,7 @@
 }
 
 .trendy-info span {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
     font-weight: 400;
     transition: color 0.3s ease;
@@ -149,30 +152,30 @@
 }
 
 /* =========================================
-   Responsive Breakpoints (The Magic for Mobile)
+   Responsive
    ========================================= */
-
-/* شاشات التابلت */
 @media (max-width: 992px) {
     .trendy-social-grid {
         gap: 15px;
     }
 }
 
-/* شاشات الموبايل (السر هنا: عمودين بدلاً من واحد) */
 @media (max-width: 768px) {
     .contact-section {
         padding: 70px 0;
     }
 
-    .trendy-social-grid {
-        /* هنا يكمن الحل! عمودين في الموبايل يختصر الطول للنصف */
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+    .contact-section .section-header h2 {
+        font-size: clamp(1.5rem, 8vw, 2rem);
     }
 
     .contact-container {
         width: 92%;
+    }
+
+    .trendy-social-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 
     .trendy-card {
@@ -192,8 +195,7 @@
     }
 
     .trendy-info span {
-        font-size: 0.75rem;
-        /* إخفاء النص الطويل جداً إذا لزم الأمر في الشاشات الصغيرة جداً */
+        font-size: 0.82rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -201,7 +203,6 @@
     }
 }
 
-/* الشاشات الصغيرة جداً (مثل iPhone SE) */
 @media (max-width: 380px) {
     .trendy-social-grid {
         gap: 10px;
@@ -213,23 +214,5 @@
 
     .trendy-info span {
         display: none;
-        /* إخفاء اسم المستخدم لتركيز الانتباه على المنصة فقط في الشاشات الضيقة جداً */
-    }
-}
-
-.contact-section .section-header h2 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    /* نفس sponsors */
-    letter-spacing: 1px;
-    /* نفس [dir="ltr"] h2 */
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1.2;
-}
-
-@media (max-width: 480px) {
-    .contact-section .section-header h2 {
-        font-size: clamp(1.5rem, 8vw, 2rem);
     }
 }
