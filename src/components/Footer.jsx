@@ -15,7 +15,7 @@ function Footer() {
           </p>
 
                     <p className="rights-text">
-            © {currentYear} <strong>Coach Salman</strong>. {t('footer_rights')}
+            © {currentYear} <strong>Mohammad Salman</strong>. {t('footer_rights')}
           </p>
 
         </div>

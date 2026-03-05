@@ -38,6 +38,31 @@
     cursor: pointer;
 }
 
+.logo span {
+    font-family: 'Cairo', sans-serif !important;
+    /* إجبار الخط على اللغتين */
+    font-size: 1.1rem;
+    font-weight: 800;
+    /* زيادة الوزن لتبدو كلمة COACH واضحة وفخمة */
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+    text-transform: uppercase;
+    /* لتوحيد شكل الحروف الإنجليزية */
+    white-space: nowrap;
+
+    /* حل مشكلة القفز واختلاف العرض */
+    display: inline-block;
+    line-height: 1;
+}
+
+/* تعديل خاص لخط Cairo في العربي ليناسب الإنجليزي في الارتفاع */
+[dir="rtl"] .logo span {
+    padding-bottom: 7px;
+    font-size: 1.15rem;
+    display: flex;
+    /* الخط العربي أحياناً يحتاج تكبير بسيط جداً ليوازي الإنجليزي بصرياً */
+}
+
 .logo img {
     height: 60px;
     /* حجم معتدل أكثر */
