@@ -2,19 +2,9 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Transformations.css";
 
-const [tappedCard, setTappedCard] = useState(null);
-
-const handleCardTap = (id) => {
-    setTappedCard(id);
-    setTimeout(() => setTappedCard(null), 600);
-};
-
 /* ─── Female Card — بيانات حقيقية، بدون صورة ─────────────── */
 const FemaleCard = ({ name, description, duration, t }) => (
-<div
-    className={`trans-card female-card ${tappedCard === client.id ? 'tapped' : ''}`}
-    onClick={() => handleCardTap(client.id)}
->
+  <div className="trans-card female-card">
     <div className="trans-images-box female-placeholder">
       <div className="female-inner">
 
@@ -118,9 +108,7 @@ const Transformations = () => {
         <div className="transformations-grid tab-content" key={activeTab}>
           {activeTab === "male"
             ? maleData.map((item) => (
-                <div key={item.id}     className={`trans-card ${tappedCard === client.id ? 'tapped' : ''}`}
-    onClick={() => handleCardTap(client.id)}
->
+                <div key={item.id} className="trans-card">
                   <div className="trans-images-box">
                     <div className="trans-img-wrapper">
                       <img src={item.beforeImg} alt={`Before - ${item.name}`} loading="lazy"
