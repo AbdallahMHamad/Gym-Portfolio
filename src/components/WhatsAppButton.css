@@ -195,3 +195,32 @@
         font-size: 1.5rem;
     }
 }
+
+/* 1. زيادة مساحة التفاعل للزرين */
+.trans-tabs button {
+    position: relative;
+    /* تأكد من عدم وجود margin كبير يفصل بينهما */
+    margin: 0 5px;
+}
+
+/* 2. إضافة طبقة وهمية خلف الزر لسد الفراغ (Pseudo-element) */
+.trans-tabs button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -10px;
+    /* تمتد لليسار لسد الفراغ */
+    right: -10px;
+    /* تمتد لليمين لسد الفراغ */
+    background: transparent;
+    z-index: -1;
+}
+
+/* 3. إذا كانت الأزرار داخل حاوية (Container) */
+.trans-tabs {
+    display: flex;
+    gap: 0;
+    /* اجعل الفجوة صفر واستخدم padding للأزرار بدل margin */
+    padding: 10px;
+}
