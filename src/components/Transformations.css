@@ -704,3 +704,26 @@ body {
     font-weight: 700;
     letter-spacing: 1.5px;
 }
+
+@media (hover: none) {
+    .trans-card {
+        border-color: rgba(245, 196, 0, 0.12);
+        /* توهج خفيف دائم */
+        box-shadow: 0 0 12px rgba(245, 196, 0, 0.06);
+    }
+
+    /* ضغطة سريعة */
+    .trans-card:active {
+        transform: scale(0.98);
+        border-color: var(--yellow-main);
+        box-shadow: 0 0 25px rgba(245, 196, 0, 0.3);
+        transition: all 0.1s ease;
+    }
+
+    /* بعد الضغط — تحتاج تضيف class="tapped" في React */
+    .trans-card.tapped {
+        border-color: var(--yellow-main);
+        box-shadow: 0 0 20px rgba(245, 196, 0, 0.25);
+        background: #1a1a1a;
+    }
+}

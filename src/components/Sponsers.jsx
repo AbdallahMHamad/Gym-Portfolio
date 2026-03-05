@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "./Sponsers.css";
 
@@ -6,7 +6,6 @@ function Sponsers() {
     const { t } = useTranslation();
     const [tappedId, setTappedId] = useState(null);
 
-    // إضافة روابط الإنستغرام داخل البيانات
     const sponsorsData = [
         {
             id: 1,
@@ -31,8 +30,32 @@ function Sponsers() {
         }
     ];
 
+    // 1. مراقبة الضغطات في أي مكان بالشاشة لإلغاء التحديد
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            // إذا الضغطة ما كانت على كارد من كروت الرعاة، الغي التحديد
+            if (!e.target.closest('.sponsor-card')) {
+                setTappedId(null);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchstart", handleClickOutside); // مهمة جداً للموبايل
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
+        };
+    }, []);
+
     const handleCardClick = (id) => {
-        setTappedId(prev => (prev === id ? null : id));
+        setTappedId(id);
+        
+        // 2. إلغاء التحديد تلقائياً بعد أقل من ثانية
+        // عشان لما اليوزر يرجع من الانستغرام يلاقي الكارد رجعت لشكلها الطبيعي
+        setTimeout(() => {
+            setTappedId(null);
+        }, 800);
     };
 
     return (
@@ -64,14 +87,8 @@ function Sponsers() {
                 </div>
 
                 {/* Grid */}
-                <div
-                    className="sponsers-grid"
-                    onClick={(e) => {
-                        if (!e.target.closest('.sponsor-card')) setTappedId(null);
-                    }}
-                >
+                <div className="sponsers-grid">
                     {sponsorsData.map((sponsor) => (
-                        // تحويل الـ div إلى a tag مع الرابط
                         <a
                             key={sponsor.id}
                             href={sponsor.link}
@@ -79,7 +96,8 @@ function Sponsers() {
                             rel="noopener noreferrer"
                             className={`sponsor-card ${tappedId === sponsor.id ? 'tapped' : ''}`}
                             onClick={() => handleCardClick(sponsor.id)}
-                            style={{ textDecoration: 'none', color: 'inherit' }} // عشان الرابط ما يخرب تصميم النصوص (يضيف خط تحتها)
+                            onBlur={() => setTappedId(null)} // 3. حماية إضافية لو المتصفح علق الفوكس عليها
+                            style={{ textDecoration: 'none', color: 'inherit' }}
                         >
                             <div className="sponsor-logo-wrapper">
                                 <img
