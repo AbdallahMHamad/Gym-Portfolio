@@ -333,15 +333,21 @@
 
 
 @media (max-width: 768px) {
-    .trans-tabs {
-        width: 90%;
-        max-width: 280px;
+    .trans-tab {
+        width: 130px;
+        font-size: 0.82rem;
+        padding: 11px 0;
     }
 
-    .trans-tab {
-        padding: 8px 18px;
-        font-size: 0.82rem;
+    .trans-tab-indicator {
+        width: 130px;
     }
+
+    .trans-tab-indicator.female {
+        left: 135px;
+    }
+
+    /* 130 + 5px */
 }
 
 /* =========================================
@@ -510,17 +516,7 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 768px) {
-    .trans-tabs {
-        width: 90%;
-        max-width: 260px;
-    }
 
-    .trans-tab {
-        padding: 8px 20px;
-        font-size: 0.82rem;
-    }
-}
 
 [dir="rtl"],
 [dir="rtl"] body {
