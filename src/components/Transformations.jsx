@@ -93,22 +93,23 @@ const femaleData = [
           <h2>{t('trans_title')} <span className="trans-highlight">{t('trans_highlight')}</span></h2>
         </div>
 
-        <div className="trans-tabs">
-          <button 
-            className={`trans-tab ${activeTab === "male" ? "active" : ""}`} 
-            onClick={() => { setActiveTab("male"); setActiveCardId(null); }}
-          >
-            {t('tab_male')}
-          </button>
-          <button 
-            className={`trans-tab ${activeTab === "female" ? "active" : ""}`} 
-            onClick={() => { setActiveTab("female"); setActiveCardId(null); }}
-          >
-            {t('tab_female')}
-          </button>
-          <span className={`trans-tab-indicator ${activeTab}`} />
-        </div>
-
+<div className="trans-tabs">
+  <button 
+    className={`trans-tab ${activeTab === "male" ? "active" : ""}`} 
+    onClick={() => { setActiveTab("male"); setActiveCardId(null); }}
+    onTouchEnd={(e) => { e.preventDefault(); setActiveTab("male"); setActiveCardId(null); }}
+  >
+    {t('tab_male')}
+  </button>
+  <button 
+    className={`trans-tab ${activeTab === "female" ? "active" : ""}`} 
+    onClick={() => { setActiveTab("female"); setActiveCardId(null); }}
+    onTouchEnd={(e) => { e.preventDefault(); setActiveTab("female"); setActiveCardId(null); }}
+  >
+    {t('tab_female')}
+  </button>
+  <span className={`trans-tab-indicator ${activeTab}`} />
+</div>
         <div className="transformations-grid tab-content" key={activeTab}>
           {activeTab === "male"
             ? maleData.map((item) => (
