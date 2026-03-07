@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "./Transformations.css";
 
-/* ─── Female Card ─────────────── */
-const FemaleCard = ({ name, description, duration, t, isActive, onTouch }) => (
+/* ─── Female Card (بدون صورة — خصوصية) ─────────────── */
+const FemalePrivacyCard = ({ name, description, duration, t, isActive, onTouch }) => (
   <div 
     className={`trans-card female-card ${isActive ? 'tapped' : ''}`}
     onTouchStart={onTouch}
@@ -33,18 +33,39 @@ const FemaleCard = ({ name, description, duration, t, isActive, onTouch }) => (
   </div>
 );
 
-/* ─── Main Component ──────────────────────────────────────── */
+/* ─── Female Card (مع صورة — نفس شكل الذكور) ─────────────── */
+const FemalePhotoCard = ({ name, description, duration, img, t, isActive, onTouch }) => (
+  <div 
+    className={`trans-card female-photo-card ${isActive ? 'tapped' : ''}`}
+    onTouchStart={onTouch}
+  >
+    <div className="trans-images-box female-photo-box">
+      <div className="trans-img-wrapper" style={{ flex: 1 }}>
+        <img 
+          src={img} 
+          alt={name} 
+          loading="lazy"
+        />
+        <span className="trans-label label-after">{t('female_card_badge')}</span>
+      </div>
+    </div>
+    <div className="trans-info">
+      <h3>{name}</h3>
+      <p>{description}</p>
+      <span className="trans-duration">{duration}</span>
+    </div>
+  </div>
+);/* ─── Main Component ──────────────────────────────────────── */
 const Transformations = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("male");
-  const [activeCardId, setActiveCardId] = useState(null); // لإدارة "الضوي" على الموبايل
+  const [activeCardId, setActiveCardId] = useState(null);
 
-  // إلغاء التحديد عند الضغط في أي مكان فارغ
   useEffect(() => {
-    const clearActive = () => setActiveCardId(null);
-    window.addEventListener('touchstart', (e) => {
-      if (!e.target.closest('.trans-card')) clearActive();
-    });
+    const clearActive = (e) => {
+      if (!e.target.closest('.trans-card')) setActiveCardId(null);
+    };
+    window.addEventListener('touchstart', clearActive);
     return () => window.removeEventListener('touchstart', clearActive);
   }, []);
 
@@ -56,10 +77,14 @@ const Transformations = () => {
     { id: 6, name: t('client_6_name'), duration: t('client_6_duration'), description: t('desc_fat_loss'), beforeImg: "/images_resources/Transformations/ashb.jpg", afterImg: "/images_resources/Transformations/asha.jpg" },
   ];
 
-  const femaleClients = [
-    { id: 1, name: t('client_1_name'), duration: t('client_1_duration'), description: t('desc_fat_loss') },
-  ];
-
+  // اسماء — عندها صورة (بنطلون واسع = قبل/بعد)
+  // رشا وشهد — بدون صورة
+const femaleData = [
+  { id: 7, type: 'photo',   name: t('client_7_name'), duration: t('client_7_duration'), description: t('client_7_desc'), img: "/images_resources/Transformations/gggg.jpg" },
+  { id: 1, type: 'privacy', name: t('client_1_name'), duration: t('client_1_duration'), description: t('client_1_desc') },
+  { id: 8, type: 'privacy', name: t('client_8_name'), duration: t('client_8_duration'), description: t('client_8_desc') },
+  { id: 9, type: 'privacy', name: t('client_9_name'), duration: t('client_9_duration'), description: t('client_9_desc') },
+];
   return (
     <section id="transformations" className="transformations-section">
       <div className="trans-container">
@@ -69,11 +94,17 @@ const Transformations = () => {
         </div>
 
         <div className="trans-tabs">
-          <button className={`trans-tab ${activeTab === "male" ? "active" : ""}`} onClick={() => {setActiveTab("male"); setActiveCardId(null);}}>
-            {t('tab_male', 'Male')}
+          <button 
+            className={`trans-tab ${activeTab === "male" ? "active" : ""}`} 
+            onClick={() => { setActiveTab("male"); setActiveCardId(null); }}
+          >
+            {t('tab_male')}
           </button>
-          <button className={`trans-tab ${activeTab === "female" ? "active" : ""}`} onClick={() => {setActiveTab("female"); setActiveCardId(null);}}>
-            {t('tab_female', 'Female')}
+          <button 
+            className={`trans-tab ${activeTab === "female" ? "active" : ""}`} 
+            onClick={() => { setActiveTab("female"); setActiveCardId(null); }}
+          >
+            {t('tab_female')}
           </button>
           <span className={`trans-tab-indicator ${activeTab}`} />
         </div>
@@ -103,15 +134,25 @@ const Transformations = () => {
                   </div>
                 </div>
               ))
-            : femaleClients.map((item) => (
-                <FemaleCard
-                  key={item.id}
-                  {...item}
-                  t={t}
-                  isActive={activeCardId === item.id}
-                  onTouch={() => setActiveCardId(item.id)}
-                />
-              ))
+            : femaleData.map((item) =>
+item.type === 'photo' ? (
+  <FemalePhotoCard
+    key={item.id}
+    {...item}
+    t={t}
+    isActive={activeCardId === item.id}
+    onTouch={() => setActiveCardId(item.id)}
+  />
+                ) : (
+                  <FemalePrivacyCard
+                    key={item.id}
+                    {...item}
+                    t={t}
+                    isActive={activeCardId === item.id}
+                    onTouch={() => setActiveCardId(item.id)}
+                  />
+                )
+              )
           }
         </div>
       </div>

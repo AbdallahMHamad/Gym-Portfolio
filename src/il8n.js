@@ -75,7 +75,17 @@ const resources = {
             "desc_squatwolf": "Clothing brand for athletes and fitness enthusiasts based in Dubai.",
             "desc_ghithaa": "Health food for athletes and fitness enthusiasts.",
 
-            "contact_subtitle": "CONNECT WITH ME",
+
+            "client_7_name": "Asmaa",
+            "client_7_duration": "4 Months",
+            "client_8_name": "Rasha",
+            "client_8_duration": "3 Months",
+            "client_9_name": "Shahd",
+            "client_9_duration": "1 Month",
+            "client_7_desc": "Lost 15kg — from 85kg to 70kg",
+            "client_1_desc": "Lost 10kg — from 84kg to 74kg",  // رشا
+            "client_9_desc": "Lost 5kg — from 58kg to 53kg",   // شهد
+            "client_8_desc": "Lost weight & body recomposition", // سميرة — ما عندنا أرقام            "contact_subtitle": "CONNECT WITH ME",
             "contact_title": "Join The ",
             "contact_highlight": "Community",
             "contact_desc": "Ready to start? Contact me on WhatsApp for coaching inquiries or follow my daily tips on social media.",
@@ -122,6 +132,16 @@ const resources = {
 
 
 
+            "client_7_name": "أسماء",
+            "client_7_duration": "4 أشهر",
+            "client_8_name": "رشا",
+            "client_8_duration": "3 أشهر",
+            "client_9_name": "شهد",
+            "client_9_duration": "شهر واحد",
+            "client_7_desc": "خسرت ١٥ كيلو — من ٨٥ إلى ٧٠ كيلو",
+            "client_1_desc": "خسرت ١٠ كيلو — من ٨٤ إلى ٧٤ كيلو",
+            "client_9_desc": "خسرت ٥ كيلو — من ٥٨ إلى ٥٣ كيلو",
+            "client_8_desc": "خسارة وزن وإعادة تشكيل الجسم",
 
 
             // بيانات التحولات - عربي

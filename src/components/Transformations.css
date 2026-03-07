@@ -417,13 +417,6 @@
     pointer-events: none;
 }
 
-/* Female tab: center the single card */
-.tab-content:has(.female-card) {
-    grid-template-columns: 1fr !important;
-    max-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 @media (max-width: 768px) {
     .trans-tabs {
@@ -537,13 +530,6 @@
     }
 }
 
-/* ── Female tab: center the card ── */
-.tab-content:has(.female-card) {
-    grid-template-columns: 1fr !important;
-    max-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 /* =========================================
    Female Card
@@ -718,3 +704,6 @@ body {
     /* إزالة اللون الأزرق الافتراضي في آيفون */
     transition: all 0.3s ease;
 }
+
+
+
