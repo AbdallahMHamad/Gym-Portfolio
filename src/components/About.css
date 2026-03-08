@@ -587,8 +587,13 @@
 
     .coach-name-tag {
         order: 1;
-        margin-bottom: -10px;
-        padding-bottom: -10px;
+        margin-bottom: 10px;
+        /* Changed to a positive gap */
+        padding-bottom: 0;
+        /* Removed the invalid negative padding */
+        justify-content: center;
+        /* Ensures it stays centered */
+        display: flex;
     }
 
     .hero-title {
