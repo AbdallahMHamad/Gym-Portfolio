@@ -192,13 +192,13 @@
 }
 
 /* ── Mobile ── */
-@media (max-width: 600px) {
+@media (max-width: 576px) {
     .whatsapp-float.rtl {
         right: 14px;
     }
 
     .whatsapp-float.ltr {
-        left: 14px;
+        left: 12px;
     }
 
     .whatsapp-trigger {
