@@ -28,7 +28,7 @@ function Navbar() {
         
         {/* Logo */}
         <div className="logo">
-          <a href="#about">
+          <a href="/">
             <img src="/images_resources/Logos/salman.png"
              alt="Coach Salman Logo" />
           </a>
