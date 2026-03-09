@@ -12,17 +12,30 @@ document.documentElement.lang = savedLng;
   })();
   </script>
 
+    <style>
+    body { visibility: hidden; }
+  </style>
+
+
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/images_resources/Logos/salman.png" />
 
     <!-- viewport-fit=cover enables safe-area-inset on iPhone notch/home bar -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+    document.fonts.ready.then(function() {
+      document.body.style.visibility = 'visible';
+    });
+    setTimeout(function() {
+      document.body.style.visibility = 'visible';
+    }, 800);
+  </script>
+
     <title>كوتش سلمان | مدرب لياقة أونلاين وأخصائي تغذية رياضية معتمد</title>
     <meta name="description" content="Online fitness coaching with Coach Salman. Personal training, custom diet plans, and real client transformations for men and women.">
     <meta name="description" content="ابدأ رحلة التغيير مع كوتش محمد سلمان. برامج تدريب أونلاين مخصصة، أنظمة تغذية رياضية معتمدة من بريطانيا، وتدريب احترافي لبناء العضلات وحرق الدهون." />
