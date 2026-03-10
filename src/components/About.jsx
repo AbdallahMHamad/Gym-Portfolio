@@ -43,12 +43,12 @@ function About() {
   const timerRef = useRef(null);
 
   const originalImages = [
-    "./public/images_resources/salman/1.webp",
-    "./public/images_resources/salman/2.webp",
-    "./public/images_resources/salman/3.webp",
-    "./public/images_resources/salman/backss.webp",
-    "./public/images_resources/salman/back2.webp",
-    "./public/images_resources/salman/packs.webp",
+    "/images_resources/salman/1.webp",
+    "/images_resources/salman/2.webp",
+    "/images_resources/salman/3.webp",
+    "/images_resources/salman/backss.webp",
+    "/images_resources/salman/back2.webp",
+    "/images_resources/salman/packs.webp",
     "/images_resources/salman/pose.webp",
     "/images_resources/salman/side.webp"
   ];
