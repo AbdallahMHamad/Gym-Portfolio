@@ -218,8 +218,12 @@ i18n
     .use(initReactI18next)
     .init({
         resources,
-        lng: 'ar',
+        lng: localStorage.getItem('i18nextLng') || 'ar', // ← بدل 'ar' الثابت
         fallbackLng: 'ar',
+        detection: {
+            order: ['localStorage'],
+            caches: ['localStorage'],
+        },
         interpolation: { escapeValue: false }
     });
 
