@@ -43,14 +43,14 @@ function About() {
   const timerRef = useRef(null);
 
   const originalImages = [
-    "/images_resources/salman/1.jfif",
-    "/images_resources/salman/2.jfif",
-    "/images_resources/salman/3.jfif",
-    "/images_resources/salman/backss.jpg",
-    "/images_resources/salman/back2.jpg",
-    "/images_resources/salman/packs.jpg",
-    "/images_resources/salman/pose.jpg",
-    "/images_resources/salman/side.jpg"
+    "./public/images_resources/salman/1.webp",
+    "./public/images_resources/salman/2.webp",
+    "./public/images_resources/salman/3.webp",
+    "./public/images_resources/salman/backss.webp",
+    "./public/images_resources/salman/back2.webp",
+    "./public/images_resources/salman/packs.webp",
+    "/images_resources/salman/pose.webp",
+    "/images_resources/salman/side.webp"
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -190,17 +190,18 @@ function About() {
                 transition: 'transform 0.6s ease-in-out'
               }}
             >
-              {originalImages.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`Coach Salman - ${index + 1}`}
-                  className="carousel-slide"
-                  style={{ minWidth: '100%', objectFit: 'cover' }}
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
-              ))}
-            </div>
+{originalImages.map((img, index) => (
+  <img
+    key={index}
+    src={img}
+    alt={`Coach Salman - ${index + 1}`}
+    className="carousel-slide"
+    style={{ minWidth: '100%', objectFit: 'cover' }}
+    loading={index === 0 ? "eager" : "lazy"} 
+    {...(index === 0 ? { fetchpriority: "high" } : {})} 
+  />
+))}  
+          </div>
 
             <div className="carousel-dots" style={{ direction: 'ltr' }}>
               {originalImages.map((_, idx) => (
