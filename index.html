@@ -2,60 +2,45 @@
 <html lang='{{lng}}' dir="{{dir}}"> 
   
 <head>
-
   <script>
   (function() {
-const savedLng = localStorage.getItem('i18nextLng') || 'ar'; // ← غير 'en' لـ 'ar'
-const dir = savedLng.startsWith('ar') ? 'rtl' : 'ltr';
-document.documentElement.dir = dir;
-document.documentElement.lang = savedLng;
+    const savedLng = localStorage.getItem('i18nextLng') || 'ar'; 
+    const dir = savedLng.startsWith('ar') ? 'rtl' : 'ltr';
+    document.documentElement.dir = dir;
+    document.documentElement.lang = savedLng;
   })();
   </script>
 
-    <style>
-    body { visibility: hidden; }
-  </style>
+  <meta charset="UTF-8" />
+  
+  <link rel="preload" as="image" href="/images_resources/salman/1.webp" fetchpriority="high" />
+  
+  <link rel="icon" type="image/webp" href="/images_resources/Logos/salman.webp" />
 
-
-    <meta charset="UTF-8" />
-    <link rel="preload" as="image" href="/images_resources/salman/1.jfif" fetchpriority="high" />
-    <link rel="icon" type="image/png" href="/images_resources/Logos/salman.png" />
-
-    <!-- viewport-fit=cover enables safe-area-inset on iPhone notch/home bar -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <title>كوتش سلمان | مدرب لياقة أونلاين وأخصائي تغذية رياضية معتمد</title>
+  <meta name="description" content="Online fitness coaching with Coach Salman. Personal training, custom diet plans, and real client transformations for men and women.">
+  <meta name="description" content="ابدأ رحلة التغيير مع كوتش محمد سلمان. برامج تدريب أونلاين مخصصة، أنظمة تغذية رياضية معتمدة من بريطانيا، وتدريب احترافي لبناء العضلات وحرق الدهون." />
+  <meta name="keywords" content="كوتش سلمان, مدرب أونلاين, تدريب شخصي, كمال أجسام, حرق دهون, أخصائي تغذية رياضية السعودية, برامج تدريب مخصصة" />
+  <meta name="author" content="Mohammad Salman" />
 
-    <script>
-    document.fonts.ready.then(function() {
-      document.body.style.visibility = 'visible';
-    });
-    setTimeout(function() {
-      document.body.style.visibility = 'visible';
-    }, 800);
-  </script>
+  <meta property="og:title" content="كوتش سلمان | التدريب الشخصي الأونلاين" />
+  <meta property="og:description" content="توقف عن التمني، ابدأ بالتنفيذ. حول جسمك مع أفضل أنظمة التدريب والتغذية." />
+  <meta property="og:image" content="/images_resources/Logos/salman.webp" />
+  <meta property="og:type" content="website" />
 
-    <title>كوتش سلمان | مدرب لياقة أونلاين وأخصائي تغذية رياضية معتمد</title>
-    <meta name="description" content="Online fitness coaching with Coach Salman. Personal training, custom diet plans, and real client transformations for men and women.">
-    <meta name="description" content="ابدأ رحلة التغيير مع كوتش محمد سلمان. برامج تدريب أونلاين مخصصة، أنظمة تغذية رياضية معتمدة من بريطانيا، وتدريب احترافي لبناء العضلات وحرق الدهون." />
-    <meta name="keywords" content="كوتش سلمان, مدرب أونلاين, تدريب شخصي, كمال أجسام, حرق دهون, أخصائي تغذية رياضية السعودية, برامج تدريب مخصصة" />
-    <meta name="author" content="Mohammad Salman" />
-
-    <meta property="og:title" content="كوتش سلمان | التدريب الشخصي الأونلاين" />
-    <meta property="og:description" content="توقف عن التمني، ابدأ بالتنفيذ. حول جسمك مع أفضل أنظمة التدريب والتغذية." />
-    <meta property="og:image" content="/images_resources/Logos/salman.png" />
-    <meta property="og:type" content="website" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Coach Salman - Online Fitness Coaching" />
-    <meta name="twitter:description" content="Certified Nutritionist - UK. Expertise in muscle building and fat loss." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Coach Salman - Online Fitness Coaching" />
+  <meta name="twitter:description" content="Certified Nutritionist - UK. Expertise in muscle building and fat loss." />
 
 </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    
   </body>
 </html>
