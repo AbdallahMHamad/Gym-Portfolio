@@ -21,7 +21,7 @@ const resources = {
             "about_title_stop": "Stop Wishing,",
             "about_title_start": "Start ",
             "about_title_doing": "Doing",
-            "about_cert": "Certified Nutritionist — Liverpool College",
+            "about_cert": "Certified Nutritionist — Liverpool College (UK)",
             "about_desc": "Transform your physique with expert guidance. Whether you're looking to lose fat or build elite muscle, I provide the roadmap to your best self.",
             "about_stat_clients": "Clients Transformed",
             "about_stat_years": "Years Experience",
@@ -83,9 +83,10 @@ const resources = {
             "client_9_name": "Shahd",
             "client_9_duration": "1 Month",
             "client_7_desc": "Lost 15kg — from 85kg to 70kg",
-            "client_1_desc": "Lost 10kg — from 84kg to 74kg",  // رشا
+            "client_1_desc": "Lost 8kg — from 79kg to 71kg",  // رشا
             "client_9_desc": "Lost 5kg — from 58kg to 53kg",   // شهد
-            "client_8_desc": "Lost weight & body recomposition", // سميرة — ما عندنا أرقام            "contact_subtitle": "CONNECT WITH ME",
+            "client_8_desc": "Lost 10kg — from 84 kg to 74 kg",
+            "contact_subtitle": "CONNECT WITH ME",
             "contact_title": "Join The ",
             "contact_highlight": "Community",
             "contact_desc": "Ready to start? Contact me on WhatsApp for coaching inquiries or follow my daily tips on social media.",
@@ -123,7 +124,7 @@ const resources = {
             "about_title_stop": "توقف عن التمني،",
             "about_title_start": "ابدأ ",
             "about_title_doing": "بالتنفيذ",
-            "about_cert": "أخصائي تغذية معتمد — كلية ليفربول",
+            "about_cert": "أخصائي تغذية معتمد - كلية ليفربول (بريطانيا)",
             "about_desc": "غيّر شكل جسمك بتوجيه احترافي. سواء كنت تبحث عن حرق الدهون أو بناء كتل عضلية صافية، سأوفر لك خارطة الطريق للوصول لأفضل نسخة من نفسك.",
             "about_stat_clients": "عميل تغيرت حياتهم",
             "about_stat_years": "سنوات من الخبرة",
@@ -138,10 +139,10 @@ const resources = {
             "client_8_duration": "3 أشهر",
             "client_9_name": "شهد",
             "client_9_duration": "شهر واحد",
-            "client_7_desc": "خسرت ١٥ كيلو — من ٨٥ إلى ٧٠ كيلو",
-            "client_1_desc": "خسرت ١٠ كيلو — من ٨٤ إلى ٧٤ كيلو",
-            "client_9_desc": "خسرت ٥ كيلو — من ٥٨ إلى ٥٣ كيلو",
-            "client_8_desc": "خسارة وزن وإعادة تشكيل الجسم",
+            "client_7_desc": "خسرت ١٥ كغ — من ٨٥ إلى ٧٠ كغ",
+            "client_1_desc": "خسرت ٨ كغ — من ٧٩ إلى ٧١ كغ",
+            "client_9_desc": "خسرت ٥ كغ — من ٥٨ إلى ٥٣ كغ",
+            "client_8_desc": "خسرت ١٠ كغ — من ٨٤ إلى ٧٤ كغ",
 
 
             // بيانات التحولات - عربي
@@ -217,7 +218,7 @@ i18n
     .use(initReactI18next)
     .init({
         resources,
-        lng: 'ar', 
+        lng: 'ar',
         fallbackLng: 'ar',
         interpolation: { escapeValue: false }
     });
