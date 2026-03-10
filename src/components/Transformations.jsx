@@ -44,7 +44,7 @@ const FemalePhotoCard = ({ name, description, duration, img, t, isActive, onTouc
         <img 
           src={img} 
           alt={name} 
-          loading="lazy"
+          loading="eager"
         />
         <span className="trans-label label-after">{t('female_card_badge')}</span>
       </div>
