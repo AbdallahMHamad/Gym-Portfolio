@@ -368,9 +368,9 @@
         /* تأخذ نصف الشاشة تقريباً وليس كلها */
         padding: 100px 20px 40px;
         /* مسافة علوية لعدم تداخل المحتوى مع الهيدر */
-        background: rgba(10, 10, 10, 0.85);
+        background: #000000;
         /* خلفية داكنة ولكن شفافة */
-        backdrop-filter: blur(25px);
+        backdrop-filter: none;
         /* تمويه قوي للخلفية (تأثير الزجاج) */
         -webkit-backdrop-filter: blur(25px);
         /* لدعم متصفحات سفاري */
