@@ -51,6 +51,14 @@ const resources = {
 
 
 
+
+            "desc_vshape": "Macro-calculated healthy meals designed to fuel your performance and fitness goals.", "vshape_view_bundles": "View Meal Bundles",
+            "vshape_hide_bundles": "Hide Offers",
+            "vshape_bundle_1_meals": "Breakfast + Lunch + Dinner + Salad + Free Delivery",
+            "vshape_bundle_2_meals": "Breakfast + Lunch + Snack + Salad + Free Delivery",
+            "vshape_duration_20": "Sun to Thu for 20 days",
+
+
             "trans_subtitle": "REAL RESULTS",
             "trans_title": "Client",
             "trans_highlight": "Transformations",
@@ -208,7 +216,15 @@ const resources = {
             "whatsapp_collab": "التعاون",
             "whatsapp_collab_sub": "شراكات وإعلانات",
             "whatsapp_cta": "تواصل معنا",
-            "free_consultation": "احصل على استشارة مجانية الآن"
+            "free_consultation": "احصل على استشارة مجانية الآن",
+
+
+
+            "desc_vshape": "وجبات صحية محسوبة السعرات بدقة لدعم أدائك الرياضي وأهدافك البدنية.", "vshape_view_bundles": "رؤية باقات الوجبات",
+            "vshape_hide_bundles": "إخفاء العروض",
+            "vshape_bundle_1_meals": "فطور + غداء + عشاء + سلطة + توصيل مجاني",
+            "vshape_bundle_2_meals": "فطور + غداء + سناك + سلطة + توصيل مجاني",
+            "vshape_duration_20": "من الأحد للخميس لمدة ٢٠ يوم",
         }
     }
 };

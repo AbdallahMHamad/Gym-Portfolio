@@ -311,3 +311,374 @@
         padding: 20px 10px;
     }
 }
+
+/* تحسين الجريد ليدعم التمدد الموحد */
+.sponsers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    /* يسمح للكروت بالتمدد طبيعياً */
+    gap: 30px;
+    width: 100%;
+}
+
+.sponsor-card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* تضمن أن الكروت في نفس الصف لها نفس الارتفاع */
+}
+
+/* تصميم زر الـ Collapse بهوية V Shape */
+.vshape-special-area {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.collapse-btn {
+    width: 100%;
+    background: transparent;
+    border: 2px solid var(--yellow-main);
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.collapse-btn:hover {
+    background: rgba(245, 196, 0, 0.1);
+    box-shadow: 0 0 15px rgba(245, 196, 0, 0.2);
+}
+
+.collapse-btn .v-icon {
+    background: var(--yellow-main);
+    color: black;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    transition: transform 0.5s ease;
+}
+
+.collapse-btn.active .v-icon {
+    transform: rotate(180deg);
+}
+
+/* انميشن فتح الباقات */
+.bundles-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
+}
+
+.bundles-collapse.show {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 20px;
+}
+
+.bundle-box {
+    background: #1a1a1a;
+    border-right: 4px solid var(--yellow-main);
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    text-align: right;
+}
+
+.bundle-text {
+    font-size: 0.85rem;
+    color: #eee;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.bundle-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    color: var(--yellow-main);
+    font-weight: 900;
+}
+
+.code-tag {
+    font-family: monospace;
+    background: #333;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--yellow-main);
+    border: 1px solid rgba(245, 196, 0, 0.3);
+}
+
+/* تحسين للجوال */
+@media (max-width: 768px) {
+    .sponsers-grid {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+    }
+}
+
+/* 1. إزالة الخطوط البنفسجية نهائياً من جميع الروابط والنصوص */
+.sponsers-section a,
+.sponsers-section a:hover,
+.sponsers-section a:visited,
+.sponsers-section a:active,
+.card-link,
+.sponsor-card h3,
+.sponsor-card p {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. تحسين الجريد ليدعم تمدد الكرت المستقل */
+.sponsers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* تغيير align-items إلى start يمنع الكروت الأخرى من التمدد إجبارياً */
+    align-items: start;
+    gap: 30px;
+    width: 100%;
+}
+
+/* 3. تنسيق الكرت الأساسي */
+.sponsor-card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    /* يسمح للكرت بأخذ الارتفاع بناءً على محتواه */
+    min-height: 330px;
+    /* يضمن تساويهم في الحالة الطبيعية دون إجبار عند التمدد */
+}
+
+/* تأكيد أن الكرت المتمدد فقط هو الذي يتغير */
+.sponsor-card.expanded {
+    height: auto;
+    z-index: 5;
+}
+
+/* محتوى الكرت */
+.sponsor-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* 4. تصميم زر الـ Collapse بهوية V Shape */
+.vshape-special-area {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.collapse-btn {
+    width: 100%;
+    background: transparent;
+    border: 2px solid var(--yellow-main);
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.collapse-btn:hover {
+    background: rgba(245, 196, 0, 0.1);
+}
+
+.collapse-btn .v-icon {
+    background: var(--yellow-main);
+    color: black;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    transition: transform 0.5s ease;
+}
+
+.collapse-btn.active .v-icon {
+    transform: rotate(180deg);
+}
+
+/* أنميشن فتح الباقات */
+.bundles-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
+}
+
+.bundles-collapse.show {
+    max-height: 800px;
+    /* تم زيادتها لتناسب المحتوى الجديد */
+    opacity: 1;
+    margin-top: 20px;
+}
+
+.bundle-box {
+    background: #1a1a1a;
+    border-right: 4px solid var(--yellow-main);
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    text-align: right;
+}
+
+.bundle-text {
+    font-size: 0.85rem;
+    color: #eee;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.bundle-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    color: var(--yellow-main);
+    font-weight: 900;
+}
+
+.code-tag {
+    font-family: monospace;
+    background: #333;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--yellow-main);
+    border: 1px solid rgba(245, 196, 0, 0.3);
+}
+
+/* تحسين للجوال */
+@media (max-width: 768px) {
+    .sponsers-grid {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        align-items: center;
+    }
+
+    .sponsor-card {
+        min-height: auto;
+        /* نلغي الحد الأدنى في الجوال ليكون التصميم مرناً */
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+/* تحسين صندوق الباقة */
+.bundle-box {
+    background: #161616;
+    /* لون أغمق قليلاً للتباين */
+    border-left: 3px solid var(--yellow-main);
+    /* خط جانبي أنيق */
+    padding: 22px 18px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    text-align: left;
+    /* للإنجليزية */
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* في حالة اللغة العربية */
+[dir="rtl"] .bundle-box {
+    text-align: right;
+    border-left: none;
+    border-right: 3px solid var(--yellow-main);
+}
+
+.bundle-box:hover {
+    transform: translateX(5px);
+    background: #1c1c1c;
+}
+
+/* تنسيق نص الوجبات */
+.bundle-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    /* خط أعرض قليلاً */
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+}
+
+/* تنسيق المدة (الأيام) */
+.bundle-duration {
+    display: block;
+    font-size: 0.75rem;
+    color: #888;
+    /* لون رمادي خفيف */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+/* منطقة السعر والكود */
+.bundle-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #222;
+    padding-top: 12px;
+}
+
+.price {
+    color: var(--yellow-main);
+    font-size: 1.2rem;
+    font-weight: 900;
+    font-family: 'Oswald', sans-serif;
+    /* أو أي خط رياضي */
+}
+
+/* تحسين شكل تاغ الكود ليصبح كأنه زر صغير */
+.code-tag {
+    font-family: 'Courier New', monospace;
+    background: rgba(245, 196, 0, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--yellow-main);
+    border: 1px solid var(--yellow-main);
+    font-weight: bold;
+    letter-spacing: 1px;
+}

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Sponsers.css";
 
 function Sponsers() {
-    const { t } = useTranslation();
-    const [tappedId, setTappedId] = useState(null);
+    const { t, i18n } = useTranslation();
+    const [showBundles, setShowBundles] = useState(false);
 
     const sponsorsData = [
         {
@@ -23,99 +23,93 @@ function Sponsers() {
         },
         {
             id: 3,
-            name: "Ghithaa - غذاء",
-            description: t('desc_ghithaa'),
-            logo: "/images_resources/Logos/ghithaa_sa.webp",
-            link: "https://www.instagram.com/ghithaa_sa/",
+            name: "V.Shape Pro",
+            description: t('desc_vshape'),
+            logo: "/images_resources/Logos/VShape.webp",
+            link: "https://www.instagram.com/v.shape.sa/",
+            bundles: [
+                {
+                    meals: t('vshape_bundle_1_meals'),
+                    duration: t('vshape_duration_20'),
+                    price: i18n.language === 'ar' ? "١٠٢٦ ﷼" : "1026 SAR",
+                    code: "MS99"
+                },
+                {
+                    meals: t('vshape_bundle_2_meals'),
+                    duration: t('vshape_duration_20'),
+                    price: i18n.language === 'ar' ? "٧٧٤ ﷼" : "774 SAR",
+                    code: "MS999"
+                }
+            ]
         }
     ];
 
-    // 1. مراقبة الضغطات في أي مكان بالشاشة لإلغاء التحديد
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            // إذا الضغطة ما كانت على كارد من كروت الرعاة، الغي التحديد
-            if (!e.target.closest('.sponsor-card')) {
-                setTappedId(null);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        document.addEventListener("touchstart", handleClickOutside); // مهمة جداً للموبايل
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-            document.removeEventListener("touchstart", handleClickOutside);
-        };
-    }, []);
-
-    const handleCardClick = (id) => {
-        setTappedId(id);
-        
-        // 2. إلغاء التحديد تلقائياً بعد أقل من ثانية
-        // عشان لما اليوزر يرجع من الانستغرام يلاقي الكارد رجعت لشكلها الطبيعي
-        setTimeout(() => {
-            setTappedId(null);
-        }, 800);
+    const toggleBundles = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setShowBundles(!showBundles);
     };
 
     return (
         <section id="sponsers" className="section dark sponsers-section">
             <div className="section-container">
-
-                {/* Header */}
                 <div className="section-header">
                     <span className="subtitle">{t('sponsors_subtitle')}</span>
                     <h2 className="section-title">
                         {t('sponsors_title')} 
                         <span className="highlight">{t('sponsors_highlight')}</span>
                     </h2>
-                    <p className="section-description">{t('sponsors_description')}</p>
                 </div>
 
-                {/* Promo Banner */}
+                {/* تحديث الـ Promo Banner ليكون مترجماً أيضاً */}
                 <div className="promo-banner">
                     <div className="promo-content">
                         <span className="promo-label">{t('promo_label')}</span>
                         <p>
-                            {t('promo_use_code')} 
-                            <span className="promo-code">MS99</span> 
-                            {t('promo_for')} 
-                            <strong> {t('promo_discount')} </strong> 
-                            {t('promo_on_products')}
+                            {t('promo_use_code')} <span className="promo-code">MS99</span> 
+                            {" "}{t('promo_for')} <strong>{t('promo_discount')}</strong> {t('promo_on_products')}
                         </p>    
                     </div>
                 </div>
 
-                {/* Grid */}
                 <div className="sponsers-grid">
                     {sponsorsData.map((sponsor) => (
-                        <a
-                            key={sponsor.id}
-                            href={sponsor.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`sponsor-card ${tappedId === sponsor.id ? 'tapped' : ''}`}
-                            onClick={() => handleCardClick(sponsor.id)}
-                            onBlur={() => setTappedId(null)} // 3. حماية إضافية لو المتصفح علق الفوكس عليها
-                            style={{ textDecoration: 'none', color: 'inherit' }}
-                        >
-                            <div className="sponsor-logo-wrapper">
-                                <img
-                                    src={sponsor.logo}
-                                    alt={`${sponsor.name} Logo`}
-                                    onError={(e) => e.target.src='https://via.placeholder.com/200x100/333/fff?text=LOGO'}
-                                />
-                            </div>
+                        <div key={sponsor.id} className="sponsor-card">
+                            <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="card-link">
+                                <div className="sponsor-logo-wrapper">
+                                    <img src={sponsor.logo} alt={sponsor.name} />
+                                </div>
+                                <div className="sponsor-content">
+                                    <h3>{sponsor.name}</h3>
+                                    <div className="divider"></div>
+                                    <p>{sponsor.description}</p>
+                                </div>
+                            </a>
 
-                            <div className="sponsor-content">
-                                <h3>{sponsor.name}</h3>
-                                <div className="divider"></div>
-                                <p>{sponsor.description}</p>
-                            </div>
-                        </a>
+                            {sponsor.bundles && (
+                                <div className="vshape-special-area">
+                                    <button className="collapse-btn" onClick={toggleBundles}>
+                                        {showBundles ? t('vshape_hide_bundles') : t('vshape_view_bundles')}
+                                        <span className="v-icon">V</span>
+                                    </button>
+                                    
+                                    <div className={`bundles-collapse ${showBundles ? 'show' : ''}`}>
+                                        {sponsor.bundles.map((bundle, idx) => (
+                                            <div key={idx} className="bundle-box">
+                                                <p className="bundle-text">{bundle.meals}</p>
+                                                <small className="bundle-duration">{bundle.duration}</small>
+                                                <div className="bundle-info">
+                                                    <span className="price">{bundle.price}</span>
+                                                    <span className="code-tag">{bundle.code}</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     ))}
                 </div>
-
             </div>
         </section>
     );
